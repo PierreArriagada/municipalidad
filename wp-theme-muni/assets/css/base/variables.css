@@ -1,0 +1,29 @@
+/* ============================================
+   VARIABLES DE COLOR - Según GUIAS-COLOR.md
+   ============================================ */
+:root {
+    /* Colores del logo y marca institucional */
+    --azul-institucional: #003399;
+    --verde-bosque: #006633;
+    --naranja: #FF6600;
+
+    /* Colores complementarios */
+    --gris-oscuro: #333333;
+    --gris-medio: #666666;
+    --gris-claro: #999999;
+
+    /* Fondos */
+    --fondo-principal: #FFFFFF;
+    --fondo-secundario: #F9F9F9;
+    --fondo-footer: #002266;
+
+    /* Texto */
+    --texto-principal: #333333;
+    --texto-secundario: #666666;
+    --texto-inverso: #FFFFFF;
+
+    /* Estados hover */
+    --hover-azul: #0044CC;
+    --hover-verde: #008844;
+    --hover-naranja: #FF7722;
+}

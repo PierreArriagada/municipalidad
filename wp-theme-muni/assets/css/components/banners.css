@@ -1,0 +1,103 @@
+/* ============================================
+   BANNERS DE INTERÉS (Turismo, Tríptico, Reciclaje)
+   ============================================ */
+.banners-interes {
+    padding: 1.5rem 0 3.5rem 0;
+    background-color: #ffffff;
+}
+
+.banners-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: -40px;
+    position: relative;
+    z-index: 2;
+}
+
+.banner-card {
+    display: block;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative; /* Necesario para posicionar los paneles de cristal */
+    text-decoration: none;
+}
+
+.banner-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+.banner-img {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.banner-card:hover .banner-img {
+    transform: scale(1.03); /* Efecto sutil de zoom al pasar el mouse */
+}
+
+/* Paneles de Cristal Flotantes (Glassmorphism) */
+.banner-glass-top,
+.banner-glass-bottom {
+    position: absolute;
+    background: rgba(15, 23, 42, 0.72); /* Fondo oscuro semitransparente con mejor contraste */
+    backdrop-filter: blur(12px); /* Efecto borroso de cristal nítido */
+    -webkit-backdrop-filter: blur(12px);
+    color: #ffffff;
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.18); /* Borde sutil de cristal */
+    border-radius: 12px; /* Cuadro plano flotante redondeado */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3); /* Sombra para resaltar de la foto */
+    transition: all 0.3s ease;
+    z-index: 2;
+    width: auto; /* No ocupa todo el ancho */
+    max-width: calc(100% - 2rem);
+}
+
+.banner-glass-top {
+    top: 1rem;
+    left: 1rem;
+    padding: 0.5rem 1rem;
+}
+
+.banner-glass-bottom {
+    bottom: 1rem;
+    right: 1rem;
+    padding: 0.45rem 0.9rem;
+}
+
+.banner-card:hover .banner-glass-top,
+.banner-card:hover .banner-glass-bottom {
+    background: rgba(0, 0, 0, 0.65);
+}
+
+.banner-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin: 0;
+    line-height: 1.2;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.4);
+}
+
+.banner-link {
+    font-size: 0.82rem;
+    font-weight: 600;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.4);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+@media (max-width: 768px) {
+    .banners-grid {
+        grid-template-columns: 1fr;
+    }
+}

@@ -1,0 +1,130 @@
+/* ============================================
+   TRANSPARENCIA ACTIVA (Ley 20.285)
+   ============================================ */
+.transparencia-activa {
+    padding: 2.5rem 1.5rem;
+    background-color: var(--fondo-principal);
+}
+
+.transparencia-subtitle {
+    font-size: 0.9rem;
+    color: var(--texto-secundario);
+    margin-top: -0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.transparencia-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    max-width: 1400px;
+    margin: 0 auto 2rem;
+}
+
+.transparencia-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 1rem 0.75rem;
+    background: var(--fondo-secundario);
+    border-radius: 12px;
+    transition: all 0.25s ease;
+}
+
+.transparencia-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    background: var(--fondo-principal);
+}
+
+.transparencia-icon {
+    margin-bottom: 0.5rem;
+}
+
+.transparencia-icon svg {
+    width: 38px;
+    height: 38px;
+}
+
+.transparencia-titulo {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--texto-principal);
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
+}
+
+.transparencia-desc {
+    font-size: 0.75rem;
+    color: var(--texto-secundario);
+    line-height: 1.4;
+}
+
+.transparencia-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: var(--fondo-secundario);
+    border-radius: 12px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.actualizacion-info {
+    font-size: 0.85rem;
+    color: var(--texto-secundario);
+}
+
+.actualizacion-info strong {
+    color: var(--texto-principal);
+}
+
+.btn-solicitud {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: var(--azul-institucional);
+    color: var(--texto-inverso);
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: background 0.2s ease;
+}
+
+.btn-solicitud:hover {
+    background: var(--hover-azul);
+}
+
+.btn-solicitud svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* Responsividad Transparencia */
+@media (min-width: 768px) {
+    .transparencia-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .transparencia-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (max-width: 767px) {
+    .transparencia-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .transparencia-footer {
+        flex-direction: column;
+        text-align: center;
+    }
+}

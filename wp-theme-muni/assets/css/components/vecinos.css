@@ -1,0 +1,158 @@
+/* ============================================
+   CENTRO DE BENEFICIOS VECINOS
+   ============================================ */
+.vecinos-section {
+    padding: 4rem 0;
+    background-color: var(--fondo-principal);
+}
+
+.vecinos-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.vecino-featured-card {
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.09);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.vecino-featured-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.14);
+}
+
+.vecino-featured-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.vecino-featured-content {
+    padding: 2rem;
+    flex: 1;
+}
+
+.vecino-featured-content h3 {
+    color: var(--texto-principal);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.vecino-highlight {
+    font-weight: 700;
+    color: var(--azul-institucional);
+    margin-bottom: 1rem;
+}
+
+.vecino-card {
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.09);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding-top: 2rem;
+    margin-top: 2rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.vecino-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.14);
+}
+
+.vecino-img-wrapper {
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    padding: 5px;
+    background: #ffffff;
+}
+
+.vecino-img-circle {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid var(--fondo-principal);
+}
+
+.vecino-card-content {
+    padding: 3.5rem 1.5rem 2rem 1.5rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.vecino-card-content h3 {
+    color: var(--texto-principal);
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    min-height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.vecino-card-content p {
+    font-size: 0.9rem;
+    color: var(--texto-secundario);
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+    flex: 1;
+}
+
+.btn-pill-blue {
+    display: inline-block;
+    background-color: var(--azul-institucional);
+    color: #ffffff;
+    padding: 0.75rem 1.5rem;
+    border-radius: 25px;
+    font-weight: 700;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.btn-pill-blue .arrow {
+    font-size: 0.7rem;
+    margin-left: 0.25rem;
+}
+
+.btn-pill-blue:hover {
+    background-color: var(--naranja);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 102, 0, 0.3);
+}
+
+/* Responsividad Beneficios Vecinos */
+@media (max-width: 1024px) {
+    .vecinos-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .vecinos-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .vecino-card {
+        margin-top: 3rem;
+    }
+}

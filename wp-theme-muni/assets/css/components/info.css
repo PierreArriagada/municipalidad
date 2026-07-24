@@ -1,0 +1,172 @@
+/* ============================================
+   INFORMACIÓN MUNICIPAL (Cuenta Pública, PLADETUR, Leyes)
+   ============================================ */
+.info-municipal {
+    padding: 0;
+    position: relative;
+    background-color: #0549BD;
+    z-index: 1;
+}
+
+.info-municipal::before {
+    display: none;
+}
+
+/* Grilla y Tarjetas EN EL FRENTE */
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.15rem;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 2rem 0 0 0;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 2;
+    /* 👈 Z-index 2 mantiene las tarjetas al FRENTE */
+}
+
+.info-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 1.25rem 0.75rem;
+    background: #ffffff;
+    border-radius: 18px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+    border: 1px solid rgba(0, 0, 0, 0.02);
+    color: #2E7D32;
+    text-decoration: none;
+    height: 100%;
+}
+
+.info-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.18);
+    background: #ffffff;
+}
+
+.info-icon {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.2rem;
+    color: inherit;
+}
+
+.info-icon svg {
+    width: 36px !important;
+    height: 36px !important;
+    max-width: 36px !important;
+    max-height: 36px !important;
+    display: block !important;
+    fill: currentColor !important;
+    color: inherit !important;
+}
+
+.info-icon svg path,
+.info-icon svg circle,
+.info-icon svg rect,
+.info-icon svg polygon,
+.info-icon svg g {
+    fill: currentColor !important;
+}
+
+.info-titulo {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: inherit;
+    line-height: 1.3;
+}
+
+/* ============================================
+   PAISAJE DECORATIVO DETRÁS DE LAS TARJETAS
+   ============================================ */
+.info-municipal-wave {
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    margin-top: -20px;
+    /* 👈 AQUÍ SE MODIFICA: cambiado de -160px a -100px para bajarla 60px */
+    position: relative;
+    z-index: 1;
+    /* 👈 Z-index 1 coloca el paisaje por DETRÁS de las tarjetas */
+}
+
+.wave-image {
+    width: 100%;
+    height: 380px;
+    display: block;
+    object-fit: cover;
+    object-position: bottom center;
+    /* 👈 Muestra el diseño inferior (caballos, carretas, curva blanca) */
+}
+
+/* Responsividad Información Municipal */
+@media (min-width: 768px) {
+    .info-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (min-width: 1100px) {
+    .info-grid {
+        grid-template-columns: repeat(6, 1fr);
+        gap: 1rem;
+    }
+
+    .info-card {
+        padding: 1.25rem 0.65rem;
+    }
+
+    .info-icon svg {
+        width: 36px !important;
+        height: 36px !important;
+    }
+
+    .info-titulo {
+        font-size: 0.78rem;
+    }
+}
+
+@media (min-width: 1440px) {
+    .info-municipal-wave {
+        margin-top: 0; /* Desplaza la imagen 20px más abajo solo en pantallas grandes (Macbook Pro) */
+    }
+}
+
+@media (max-width: 767px) {
+    .info-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.85rem;
+        padding: 1.5rem 0 0 0;
+    }
+
+    .info-municipal-wave {
+        margin-top: -90px;
+    }
+
+    .wave-image {
+        height: 240px;
+    }
+
+    .info-card {
+        padding: 1rem 0.5rem;
+    }
+
+    .info-icon svg {
+        width: 32px !important;
+        height: 32px !important;
+    }
+
+    .info-titulo {
+        font-size: 0.75rem;
+    }
+}

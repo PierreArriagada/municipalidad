@@ -1,0 +1,62 @@
+/* ============================================
+   INFORMACIÓN DE CONTACTO RÁPIDO
+   ============================================ */
+.contacto-rapido {
+    padding: 2rem 1.5rem;
+    background-color: var(--fondo-secundario);
+}
+
+.contacto-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+
+.contacto-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+}
+
+.contacto-icon {
+    width: 40px;
+    height: 40px;
+    background: var(--azul-institucional);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--texto-inverso);
+    font-size: 1.1rem;
+    flex-shrink: 0;
+}
+
+.contacto-info h4 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--texto-principal);
+    margin-bottom: 0.25rem;
+}
+
+.contacto-info p {
+    font-size: 0.85rem;
+    color: var(--texto-secundario);
+}
+
+.contacto-info a {
+    color: var(--azul-institucional);
+    font-weight: 600;
+}
+
+/* Responsividad Contacto */
+@media (min-width: 768px) {
+    .contacto-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .contacto-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}

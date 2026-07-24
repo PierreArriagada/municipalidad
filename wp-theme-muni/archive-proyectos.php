@@ -1,0 +1,101 @@
+<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+/**
+ * Plantilla de Archivo para Proyectos
+ *
+ * @package Muni_Santa_Juana
+ */
+
+get_header();
+?>
+
+<main id="primary" class="site-main">
+    <!-- Header del Archivo -->
+    <div class="page-header" style="background-color: #006633; color: white; padding: 4rem 1.5rem; text-align: center; position: relative;">
+        <div class="container" style="position: relative; z-index: 2;">
+            <h1 class="page-title" style="font-size: 3rem; margin: 0 0 1rem 0; font-weight: 800;">Proyectos Municipales</h1>
+            <p style="font-size: 1.2rem; opacity: 0.9; max-width: 800px; margin: 0 auto;">Conoce las obras y avances que estamos construyendo juntos para mejorar la calidad de vida en Santa Juana.</p>
+        </div>
+        <svg style="position: absolute; bottom: 0; left: 0; width: 100%; height: auto;" viewBox="0 0 1440 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 48H1440V0C1440 0 1140 48 720 48C300 48 0 0 0 0V48Z" fill="#ffffff"/></svg>
+    </div>
+
+    <div class="container" style="padding: 4rem 1.5rem;">
+        <?php if ( have_posts() ) : ?>
+            
+            <div class="proyectos-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 2rem;">
+                <?php while ( have_posts() ) : the_post(); 
+                    $post_id   = get_the_ID();
+                    $estado    = get_post_meta( $post_id, '_estado_proyecto', true );
+                    $categoria = get_post_meta( $post_id, '_categoria_proyecto', true );
+
+                    if ( empty( $estado ) ) $estado = 'En Desarrollo';
+                    if ( empty( $categoria ) ) $categoria = 'Infraestructura';
+
+                    $clean_estado = strtolower( trim( $estado ) );
+                    $clase_badge = 'badge-desarrollo';
+                    $bg_color = '#cc5200';
+                    if ( strpos( $clean_estado, 'aprobado' ) !== false || strpos( $clean_estado, 'finalizado' ) !== false ) {
+                        $clase_badge = 'badge-aprobado';
+                        $bg_color = '#006633';
+                    } elseif ( strpos( $clean_estado, 'licitaci' ) !== false || strpos( $clean_estado, 'postula' ) !== false ) {
+                        $clase_badge = 'badge-licitacion';
+                        $bg_color = '#003399';
+                    }
+                ?>
+                    <article class="proyecto-card" style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.06); transition: transform 0.3s ease; display: flex; flex-direction: column;">
+                        <div class="proyecto-thumb-wrap" style="position: relative; padding-top: 60%;">
+                            <a href="<?php the_permalink(); ?>">
+                                <?php if ( has_post_thumbnail() ) : ?>
+                                    <?php the_post_thumbnail( 'medium_large', array( 'style' => 'position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;', 'alt' => esc_attr( get_the_title() ) ) ); ?>
+                                <?php else : ?>
+                                    <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/img/noticia_fondos_1783211931893.png" alt="<?php the_title_attribute(); ?>" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+                                <?php endif; ?>
+                            </a>
+                            <span style="position: absolute; top: 1rem; right: 1rem; background: <?php echo esc_attr( $bg_color ); ?>; color: white; padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.75rem; font-weight: bold; text-transform: uppercase;">
+                                <?php echo esc_html( $estado ); ?>
+                            </span>
+                        </div>
+
+                        <div class="proyecto-content" style="padding: 2rem; display: flex; flex-direction: column; flex: 1;">
+                            <span style="color: #666; font-size: 0.85rem; font-weight: bold; text-transform: uppercase; margin-bottom: 0.5rem;"><?php echo esc_html( $categoria ); ?></span>
+                            <h3 class="proyecto-title" style="margin: 0 0 1rem 0; font-size: 1.3rem;">
+                                <a href="<?php the_permalink(); ?>" style="color: #333; text-decoration: none;"><?php the_title(); ?></a>
+                            </h3>
+                            
+                            <p class="proyecto-excerpt" style="color: #555; font-size: 0.95rem; line-height: 1.6; margin-bottom: 2rem;">
+                                <?php echo wp_trim_words( wp_strip_all_tags( get_the_content() ), 15, '...' ); ?>
+                            </p>
+
+                            <div class="proyecto-footer" style="margin-top: auto; display: flex; justify-content: space-between; align-items: center; padding-top: 1.5rem; border-top: 1px solid #eee;">
+                                <a href="<?php the_permalink(); ?>" class="proyecto-link" style="color: #006633; font-weight: bold; text-decoration: none; font-size: 0.9rem;">Ver proyecto</a>
+                                <a href="<?php the_permalink(); ?>" class="proyecto-btn" aria-label="Ver proyecto" style="display: flex; align-items: center; justify-content: center; width: 35px; height: 35px; background: rgba(0,102,51,0.1); color: #006633; border-radius: 50%;">
+                                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                                        <polyline points="12 5 19 12 12 19"></polyline>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+                <?php endwhile; ?>
+            </div>
+            
+            <div style="margin-top: 4rem; text-align: center;">
+                <?php
+                the_posts_navigation( array(
+                    'prev_text' => '← Proyectos Anteriores',
+                    'next_text' => 'Más Proyectos →'
+                ) );
+                ?>
+            </div>
+            
+        <?php else : ?>
+            <p style="text-align: center; font-size: 1.2rem; color: #666;">Aún no hay proyectos publicados.</p>
+        <?php endif; ?>
+    </div>
+</main>
+
+<?php
+get_footer();

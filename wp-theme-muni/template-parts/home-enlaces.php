@@ -1,0 +1,161 @@
+<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+?>
+<!-- ============================================
+     ENLACES ÚTILES (Diseño Institucional Limpio y Responsivo)
+     ============================================ -->
+<section class="enlaces-rapidos">
+    <div class="container">
+        <h2 class="section-title"><?php esc_html_e( 'Enlaces Útiles', 'muni-santa-juana' ); ?></h2>
+        
+        <?php if ( has_nav_menu( 'enlaces-rapidos' ) ) : ?>
+            <?php
+            wp_nav_menu( array(
+                'theme_location' => 'enlaces-rapidos',
+                'menu_class'     => 'enlaces-rapidos-grid',
+                'container'      => false,
+            ) );
+            ?>
+        <?php else : ?>
+            <div class="enlaces-rapidos-grid">
+                <!-- 1. Pagos Online -->
+                <a href="#" class="enlace-rapido-card">
+                    <div class="enlace-icon-box">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                            <line x1="1" y1="10" x2="23" y2="10"></line>
+                        </svg>
+                    </div>
+                    <div class="enlace-info">
+                        <span class="enlace-titulo">Pagos Online</span>
+                    </div>
+                    <div class="enlace-arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </div>
+                </a>
+
+                <!-- 2. Turismo Comunal -->
+                <a href="#" class="enlace-rapido-card">
+                    <div class="enlace-icon-box">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"></polygon>
+                            <line x1="9" y1="3" x2="9" y2="21"></line>
+                            <line x1="15" y1="3" x2="15" y2="21"></line>
+                        </svg>
+                    </div>
+                    <div class="enlace-info">
+                        <span class="enlace-titulo">Turismo Comunal</span>
+                    </div>
+                    <div class="enlace-arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </div>
+                </a>
+
+                <!-- 3. Boletines Municipales -->
+                <a href="#" class="enlace-rapido-card">
+                    <div class="enlace-icon-box">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 22h14a2 2 0 0 0 2-2V7.5L14.5 2H6a2 2 0 0 0-2 2v4"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                            <path d="M2 15h10"></path>
+                            <path d="M2 18h10"></path>
+                        </svg>
+                    </div>
+                    <div class="enlace-info">
+                        <span class="enlace-titulo">Boletines Mensuales</span>
+                    </div>
+                    <div class="enlace-arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </div>
+                </a>
+
+                <!-- 4. Trípticos Informativos -->
+                <a href="#" class="enlace-rapido-card">
+                    <div class="enlace-icon-box">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                        </svg>
+                    </div>
+                    <div class="enlace-info">
+                        <span class="enlace-titulo">Trípticos e Informes</span>
+                    </div>
+                    <div class="enlace-arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </div>
+                </a>
+
+                <!-- 5. Proyectos Municipales -->
+                <a href="#" class="enlace-rapido-card">
+                    <div class="enlace-icon-box">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M2 22h20"></path>
+                            <path d="M12 2v20"></path>
+                            <path d="M5 22V9"></path>
+                            <path d="M19 22V11"></path>
+                        </svg>
+                    </div>
+                    <div class="enlace-info">
+                        <span class="enlace-titulo">Proyectos y Obras</span>
+                    </div>
+                    <div class="enlace-arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </div>
+                </a>
+
+                <!-- 6. Ley de Lobby -->
+                <a href="#" class="enlace-rapido-card">
+                    <div class="enlace-icon-box">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                        </svg>
+                    </div>
+                    <div class="enlace-info">
+                        <span class="enlace-titulo">Ley de Lobby</span>
+                    </div>
+                    <div class="enlace-arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </div>
+                </a>
+
+                <!-- 7. Ley 21.146 -->
+                <a href="#" class="enlace-rapido-card">
+                    <div class="enlace-icon-box">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                            <line x1="3" y1="9" x2="21" y2="9"></line>
+                            <line x1="9" y1="21" x2="9" y2="9"></line>
+                        </svg>
+                    </div>
+                    <div class="enlace-info">
+                        <span class="enlace-titulo">Ley 21.146</span>
+                    </div>
+                    <div class="enlace-arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </div>
+                </a>
+
+                <!-- 8. Permisos de Circulación -->
+                <a href="#" class="enlace-rapido-card">
+                    <div class="enlace-icon-box">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A2 2 0 0 0 2 12v4c0 .6.4 1 1 1h2"></path>
+                            <circle cx="7" cy="17" r="2"></circle>
+                            <circle cx="17" cy="17" r="2"></circle>
+                        </svg>
+                    </div>
+                    <div class="enlace-info">
+                        <span class="enlace-titulo">Permiso Circulación</span>
+                    </div>
+                    <div class="enlace-arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </div>
+                </a>
+            </div>
+        <?php endif; ?>
+    </div>
+</section>

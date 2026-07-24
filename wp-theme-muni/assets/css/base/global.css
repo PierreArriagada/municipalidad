@@ -1,0 +1,114 @@
+/* ============================================
+   RESET Y ESTILOS BASE
+   ============================================ */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Source Sans 3', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background-color: var(--fondo-principal);
+    color: var(--texto-principal);
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.2s ease;
+}
+
+ul, ol {
+    list-style: none;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* ============================================
+   ESTÁNDAR GLOBAL RIGUROSO DE CONTENEDORES (1240px Max-Width)
+   ============================================ */
+.container {
+    max-width: 1240px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding-left: 2rem !important;
+    padding-right: 2rem !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+@media (min-width: 1200px) {
+    .container {
+        padding-left: 2.5rem !important;
+        padding-right: 2.5rem !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding-left: 1.25rem !important;
+        padding-right: 1.25rem !important;
+    }
+}
+
+/* Grillas internas forzadas al 100% del contenedor sin sobresalir */
+.hero-grid,
+.info-grid,
+.banners-grid,
+.vecinos-grid,
+.emergencias-grid,
+.noticias-premium-grid,
+.transparencia-grid,
+.concejo-grid,
+.proyectos-grid,
+.servicios-grid,
+.servicios-sec-grid,
+.enlaces-rapidos-grid,
+.contacto-grid,
+.footer-grid {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    box-sizing: border-box !important;
+}
+
+.section-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--azul-institucional);
+    margin-bottom: 1.5rem;
+    position: relative;
+    padding-left: 1rem;
+}
+
+.section-title::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 100%;
+    background-color: var(--naranja);
+    border-radius: 2px;
+}
+
+.text-white {
+    color: #ffffff !important;
+}
