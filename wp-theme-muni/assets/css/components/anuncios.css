@@ -1,0 +1,150 @@
+/* ==========================================================================
+   COMPONENTES DE ANUNCIOS (POPUP Y HERO)
+   ========================================================================== */
+
+/* --- 1. POPUP DE ANUNCIO --- */
+.muni-popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.75);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+
+.muni-popup-content {
+    position: relative;
+    max-width: 800px;
+    width: 90%;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    animation: popupFadeIn 0.4s ease-out forwards;
+}
+
+@keyframes popupFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95) translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.muni-popup-close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    font-size: 24px;
+    line-height: 1;
+    cursor: pointer;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s ease;
+}
+
+.muni-popup-close-btn:hover {
+    background: #e53e3e; /* Rojo */
+}
+
+.muni-popup-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    max-height: 80vh;
+    object-fit: cover;
+}
+
+.muni-popup-no-img {
+    padding: 3rem 2rem;
+    text-align: center;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    color: white;
+}
+
+.muni-popup-no-img h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+
+/* --- 2. HERO ANUNCIO DESTACADO --- */
+.anuncio-hero-section {
+    position: relative;
+    width: 100%;
+    background-color: var(--background-color);
+}
+
+.anuncio-hero-link {
+    display: block;
+    width: 100%;
+    text-decoration: none;
+    overflow: hidden;
+    position: relative;
+}
+
+.anuncio-hero-bg {
+    width: 100%;
+    height: 400px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: transform 0.5s ease;
+}
+
+@media (min-width: 768px) {
+    .anuncio-hero-bg {
+        height: 500px; /* Más grande en desktop */
+    }
+}
+
+@media (min-width: 1200px) {
+    .anuncio-hero-bg {
+        height: 600px; /* Pantalla completa en pantallas grandes */
+    }
+}
+
+.anuncio-hero-link:hover .anuncio-hero-bg {
+    transform: scale(1.02);
+}
+
+.anuncio-hero-bg.no-bg {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-color) 100%);
+    color: white;
+    text-align: center;
+    padding: 2rem;
+}
+
+.anuncio-hero-fallback-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+@media (max-width: 767px) {
+    .anuncio-hero-fallback-title {
+        font-size: 1.8rem;
+    }
+}
