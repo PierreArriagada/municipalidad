@@ -1,0 +1,210 @@
+/* ==========================================================================
+   PLANTILLA INTRANET
+   ========================================================================== */
+
+.intranet-main {
+    background-color: var(--color-bg, #f8fafc);
+    padding-bottom: 5rem;
+}
+
+.intranet-hero {
+    background-color: var(--azul-institucional);
+    color: white;
+    padding: 3rem 1.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.intranet-hero .container {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+}
+
+.intranet-title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    margin: 0 0 1rem 0;
+    font-weight: 800;
+    color: white;
+}
+
+.intranet-subtitle {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    margin: 0;
+}
+
+.hero-wave {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    z-index: 1;
+}
+
+.intranet-container {
+    padding-top: 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.intranet-content {
+    background: white;
+    padding: 2rem;
+    border-radius: var(--radius-lg, 12px);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.04);
+    margin-bottom: 3rem;
+    text-align: center;
+    color: var(--color-text, #333);
+}
+
+.intranet-services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.intranet-card {
+    background: white;
+    border-radius: var(--radius-lg, 12px);
+    padding: 1.5rem;
+    text-decoration: none;
+    color: var(--color-text, #333);
+    transition: all 0.3s ease;
+    border: 1px solid var(--color-border, #eaeaea);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    position: relative;
+    overflow: hidden;
+}
+
+.intranet-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--azul-institucional);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+}
+
+.intranet-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+    border-color: transparent;
+}
+
+.intranet-card:hover::before {
+    transform: scaleX(1);
+}
+
+.intranet-card.webmail-card::before {
+    background: #ea4335; /* Color rojo sutil para email */
+}
+
+.intranet-card.sistema-card::before {
+    background: var(--color-secondary); /* Color secundario para sistema */
+}
+
+.intranet-card-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: rgba(0, 51, 153, 0.05); /* var(--azul-institucional) con opacidad */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+    color: var(--azul-institucional);
+    transition: all 0.3s ease;
+}
+
+.intranet-card.webmail-card .intranet-card-icon {
+    background: rgba(234, 67, 53, 0.05);
+    color: #ea4335;
+}
+
+.intranet-card.sistema-card .intranet-card-icon {
+    background: rgba(0, 180, 216, 0.05);
+    color: var(--azul-institucional);
+}
+
+.intranet-card:hover .intranet-card-icon {
+    transform: scale(1.1);
+}
+
+.intranet-card-icon svg {
+    width: 28px;
+    height: 28px;
+}
+
+.intranet-card-content h3 {
+    margin: 0 0 1rem 0;
+    font-size: 1.4rem;
+    color: var(--color-heading, #111);
+}
+
+.intranet-card-content p {
+    margin: 0 0 2rem 0;
+    margin: 0 0 1.5rem 0;
+    color: var(--color-text-light, #666);
+    line-height: 1.5;
+    font-size: 0.95rem;
+}
+
+.intranet-card-action {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    color: var(--azul-institucional);
+    margin-top: auto;
+    font-size: 0.95rem;
+}
+
+.intranet-card.webmail-card .intranet-card-action {
+    color: #ea4335;
+}
+
+.intranet-card.sistema-card .intranet-card-action {
+    color: var(--color-secondary, #00b4d8);
+}
+
+.intranet-card-action svg {
+    width: 20px;
+    height: 20px;
+}
+
+.intranet-card:hover .intranet-card-action {
+    gap: 1rem;
+}
+
+@media (max-width: 768px) {
+    .intranet-services-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .intranet-hero {
+        padding: 2rem 1rem;
+    }
+    .intranet-services-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    .intranet-card {
+        padding: 1.5rem 1rem;
+    }
+    .intranet-title {
+        font-size: 1.8rem;
+    }
+}
