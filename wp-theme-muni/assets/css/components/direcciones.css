@@ -3,17 +3,27 @@
    ========================================================================== */
 
 .page-direcciones {
-    background-color: var(--color-bg, #f8fafc);
+    background-color: var(--fondo-secundario, #f8fafc);
     padding-bottom: 5rem;
+    min-height: 80vh;
 }
 
 .hero-direcciones {
-    background-color: var(--azul-institucional);
-    color: white;
-    padding: 3rem 0;
+    background: linear-gradient(135deg, var(--azul-institucional, #003399) 0%, #002266 100%);
+    color: #ffffff;
+    padding: 3.5rem 0 4rem;
     text-align: center;
     position: relative;
     overflow: hidden;
+}
+
+.hero-direcciones .entry-title {
+    color: #ffffff;
+    font-size: 2.4rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
 }
 
 .hero-direcciones .container {
@@ -23,89 +33,184 @@
 }
 
 .direcciones-subtitle {
-    font-size: 1.1rem;
-    opacity: 0.9;
+    font-size: 1.15rem;
+    opacity: 0.92;
     margin: 0;
+    font-weight: 400;
+}
+
+.hero-wave {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 30px;
+    z-index: 1;
 }
 
 .container-direcciones {
-    padding-top: 4rem;
+    padding-top: 2rem;
     max-width: 1200px;
     margin: 0 auto;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+}
+
+/* Breadcrumbs */
+.direcciones-breadcrumbs {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--gris-medio, #666);
+    margin-bottom: 2rem;
+}
+
+.direcciones-breadcrumbs a {
+    color: var(--azul-institucional, #003399);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.direcciones-breadcrumbs a:hover {
+    color: var(--verde-bosque, #006633);
+    text-decoration: underline;
+}
+
+.direcciones-breadcrumbs .separator {
+    color: #cbd5e1;
+}
+
+.direcciones-breadcrumbs .current {
+    color: var(--gris-oscuro, #333);
+    font-weight: 600;
 }
 
 .page-content-wrapper {
-    background: white;
+    background: #ffffff;
     padding: 2rem;
-    border-radius: var(--radius-lg, 12px);
+    border-radius: 12px;
     box-shadow: 0 5px 20px rgba(0,0,0,0.04);
     margin-bottom: 3rem;
-    color: var(--color-text, #333);
+    color: var(--gris-oscuro, #333);
+    line-height: 1.6;
 }
 
+/* Grid de tarjetas (3 columnas en Desktop, idéntico al diseño de la imagen) */
 .direcciones-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.75rem;
 }
 
+/* Tarjetas con estilo Teal Institucional */
 .direccion-card {
-    background-color: #0b6c7a; /* Color Teal similar a la imagen */
-    color: white;
-    padding: 1.5rem;
+    background-color: #0b6c7a; /* Color Teal institucional exacto a la imagen de referencia */
+    color: #ffffff;
+    padding: 1.75rem 1.5rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
     text-decoration: none;
-    border-radius: 4px;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    min-height: 120px;
+    border-radius: 6px;
+    box-shadow: 0 4px 14px rgba(11, 108, 122, 0.25);
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.25s ease;
+    min-height: 130px;
+    position: relative;
+    overflow: hidden;
+}
+
+.direccion-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.3);
+    transition: width 0.25s ease, background-color 0.25s ease;
 }
 
 .direccion-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(11, 108, 122, 0.4);
-    color: white; /* Mantener color de texto */
+    transform: translateY(-5px);
+    box-shadow: 0 12px 28px rgba(11, 108, 122, 0.45);
+    background-color: #085864; /* Tono Teal más profundo en hover */
+    color: #ffffff;
+}
+
+.direccion-card:hover::before {
+    width: 6px;
+    background-color: #ffffff;
 }
 
 .direccion-card-content {
     flex: 1;
     padding-right: 1rem;
+    z-index: 2;
 }
 
 .direccion-title {
     margin: 0;
-    font-size: 1.1rem;
-    font-weight: 700;
+    font-size: 1.15rem;
+    font-weight: 800;
     text-transform: uppercase;
     line-height: 1.3;
+    letter-spacing: 0.02em;
+    color: #ffffff;
 }
 
 .direccion-card-icon {
-    width: 60px;
-    height: 60px;
+    width: 85px;
+    height: 75px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
+    z-index: 2;
 }
 
 .direccion-card-icon svg {
     width: 100%;
     height: 100%;
-    stroke: white;
-    fill: none; /* Asegurar que los íconos se vean bien */
+    max-height: 75px;
+    color: #ffffff;
+    display: block;
 }
 
-/* Excepciones si algún SVG necesita fill en lugar de stroke */
-.direccion-card-icon svg path,
-.direccion-card-icon svg circle,
-.direccion-card-icon svg rect {
-    /* stroke-width ya está definido inline */
+/* Responsividad */
+@media (max-width: 1024px) {
+    .direcciones-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 640px) {
     .direcciones-grid {
         grid-template-columns: 1fr;
+        gap: 1.25rem;
+    }
+    
+    .hero-direcciones {
+        padding: 2.5rem 1rem 3rem;
+    }
+
+    .hero-direcciones .entry-title {
+        font-size: 1.8rem;
+    }
+    
+    .direccion-card {
+        padding: 1.25rem 1.25rem;
+        min-height: 110px;
+    }
+
+    .direccion-title {
+        font-size: 1.05rem;
+    }
+    
+    .direccion-card-icon {
+        width: 70px;
+        height: 60px;
     }
 }

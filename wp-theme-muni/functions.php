@@ -224,6 +224,21 @@ function muni_render_svg( $icon_name, $default_icon = '' ) {
 }
 
 /**
+ * Forzar el uso de la plantilla personalizada para Direcciones Municipales
+ * independientemente de si el usuario escogió "Plantilla por defecto" en el editor.
+ */
+add_filter( 'template_include', 'muni_force_direcciones_template', 99 );
+function muni_force_direcciones_template( $template ) {
+    if ( is_page( 'direcciones-municipales' ) || is_page( 'direcciones' ) ) {
+        $custom = locate_template( array( 'page-direcciones-municipales.php', 'page-direcciones.php' ) );
+        if ( $custom ) {
+            return $custom;
+        }
+    }
+    return $template;
+}
+
+/**
  * Añadir íconos SVG a los elementos del menú "Enlaces Rápidos".
  * Detecta la clase "svg-nombreicono" o deduce el SVG según el título del elemento del menú.
  */

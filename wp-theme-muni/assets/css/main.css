@@ -21,5 +21,7 @@
 @import url('components/emergencias.css');  /* 11. Contactos de Emergencia 24/7 */
 @import url('components/contacto.css');     /* 12. Información de Contacto Rápido */
 @import url('components/footer.css');       /* 13. Pie de Página & Tarjeta Alcalde */
+@import url('components/direcciones.css');  /* Plantilla Direcciones Municipales */
+@import url('components/intranet.css');     /* Plantilla Intranet */
 
-/* Cache buster: v16 */
+/* Cache buster: v17 */

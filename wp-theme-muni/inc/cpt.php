@@ -705,7 +705,7 @@ function muni_seed_essential_pages() {
             'title'    => 'Direcciones Municipales',
             'slug'     => 'direcciones-municipales',
             'content'  => 'Listado de las direcciones municipales de Santa Juana.',
-            'template' => 'page-direcciones.php',
+            'template' => 'page-direcciones-municipales.php',
         ),
         array(
             'title'    => 'Normativa Comunal',
@@ -779,6 +779,77 @@ function muni_seed_initial_contactos() {
 }
 // OPTIMIZACIÓN: Ejecutar solo una vez al activar el tema.
 add_action( 'after_switch_theme', 'muni_seed_initial_contactos' );
+
+/**
+ * Auto-poblar Direcciones Municipales en la Base de Datos
+ */
+function muni_seed_initial_direcciones() {
+    if ( get_option( 'muni_direcciones_seeded_v1' ) ) {
+        return;
+    }
+
+    $existing = get_posts( array(
+        'post_type'   => 'direcciones',
+        'numberposts' => 1,
+        'post_status' => 'any',
+    ) );
+
+    if ( empty( $existing ) ) {
+        $sample_dirs = array(
+            array(
+                'title'      => 'DIRECCIÓN DE OBRAS MUNICIPALES',
+                'icono'      => 'obras',
+                'menu_order' => 1,
+                'url'        => '#',
+            ),
+            array(
+                'title'      => 'DIRECCIÓN DE TRÁNSITO',
+                'icono'      => 'transito',
+                'menu_order' => 2,
+                'url'        => '#',
+            ),
+            array(
+                'title'      => 'DIRECCIÓN DE DESARROLLO COMUNITARIO',
+                'icono'      => 'dideco',
+                'menu_order' => 3,
+                'url'        => '#',
+            ),
+            array(
+                'title'      => 'DIRECCIÓN DE MEDIO AMBIENTE ASEO Y ORNATO',
+                'icono'      => 'medioambiente',
+                'menu_order' => 4,
+                'url'        => '#',
+            ),
+            array(
+                'title'      => 'DIRECCIÓN DE SEGURIDAD PÚBLICA',
+                'icono'      => 'seguridad',
+                'menu_order' => 5,
+                'url'        => '#',
+            ),
+            array(
+                'title'      => 'JUZGADO DE POLICÍA LOCAL',
+                'icono'      => 'juzgado',
+                'menu_order' => 6,
+                'url'        => '#',
+            ),
+        );
+
+        foreach ( $sample_dirs as $dir ) {
+            $post_id = wp_insert_post( array(
+                'post_title'   => $dir['title'],
+                'post_status'  => 'publish',
+                'post_type'    => 'direcciones',
+                'menu_order'   => $dir['menu_order'],
+            ) );
+            if ( $post_id && ! is_wp_error( $post_id ) ) {
+                update_post_meta( $post_id, '_direccion_icono', $dir['icono'] );
+                update_post_meta( $post_id, '_direccion_url', $dir['url'] );
+            }
+        }
+        update_option( 'muni_direcciones_seeded_v1', true );
+    }
+}
+add_action( 'admin_init', 'muni_seed_initial_direcciones' );
 
 
 function muni_direcciones_meta_callback( $post ) {
