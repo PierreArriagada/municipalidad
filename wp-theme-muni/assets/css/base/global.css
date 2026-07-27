@@ -12,6 +12,38 @@
 html {
     font-size: 16px;
     scroll-behavior: smooth;
+    scroll-padding-top: 130px;
+}
+
+/* Evitar que el Navbar Sticky/Fixed oculte los títulos de secciones con ID al navegar por anclas */
+section[id],
+div[id],
+article[id],
+[id="contacto"],
+[id="emergencias"],
+[id="noticias"],
+[id="concejo"],
+[id="proyectos"],
+[id="servicios"],
+[id="hero"] {
+    scroll-margin-top: 130px !important;
+}
+
+@media (max-width: 768px) {
+    html {
+        scroll-padding-top: 100px;
+    }
+    section[id],
+    div[id],
+    article[id],
+    [id="contacto"],
+    [id="emergencias"],
+    [id="noticias"],
+    [id="concejo"],
+    [id="proyectos"],
+    [id="servicios"] {
+        scroll-margin-top: 100px !important;
+    }
 }
 
 body {

@@ -119,12 +119,14 @@ function muni_santa_juana_scripts() {
         wp_enqueue_style( 'muni-direcciones',$tpl_uri . '/assets/css/components/direcciones.css',array(), $theme_version );
     }
 
+    $js_ver = file_exists( $tpl_dir . '/assets/js/main.js' ) ? (string) filemtime( $tpl_dir . '/assets/js/main.js' ) : '1.0.1';
+
     // Script principal con estrategia `defer` para no bloquear el renderizado (WP 6.3+).
     wp_enqueue_script(
         'muni-santa-juana-script',
         $tpl_uri . '/assets/js/main.js',
         array(),
-        '1.0.0',
+        $js_ver,
         array(
             'strategy'  => 'defer',
             'in_footer' => true,

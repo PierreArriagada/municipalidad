@@ -50,27 +50,67 @@ function initNavToggle() {
 }
 
 /**
- * Inicializa scroll suave para enlaces internos
+ * Inicializa scroll suave para enlaces internos respetando la altura del Navbar Sticky
  */
 function initSmoothScroll() {
-    const links = document.querySelectorAll('a[href^="#"]');
+    document.addEventListener('click', function(e) {
+        const link = e.target.closest('a');
+        if (!link) return;
 
-    links.forEach(link => {
-        link.addEventListener('click', function(e) {
-            const href = this.getAttribute('href');
+        const href = link.getAttribute('href');
+        if (!href) return;
 
-            if (href !== '#') {
-                e.preventDefault();
-                const target = document.querySelector(href);
-
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
+        let targetId = null;
+        if (href.startsWith('#') && href !== '#') {
+            targetId = href;
+        } else if (href.includes('/#')) {
+            const parts = href.split('/#');
+            const path = parts[0];
+            const hash = parts[1];
+            const currentPath = window.location.pathname;
+            if (path === '' || path === window.location.origin || currentPath === '/' || currentPath.endsWith(path)) {
+                targetId = '#' + hash;
             }
-        });
+        }
+
+        if (targetId) {
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                e.preventDefault();
+                scrollToElementWithOffset(targetElement);
+            }
+        }
+    });
+
+    // Manejo de carga inicial con Hash en la URL (ej: al venir desde otra página)
+    if (window.location.hash) {
+        const initialTarget = document.querySelector(window.location.hash);
+        if (initialTarget) {
+            setTimeout(function() {
+                scrollToElementWithOffset(initialTarget);
+            }, 200);
+        }
+    }
+}
+
+function scrollToElementWithOffset(element) {
+    const header = document.querySelector('.header');
+    const topBar = document.querySelector('.top-bar');
+    let headerOffset = 120;
+
+    if (header) {
+        headerOffset = header.offsetHeight;
+        if (topBar && window.getComputedStyle(topBar).display !== 'none') {
+            headerOffset += topBar.offsetHeight;
+        }
+    }
+
+    const elementPosition = element.getBoundingClientRect().top;
+    const offsetPosition = elementPosition + window.pageYOffset - (headerOffset + 20);
+
+    window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
     });
 }
 
