@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initNavToggle();
     initSmoothScroll();
     initNavActiveState();
+    initAnuncioCarousel();
 });
 
 /**
@@ -106,4 +107,81 @@ function initNavActiveState() {
             // Clase removida según petición
         });
     });
+}
+
+/**
+ * Inicializa el carrusel de anuncios hero
+ */
+function initAnuncioCarousel() {
+    const slider = document.getElementById('anuncioHeroSlider');
+    if (!slider) return;
+
+    const slides = slider.querySelectorAll('.anuncio-hero-slide');
+    if (slides.length <= 1) return;
+
+    const nextBtn = slider.querySelector('.anuncio-hero-control.next');
+    const prevBtn = slider.querySelector('.anuncio-hero-control.prev');
+    const dots = slider.querySelectorAll('.anuncio-hero-dot');
+    
+    let currentIndex = 0;
+    let autoPlayInterval;
+    const intervalTime = 5000; // 5 segundos
+
+    function goToSlide(index) {
+        slides[currentIndex].classList.remove('active');
+        if (dots.length) dots[currentIndex].classList.remove('active');
+
+        currentIndex = index;
+        if (currentIndex < 0) {
+            currentIndex = slides.length - 1;
+        } else if (currentIndex >= slides.length) {
+            currentIndex = 0;
+        }
+
+        slides[currentIndex].classList.add('active');
+        if (dots.length) dots[currentIndex].classList.add('active');
+    }
+
+    function nextSlide() {
+        goToSlide(currentIndex + 1);
+    }
+
+    function prevSlide() {
+        goToSlide(currentIndex - 1);
+    }
+
+    function resetInterval() {
+        clearInterval(autoPlayInterval);
+        autoPlayInterval = setInterval(nextSlide, intervalTime);
+    }
+
+    if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+            nextSlide();
+            resetInterval();
+        });
+    }
+
+    if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+            prevSlide();
+            resetInterval();
+        });
+    }
+
+    if (dots.length) {
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                goToSlide(index);
+                resetInterval();
+            });
+        });
+    }
+
+    // Iniciar autoplay
+    resetInterval();
+
+    // Pausar en hover
+    slider.addEventListener('mouseenter', () => clearInterval(autoPlayInterval));
+    slider.addEventListener('mouseleave', resetInterval);
 }
