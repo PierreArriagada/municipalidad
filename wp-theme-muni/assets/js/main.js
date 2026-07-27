@@ -103,10 +103,7 @@ function initNavActiveState() {
                 }
             }
             
-            // No prevenimos default si son links con URL real, pero para el demo
-            // actualiza la clase visualmente
-            navLinks.forEach(l => l.classList.remove('active'));
-            this.classList.add('active');
+            // Clase removida según petición
         });
     });
 }

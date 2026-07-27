@@ -87,6 +87,82 @@ if ( ! defined( 'ABSPATH' ) ) {
         </div>
     </footer>
 
+    <?php
+    // Logic for Popup Anuncio
+    $popup_args = array(
+        'post_type'      => 'anuncios',
+        'posts_per_page' => 1,
+        'post_status'    => 'publish',
+        'meta_query'     => array(
+            'relation' => 'AND',
+            array(
+                'key'     => '_anuncio_tipo',
+                'value'   => 'popup',
+                'compare' => '='
+            ),
+            array(
+                'key'     => '_anuncio_activo',
+                'value'   => '1',
+                'compare' => '='
+            )
+        )
+    );
+
+    $popup_query = new WP_Query( $popup_args );
+
+    if ( $popup_query->have_posts() ) :
+        while ( $popup_query->have_posts() ) : $popup_query->the_post();
+            $link = get_post_meta( get_the_ID(), '_anuncio_link', true );
+            $link = ! empty( $link ) ? $link : '#';
+            $thumb_url = get_the_post_thumbnail_url( get_the_ID(), 'large' );
+    ?>
+    <div id="muni-popup-anuncio" class="muni-popup-overlay" style="display: none;">
+        <div class="muni-popup-content">
+            <button id="muni-popup-close" class="muni-popup-close-btn" aria-label="Cerrar Anuncio">&times;</button>
+            <a href="<?php echo esc_url( $link ); ?>">
+                <?php if ( $thumb_url ) : ?>
+                    <img src="<?php echo esc_url( $thumb_url ); ?>" alt="<?php echo esc_attr( get_the_title() ); ?>" class="muni-popup-img">
+                <?php else : ?>
+                    <div class="muni-popup-no-img">
+                        <h2><?php the_title(); ?></h2>
+                        <p>Haz clic para más información</p>
+                    </div>
+                <?php endif; ?>
+            </a>
+        </div>
+    </div>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var popup = document.getElementById("muni-popup-anuncio");
+        var closeBtn = document.getElementById("muni-popup-close");
+        
+        // Check session storage
+        if (!sessionStorage.getItem("muni_popup_seen")) {
+            // Show popup
+            popup.style.display = "flex";
+            
+            // Close event
+            closeBtn.addEventListener("click", function() {
+                popup.style.display = "none";
+                sessionStorage.setItem("muni_popup_seen", "true");
+            });
+
+            // Close when clicking outside content
+            popup.addEventListener("click", function(e) {
+                if(e.target === popup) {
+                    popup.style.display = "none";
+                    sessionStorage.setItem("muni_popup_seen", "true");
+                }
+            });
+        }
+    });
+    </script>
+    <?php
+        endwhile;
+        wp_reset_postdata();
+    endif;
+    ?>
+
     <?php wp_footer(); ?>
 </body>
 </html>

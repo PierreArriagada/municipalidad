@@ -218,10 +218,15 @@
     text-decoration: none;
 }
 
-.nav-link:hover,
-.nav-link.active,
-.menu-item > a:hover,
-.current-menu-item > a {
+@media (hover: hover) {
+    .nav-link:hover,
+    .menu-item > a:hover {
+        background: rgba(0, 51, 153, 0.08);
+        color: var(--azul-institucional);
+    }
+}
+.nav-link:active,
+.menu-item > a:active {
     background: rgba(0, 51, 153, 0.08);
     color: var(--azul-institucional);
 }

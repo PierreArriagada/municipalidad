@@ -56,12 +56,49 @@ function muni_santa_juana_scripts() {
     // Fonts de Google
     wp_enqueue_style( 'muni-fonts', 'https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap', array(), null );
     
-    // Estilo principal del tema (con busteo de caché)
-    $css_ver = file_exists( get_template_directory() . '/assets/css/main.css' ) ? filemtime( get_template_directory() . '/assets/css/main.css' ) : '1.0.1';
-    wp_enqueue_style( 'muni-santa-juana-style', get_template_directory_uri() . '/assets/css/main.css', array(), $css_ver );
+    // Estilo principal del tema (con busteo de caché por timestamp de archivo)
+    $tpl_dir = get_template_directory();
+    $tpl_uri = get_template_directory_uri();
 
-    // Script principal del tema
-    wp_enqueue_script( 'muni-santa-juana-script', get_template_directory_uri() . '/assets/js/main.js', array(), '1.0.0', true );
+    $css_ver = file_exists( $tpl_dir . '/assets/css/main.css' ) ? (string) filemtime( $tpl_dir . '/assets/css/main.css' ) : '1.0.1';
+    wp_enqueue_style( 'muni-santa-juana-style', $tpl_uri . '/assets/css/main.css', array(), $css_ver );
+
+    // Estilos de componentes (versión estática; incrementar manualmente al publicar cambios)
+    $theme_version = '1.0.0';
+    wp_enqueue_style( 'muni-header',       $tpl_uri . '/assets/css/components/header.css',       array(), $theme_version );
+    wp_enqueue_style( 'muni-hero',         $tpl_uri . '/assets/css/components/hero.css',         array(), $theme_version );
+    wp_enqueue_style( 'muni-emergencias',  $tpl_uri . '/assets/css/components/emergencias.css',  array(), $theme_version );
+    wp_enqueue_style( 'muni-enlaces',      $tpl_uri . '/assets/css/components/enlaces.css',      array(), $theme_version );
+    wp_enqueue_style( 'muni-vecinos',      $tpl_uri . '/assets/css/components/vecinos.css',      array(), $theme_version );
+    wp_enqueue_style( 'muni-proyectos',    $tpl_uri . '/assets/css/components/proyectos.css',    array(), $theme_version );
+    wp_enqueue_style( 'muni-noticias',     $tpl_uri . '/assets/css/components/noticias.css',     array(), $theme_version );
+    wp_enqueue_style( 'muni-banners',      $tpl_uri . '/assets/css/components/banners.css',      array(), $theme_version );
+    wp_enqueue_style( 'muni-concejo',      $tpl_uri . '/assets/css/components/concejo.css',      array(), $theme_version );
+    wp_enqueue_style( 'muni-info',         $tpl_uri . '/assets/css/components/info.css',         array(), $theme_version );
+    wp_enqueue_style( 'muni-transparencia',$tpl_uri . '/assets/css/components/transparencia.css',$theme_version );
+    wp_enqueue_style( 'muni-contacto',     $tpl_uri . '/assets/css/components/contacto.css',     array(), $theme_version );
+    wp_enqueue_style( 'muni-footer',       $tpl_uri . '/assets/css/components/footer.css',       array(), $theme_version );
+    wp_enqueue_style( 'muni-anuncios',     $tpl_uri . '/assets/css/components/anuncios.css',     array(), $theme_version );
+    
+    // Plantillas especiales: solo cargar el CSS si la página actual lo necesita.
+    if ( is_page_template( 'page-intranet.php' ) ) {
+        wp_enqueue_style( 'muni-intranet',   $tpl_uri . '/assets/css/components/intranet.css',   array(), $theme_version );
+    }
+    if ( is_page_template( 'page-direcciones.php' ) ) {
+        wp_enqueue_style( 'muni-direcciones',$tpl_uri . '/assets/css/components/direcciones.css',array(), $theme_version );
+    }
+
+    // Script principal con estrategia `defer` para no bloquear el renderizado (WP 6.3+).
+    wp_enqueue_script(
+        'muni-santa-juana-script',
+        $tpl_uri . '/assets/js/main.js',
+        array(),
+        '1.0.0',
+        array(
+            'strategy'  => 'defer',
+            'in_footer' => true,
+        )
+    );
 }
 add_action( 'wp_enqueue_scripts', 'muni_santa_juana_scripts' );
 
@@ -212,35 +249,56 @@ function muni_add_svg_to_menu( $title, $item, $args, $depth ) {
 add_filter( 'nav_menu_item_title', 'muni_add_svg_to_menu', 10, 4 );
 
 /**
- * Auto-poblar "Pagos Online" en la base de datos dentro del menú "Enlaces Rápidos" si no existe aún.
+ * Auto-poblar los 8 enlaces rápidos iniciales si el menú está vacío.
  */
-function muni_auto_seed_pagos_online_menu() {
-    $location = 'enlaces-rapidos';
-    $locations = get_nav_menu_locations();
-    if ( isset( $locations[ $location ] ) && $locations[ $location ] > 0 ) {
-        $menu_id = $locations[ $location ];
-        $items = wp_get_nav_menu_items( $menu_id );
-        $exists = false;
-        if ( ! empty( $items ) ) {
-            foreach ( $items as $item ) {
-                $clean_title = strtolower( trim( $item->title ) );
-                if ( strpos( $clean_title, 'pago' ) !== false ) {
-                    $exists = true;
-                    break;
-                }
-            }
-        }
-        if ( ! $exists ) {
+function muni_auto_seed_enlaces_menu() {
+    if ( get_option( 'muni_enlaces_seeded_v2' ) ) {
+        return;
+    }
+
+    $menu_name = 'Enlaces Rápidos';
+    $menu_exists = wp_get_nav_menu_object( $menu_name );
+
+    if ( ! $menu_exists ) {
+        $menu_id = wp_create_nav_menu( $menu_name );
+    } else {
+        $menu_id = $menu_exists->term_id;
+    }
+
+    // Asignar el menú a la ubicación si no está asignado
+    $locations = get_theme_mod( 'nav_menu_locations' );
+    if ( empty( $locations['enlaces-rapidos'] ) ) {
+        $locations['enlaces-rapidos'] = $menu_id;
+        set_theme_mod( 'nav_menu_locations', $locations );
+    }
+
+    // Comprobar si está vacío antes de sembrar
+    $items = wp_get_nav_menu_items( $menu_id );
+    if ( empty( $items ) || count( $items ) === 0 ) {
+        $enlaces = array(
+            array( 'title' => 'Pagos Online', 'class' => 'svg-pagos-online', 'url' => 'https://portalpagos.smc.cl/SANTA_JUANA/PV/Login' ),
+            array( 'title' => 'Turismo Comunal', 'class' => 'svg-turismo', 'url' => '#' ),
+            array( 'title' => 'Boletines Mensuales', 'class' => 'svg-boletines', 'url' => '#' ),
+            array( 'title' => 'Trípticos e Informes', 'class' => 'svg-tripticos', 'url' => '#' ),
+            array( 'title' => 'Proyectos y Obras', 'class' => 'svg-proyectos', 'url' => '#' ),
+            array( 'title' => 'Ley de Lobby', 'class' => 'svg-lobby', 'url' => '#' ),
+            array( 'title' => 'Ley 21.146', 'class' => 'svg-ley21146', 'url' => '#' ),
+            array( 'title' => 'Permiso Circulación', 'class' => '', 'url' => 'https://portalpagos.smc.cl/SANTA_JUANA/PV/Login' ),
+        );
+
+        foreach ( $enlaces as $enlace ) {
             wp_update_nav_menu_item( $menu_id, 0, array(
-                'menu-item-title'   => 'Pagos Online',
-                'menu-item-url'     => '#',
+                'menu-item-title'   => $enlace['title'],
+                'menu-item-url'     => $enlace['url'],
                 'menu-item-status'  => 'publish',
-                'menu-item-classes' => 'svg-pagos-online',
+                'menu-item-classes' => $enlace['class'],
             ) );
         }
+        update_option( 'muni_enlaces_seeded_v2', true );
     }
 }
-add_action( 'init', 'muni_auto_seed_pagos_online_menu' );
+// OPTIMIZACIÓN: Ejecutar solo una vez al activar el tema.
+add_action( 'after_switch_theme', 'muni_auto_seed_enlaces_menu' );
 
 /**
  * Enforce strict chronological order and ignore sticky posts on blog index and archives.

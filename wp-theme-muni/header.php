@@ -34,7 +34,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                 </a>
 
                 <!-- 2. Solicitud de Información -->
-                <a href="<?php echo esc_url( get_theme_mod( 'muni_link_solicitud', '#solicitud' ) ); ?>" class="top-link">
+                <a href="<?php echo esc_url( get_theme_mod( 'muni_link_solicitud', 'https://www.portaltransparencia.cl/PortalPdT/ingreso-sai-v2?idOrgTa=MU306' ) ); ?>" class="top-link" target="_blank" rel="noopener noreferrer">
                     <span class="top-link-icon"><?php echo muni_render_svg( 'topbar-solicitud' ); ?></span>
                     <div style="display: flex; flex-direction: column; line-height: 1.2;">
                         <span>Solicitud de Información</span>
@@ -91,24 +91,23 @@ if ( ! defined( 'ABSPATH' ) ) {
                             </svg>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="#" class="dropdown-link">Direcciones Municipales</a></li>
-                            <li><a href="#" class="dropdown-link">Misión</a></li>
-                            <li><a href="#" class="dropdown-link">Visión</a></li>
-                            <li><a href="#" class="dropdown-link">Ley 21146</a></li>
-                            <li><a href="#" class="dropdown-link">Intranet Municipal</a></li>
+                            <li><a href="<?php echo esc_url( get_permalink( get_page_by_title( 'Direcciones Municipales' ) ) ); ?>" class="dropdown-link">Direcciones Municipales</a></li>
+                            <li><a href="<?php echo esc_url( get_permalink( get_page_by_title( 'Misión' ) ) ); ?>" class="dropdown-link">Misión</a></li>
+                            <li><a href="<?php echo esc_url( get_permalink( get_page_by_title( 'Visión' ) ) ); ?>" class="dropdown-link">Visión</a></li>
+                            <li><a href="<?php echo esc_url( get_permalink( get_page_by_title( 'Ley 21146' ) ) ); ?>" class="dropdown-link">Ley 21146</a></li>
+                            <li><a href="<?php echo esc_url( get_permalink( get_page_by_title( 'Intranet Municipal' ) ) ); ?>" class="dropdown-link">Intranet Municipal</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item"><a href="#" class="nav-link">Trámites</a></li>
-                    <li class="nav-item"><a href="#transparencia" class="nav-link">Transparencia</a></li>
+                    <li class="nav-item"><a href="<?php echo esc_url( get_theme_mod( 'muni_link_transparencia', 'https://www.portaltransparencia.cl/PortalPdT/directorio-de-organismos-regulados/?org=MU306' ) ); ?>" class="nav-link" target="_blank" rel="noopener">Transparencia</a></li>
                     <li class="nav-item dropdown">
-                        <a href="#" class="nav-link" aria-haspopup="true" aria-expanded="false">
+                        <a href="https://portalpagos.smc.cl/SANTA_JUANA/PV/Login" class="nav-link" aria-haspopup="true" aria-expanded="false" target="_blank" rel="noopener">
                             Pagos Online
                             <svg class="dropdown-icon" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 4px; vertical-align: -3px;">
                                 <polyline points="6 9 12 15 18 9"></polyline>
                             </svg>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="#" class="dropdown-link">Pago de Permiso de Circulación</a></li>
+                            <li><a href="https://portalpagos.smc.cl/SANTA_JUANA/PV/Login" class="dropdown-link" target="_blank" rel="noopener">Pago de Permiso de Circulación</a></li>
                         </ul>
                     </li>
                     <li class="nav-item"><a href="<?php echo esc_url( home_url( '/#contacto' ) ); ?>" class="nav-link">Contacto</a></li>
