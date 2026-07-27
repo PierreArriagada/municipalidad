@@ -95,7 +95,7 @@ function muni_santa_juana_scripts() {
     wp_enqueue_style( 'muni-santa-juana-style', $tpl_uri . '/assets/css/main.css', array(), $css_ver );
 
     // Estilos de componentes (versión estática; incrementar manualmente al publicar cambios)
-    $theme_version = '1.0.0';
+    $theme_version = '22.0.0';
     wp_enqueue_style( 'muni-header',       $tpl_uri . '/assets/css/components/header.css',       array(), $theme_version );
     wp_enqueue_style( 'muni-hero',         $tpl_uri . '/assets/css/components/hero.css',         array(), $theme_version );
     wp_enqueue_style( 'muni-emergencias',  $tpl_uri . '/assets/css/components/emergencias.css',  array(), $theme_version );

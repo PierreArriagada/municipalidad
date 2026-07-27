@@ -18,12 +18,17 @@ if ( ! defined( 'ABSPATH' ) ) {
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-section alcalde-section">
+                    <?php
+                    $alcalde_img = get_theme_mod( 'muni_alcalde_img', get_template_directory_uri() . '/assets/img/alcalde.jpg' );
+                    $alcalde_nombre = get_theme_mod( 'muni_alcalde_nombre', 'Ángel Castro Medina' );
+                    $alcalde_cargo = get_theme_mod( 'muni_alcalde_cargo', 'Alcalde de Santa Juana 2026' );
+                    ?>
                     <div class="alcalde-foto-container">
-                        <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/img/alcalde.jpg" alt="Ángel Castro Medina - Alcalde de Santa Juana" class="alcalde-img" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\' fill=\'%23003399\'><rect width=\'100\' height=\'100\' fill=\'%23e0e0e0\'/><circle cx=\'50\' cy=\'40\' r=\'20\'/><path d=\'M20 100 Q 50 60 80 100 Z\'/></svg>'">
+                        <img src="<?php echo esc_url( $alcalde_img ); ?>" alt="<?php echo esc_attr( $alcalde_nombre . ' - ' . $alcalde_cargo ); ?>" class="alcalde-img" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\' fill=\'%23003399\'><rect width=\'100\' height=\'100\' fill=\'%23e0e0e0\'/><circle cx=\'50\' cy=\'40\' r=\'20\'/><path d=\'M20 100 Q 50 60 80 100 Z\'/></svg>'">
                     </div>
                     <div class="alcalde-info">
-                        <h4>Ángel Castro Medina</h4>
-                        <p class="alcalde-cargo">Alcalde de Santa Juana 2026</p>
+                        <h4><?php echo esc_html( $alcalde_nombre ); ?></h4>
+                        <p class="alcalde-cargo"><?php echo esc_html( $alcalde_cargo ); ?></p>
                     </div>
                 </div>
                 
