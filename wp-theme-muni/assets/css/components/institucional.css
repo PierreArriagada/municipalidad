@@ -1,0 +1,291 @@
+/* ==========================================================================
+   PLANTILLAS INSTITUCIONALES (MISIÓN, VISIÓN, HISTORIA) - RESPONSIVE DE 320px+
+   ========================================================================== */
+
+.inst-page-main {
+    background-color: var(--color-background, #f8fafc);
+    padding-bottom: 4rem;
+}
+
+/* Banner Hero Institucional */
+.inst-hero {
+    background-color: var(--color-primary, #003399);
+    text-align: center;
+    position: relative;
+    padding: 0;
+    overflow: hidden;
+}
+
+.inst-hero-wrapper {
+    width: 100%;
+    min-height: 380px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 1rem 5rem;
+    box-sizing: border-radius;
+}
+
+.inst-hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.65);
+}
+
+.inst-hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(0, 51, 153, 0.88) 0%, rgba(15, 23, 42, 0.92) 100%);
+}
+
+.inst-hero-content {
+    position: relative;
+    z-index: 2;
+    color: #ffffff;
+    max-width: 900px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.inst-hero-tag {
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #93c5fd;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.inst-hero-title {
+    font-size: 3rem;
+    margin: 0;
+    font-weight: 800;
+    color: #ffffff;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+    line-height: 1.15;
+    word-break: break-word;
+}
+
+.inst-hero-subtitle {
+    margin-top: 1rem;
+    font-size: 1.2rem;
+    font-weight: 300;
+    line-height: 1.5;
+    opacity: 0.95;
+    color: #ffffff;
+}
+
+.inst-hero-wave {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    z-index: 3;
+    display: block;
+}
+
+/* Contenedor y Caja de Contenido */
+.inst-container {
+    padding-top: 2.5rem;
+    max-width: 960px;
+    width: 100%;
+    margin: 0 auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    box-sizing: border-box;
+}
+
+.inst-content-box {
+    background: #ffffff;
+    padding: 3.5rem 4rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.04);
+    line-height: 1.8;
+    font-size: 1.1rem;
+    color: #334155;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+}
+
+/* Caja de Declaración / Cita */
+.inst-declaration-box {
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+    padding: 2.5rem;
+    border-radius: 12px;
+    margin-bottom: 2.5rem;
+    text-align: center;
+}
+
+.inst-declaration-title {
+    color: var(--color-primary, #003399);
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.inst-declaration-quote {
+    font-size: 1.15rem;
+    font-weight: 500;
+    color: #1e293b;
+    line-height: 1.85;
+    margin: 0;
+    font-style: italic;
+}
+
+/* Encabezados y Ejes */
+.inst-h2 {
+    color: #1e293b;
+    font-size: 1.85rem;
+    font-weight: 700;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    line-height: 1.25;
+}
+
+.inst-ejes-grid {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+}
+
+.inst-eje-item {
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.inst-eje-item:last-child {
+    border-bottom: none;
+}
+
+.inst-h3 {
+    color: var(--color-primary, #003399);
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
+}
+
+/* ==========================================================================
+   MEDIA QUERIES RESPONSIVE (MÓVIL < 768px y 320px)
+   ========================================================================== */
+@media (max-width: 768px) {
+    .inst-hero-wrapper {
+        min-height: 260px;
+        padding: 3rem 1rem 4rem;
+    }
+
+    .inst-hero-title {
+        font-size: 2.1rem;
+    }
+
+    .inst-hero-subtitle {
+        font-size: 1.05rem;
+        margin-top: 0.75rem;
+    }
+
+    .inst-hero-tag {
+        font-size: 0.75rem;
+        letter-spacing: 1px;
+    }
+
+    .inst-container {
+        padding-top: 1.5rem;
+    }
+
+    .inst-content-box {
+        padding: 2rem 1.5rem;
+        border-radius: 12px;
+        font-size: 1rem;
+        line-height: 1.7;
+    }
+
+    .inst-declaration-box {
+        padding: 1.5rem 1.25rem;
+        margin-bottom: 2rem;
+    }
+
+    .inst-declaration-title {
+        font-size: 1.25rem;
+    }
+
+    .inst-declaration-quote {
+        font-size: 1rem;
+        line-height: 1.7;
+    }
+
+    .inst-h2 {
+        font-size: 1.45rem;
+        margin-top: 2rem;
+    }
+
+    .inst-h3 {
+        font-size: 1.15rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .inst-hero-wrapper {
+        min-height: 220px;
+        padding: 2.5rem 0.75rem 3.5rem;
+    }
+
+    .inst-hero-title {
+        font-size: 1.75rem;
+    }
+
+    .inst-hero-subtitle {
+        font-size: 0.95rem;
+    }
+
+    .inst-container {
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+        padding-top: 1rem;
+    }
+
+    .inst-content-box {
+        padding: 1.25rem 1rem;
+        border-radius: 10px;
+        font-size: 0.95rem;
+        line-height: 1.65;
+    }
+
+    .inst-declaration-box {
+        padding: 1.25rem 0.85rem;
+        border-radius: 8px;
+    }
+
+    .inst-declaration-title {
+        font-size: 1.1rem;
+    }
+
+    .inst-declaration-quote {
+        font-size: 0.9rem;
+        line-height: 1.6;
+    }
+
+    .inst-h2 {
+        font-size: 1.3rem;
+    }
+
+    .inst-h3 {
+        font-size: 1.05rem;
+    }
+}

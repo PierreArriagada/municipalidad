@@ -23,5 +23,6 @@
 @import url('components/footer.css');       /* 13. Pie de Página & Tarjeta Alcalde */
 @import url('components/direcciones.css');  /* Plantilla Direcciones Municipales */
 @import url('components/intranet.css');     /* Plantilla Intranet */
+@import url('components/institucional.css');/* Plantillas Misión, Visión, Historia */
 
-/* Cache buster: v17 */
+/* Cache buster: v18 */
