@@ -25,20 +25,19 @@ $hero_query = new WP_Query( $hero_args );
                 <!-- Noticia grande (izquierda) -->
                 <article class="noticia-destacada">
                     <div class="noticia-destacada-thumb">
-                        <?php if ( has_post_thumbnail() ) : 
-                            $thumb_url = get_the_post_thumbnail_url( get_the_ID(), 'large' );
-                            if ( ! $thumb_url ) {
-                                $thumb_url = get_template_directory_uri() . '/assets/img/noticia_fondos_1783211931893.png';
-                            }
+                        <?php 
+                        $thumb_url = has_post_thumbnail() ? get_the_post_thumbnail_url( get_the_ID(), 'large' ) : false;
                         ?>
-                            <a href="<?php the_permalink(); ?>">
-                                <img src="<?php echo esc_url( $thumb_url ); ?>" alt="<?php echo esc_attr( get_the_title() ); ?>" class="noticia-destacada-img" onerror="this.src='<?php echo esc_url( get_template_directory_uri() . '/assets/img/noticia_fondos_1783211931893.png' ); ?>';">
-                            </a>
-                        <?php else : ?>
-                            <a href="<?php the_permalink(); ?>">
-                                <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/img/noticia_fondos_1783211931893.png" alt="<?php echo esc_attr( get_the_title() ); ?>" class="noticia-destacada-img">
-                            </a>
-                        <?php endif; ?>
+                        <a href="<?php the_permalink(); ?>" style="display: block; background: #f1f5f9; height: 100%; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;">
+                            <!-- Placeholder Background Layers -->
+                            <div style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; background: linear-gradient(135deg, rgba(0,51,153,0.1) 0%, rgba(0,51,153,0.02) 100%); z-index: 1;"></div>
+                            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/fallback-logo.png' ); ?>" alt="" style="position: absolute; width: 50%; height: auto; object-fit: contain; filter: grayscale(100%) opacity(0.2); z-index: 2; margin: auto; left: 0; right: 0; top: 0; bottom: 0;">
+                            
+                            <!-- Actual Image -->
+                            <?php if ( $thumb_url ) : ?>
+                                <img src="<?php echo esc_url( $thumb_url ); ?>" alt="<?php echo esc_attr( get_the_title() ); ?>" class="noticia-destacada-img" style="position: relative; z-index: 3; width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none';">
+                            <?php endif; ?>
+                        </a>
                     </div>
                     <div class="noticia-destacada-content">
                         <div class="noticia-premium-meta" style="margin-bottom: 0.5rem;">
@@ -69,20 +68,19 @@ $hero_query = new WP_Query( $hero_args );
                     <?php while ( $hero_query->have_posts() ) : $hero_query->the_post(); ?>
                         <article class="noticia-secundaria">
                             <div class="noticia-secundaria-thumb">
-                                <?php if ( has_post_thumbnail() ) : 
-                                    $thumb_url = get_the_post_thumbnail_url( get_the_ID(), 'medium' );
-                                    if ( ! $thumb_url ) {
-                                        $thumb_url = get_template_directory_uri() . '/assets/img/noticia_salud_1783211940813.png';
-                                    }
+                                <?php 
+                                $thumb_url = has_post_thumbnail() ? get_the_post_thumbnail_url( get_the_ID(), 'medium_large' ) : false;
                                 ?>
-                                    <a href="<?php the_permalink(); ?>">
-                                        <img src="<?php echo esc_url( $thumb_url ); ?>" alt="<?php echo esc_attr( get_the_title() ); ?>" class="noticia-secundaria-img" onerror="this.src='<?php echo esc_url( get_template_directory_uri() . '/assets/img/noticia_salud_1783211940813.png' ); ?>';">
-                                    </a>
-                                <?php else : ?>
-                                    <a href="<?php the_permalink(); ?>">
-                                        <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/img/noticia_salud_1783211940813.png" alt="<?php echo esc_attr( get_the_title() ); ?>" class="noticia-secundaria-img">
-                                    </a>
-                                <?php endif; ?>
+                                <a href="<?php the_permalink(); ?>" style="display: block; background: #f1f5f9; height: 100%; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;">
+                                    <!-- Placeholder Background Layers -->
+                                    <div style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; background: linear-gradient(135deg, rgba(0,51,153,0.1) 0%, rgba(0,51,153,0.02) 100%); z-index: 1;"></div>
+                                    <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/fallback-logo.png' ); ?>" alt="" style="position: absolute; width: 60%; height: auto; object-fit: contain; filter: grayscale(100%) opacity(0.2); z-index: 2; margin: auto; left: 0; right: 0; top: 0; bottom: 0;">
+                                    
+                                    <!-- Actual Image -->
+                                    <?php if ( $thumb_url ) : ?>
+                                        <img src="<?php echo esc_url( $thumb_url ); ?>" alt="<?php echo esc_attr( get_the_title() ); ?>" class="noticia-secundaria-img" style="position: relative; z-index: 3; width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none';">
+                                    <?php endif; ?>
+                                </a>
                             </div>
                             <div class="noticia-secundaria-content">
                                 <div class="noticia-premium-meta" style="margin-bottom: 0.4rem;">
@@ -114,7 +112,12 @@ $hero_query = new WP_Query( $hero_args );
                 <!-- Fallback estático (se muestra cuando no hay posts en BD) -->
                 <article class="noticia-destacada">
                     <div class="noticia-destacada-thumb">
-                        <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/img/noticia_fondos_1783211931893.png" alt="Bases Fondos Concursables 2026" class="noticia-destacada-img">
+                        <a href="#" style="display: block; background: #f1f5f9; height: 100%; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;">
+                            <div style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; background: linear-gradient(135deg, rgba(0,51,153,0.1) 0%, rgba(0,51,153,0.02) 100%); z-index: 1;"></div>
+                            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/fallback-logo.png' ); ?>" alt="" style="position: absolute; width: 50%; height: auto; object-fit: contain; filter: grayscale(100%) opacity(0.2); z-index: 2; margin: auto; left: 0; right: 0; top: 0; bottom: 0;">
+                            
+                            <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/img/noticia_fondos_1783211931893.png" alt="Bases Fondos Concursables 2026" class="noticia-destacada-img" style="position: relative; z-index: 3; width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none';">
+                        </a>
                     </div>
                     <div class="noticia-destacada-content">
                         <div class="noticia-premium-meta" style="margin-bottom: 0.5rem;">
@@ -144,7 +147,12 @@ $hero_query = new WP_Query( $hero_args );
                 <div class="noticias-secundarias">
                     <article class="noticia-secundaria">
                         <div class="noticia-secundaria-thumb">
-                            <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/img/noticia_salud_1783211940813.png" alt="Bases FONDESAL 2026" class="noticia-secundaria-img">
+                            <a href="#" style="display: block; background: #f1f5f9; height: 100%; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;">
+                                <div style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; background: linear-gradient(135deg, rgba(0,51,153,0.1) 0%, rgba(0,51,153,0.02) 100%); z-index: 1;"></div>
+                                <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/fallback-logo.png' ); ?>" alt="" style="position: absolute; width: 60%; height: auto; object-fit: contain; filter: grayscale(100%) opacity(0.2); z-index: 2; margin: auto; left: 0; right: 0; top: 0; bottom: 0;">
+                                
+                                <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/img/noticia_salud_1783211940813.png" alt="Bases FONDESAL 2026" class="noticia-secundaria-img" style="position: relative; z-index: 3; width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none';">
+                            </a>
                         </div>
                         <div class="noticia-secundaria-content">
                             <div class="noticia-premium-meta" style="margin-bottom: 0.4rem;">
@@ -171,7 +179,12 @@ $hero_query = new WP_Query( $hero_args );
                     </article>
                     <article class="noticia-secundaria">
                         <div class="noticia-secundaria-thumb">
-                            <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/img/noticia_mujeres_1783211949705.png" alt="Concurso 2 Cargos Programa 4 a 7" class="noticia-secundaria-img">
+                            <a href="#" style="display: block; background: #f1f5f9; height: 100%; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;">
+                                <div style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; background: linear-gradient(135deg, rgba(0,51,153,0.1) 0%, rgba(0,51,153,0.02) 100%); z-index: 1;"></div>
+                                <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/fallback-logo.png' ); ?>" alt="" style="position: absolute; width: 60%; height: auto; object-fit: contain; filter: grayscale(100%) opacity(0.2); z-index: 2; margin: auto; left: 0; right: 0; top: 0; bottom: 0;">
+                                
+                                <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/img/noticia_mujeres_1783211949705.png" alt="Concurso 2 Cargos Programa 4 a 7" class="noticia-secundaria-img" style="position: relative; z-index: 3; width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none';">
+                            </a>
                         </div>
                         <div class="noticia-secundaria-content">
                             <div class="noticia-premium-meta" style="margin-bottom: 0.4rem;">
