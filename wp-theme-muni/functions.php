@@ -224,6 +224,23 @@ function muni_render_svg( $icon_name, $default_icon = '' ) {
 }
 
 /**
+ * Obtener la imagen de un post (Destacada o primera del contenido)
+ * Si no tiene, devuelve el fallback del tema.
+ */
+function muni_get_post_image( $post_id, $fallback_img_name ) {
+    $thumb_url = get_the_post_thumbnail_url( $post_id, 'medium_large' );
+    if ( $thumb_url ) return $thumb_url;
+
+    $post = get_post( $post_id );
+    if ( $post && ! empty( $post->post_content ) ) {
+        preg_match( '/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', $post->post_content, $matches );
+        if ( ! empty( $matches[1] ) ) return $matches[1];
+    }
+
+    return get_template_directory_uri() . '/assets/img/' . $fallback_img_name;
+}
+
+/**
  * Forzar el uso de la plantilla personalizada para Direcciones Municipales
  * independientemente de si el usuario escogió "Plantilla por defecto" en el editor.
  */

@@ -27,10 +27,7 @@ get_header();
                 <?php while ( have_posts() ) : the_post(); ?>
                     <article id="post-<?php the_ID(); ?>" <?php post_class( 'reciclaje-card' ); ?> style="background: var(--color-surface, #fff); border-radius: var(--radius-lg, 12px); overflow: hidden; box-shadow: var(--shadow-md, 0 4px 6px rgba(0,0,0,0.1)); transition: transform 0.3s ease;">
                         <?php 
-                        $thumb_url = get_the_post_thumbnail_url( get_the_ID(), 'medium_large' );
-                        if ( ! $thumb_url ) {
-                            $thumb_url = get_template_directory_uri() . '/assets/img/reciclaje.png';
-                        }
+                        $thumb_url = muni_get_post_image( get_the_ID(), 'reciclaje.png' );
                         ?>
                         <a href="<?php the_permalink(); ?>" style="display: block; width: 100%; height: 200px; overflow: hidden;">
                             <img src="<?php echo esc_url( $thumb_url ); ?>" alt="<?php echo esc_attr( get_the_title() ); ?>" class="reciclaje-img" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease;" loading="lazy" decoding="async">

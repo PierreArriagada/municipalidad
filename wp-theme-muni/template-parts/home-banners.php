@@ -44,9 +44,7 @@ if ( false === $banners_posts ) {
                         }
                     ?>
                         <a href="<?php echo esc_url( $banner_link ); ?>" class="banner-card" aria-label="<?php echo esc_attr( sprintf( __( 'Ir a %s', 'muni-santa-juana' ), get_the_title() ) ); ?>">
-                            <?php if ( has_post_thumbnail() ) : ?>
-                                <?php the_post_thumbnail( 'medium_large', array( 'class' => 'banner-img', 'alt' => esc_attr( get_the_title() ), 'loading' => 'lazy', 'decoding' => 'async' ) ); ?>
-                            <?php else : 
+                            <?php 
                                 $fallback_img = 'Turismo.png';
                                 $title_lower  = mb_strtolower( get_the_title(), 'UTF-8' );
                                 if ( str_contains( $title_lower, 'triptico' ) || str_contains( $title_lower, 'tríptico' ) ) {
@@ -54,9 +52,9 @@ if ( false === $banners_posts ) {
                                 } elseif ( str_contains( $title_lower, 'reciclaje' ) || str_contains( $title_lower, 'limpio' ) ) {
                                     $fallback_img = 'reciclaje.png';
                                 }
+                                $final_img_url = muni_get_post_image( get_the_ID(), $fallback_img );
                             ?>
-                                <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/' . $fallback_img ); ?>" alt="<?php echo esc_attr( get_the_title() ); ?>" class="banner-img" loading="lazy" decoding="async">
-                            <?php endif; ?>
+                            <img src="<?php echo esc_url( $final_img_url ); ?>" alt="<?php echo esc_attr( get_the_title() ); ?>" class="banner-img" loading="lazy" decoding="async">
                             <div class="banner-glass-top">
                                 <h3 class="banner-title"><?php echo esc_html( get_the_title() ); ?></h3>
                             </div>
