@@ -311,3 +311,55 @@ function muni_strict_chronological_news( $query ) {
     }
 }
 add_action( 'pre_get_posts', 'muni_strict_chronological_news' );
+
+/**
+ * Renombrar 'Entradas' a 'Noticias' en el panel de administración
+ */
+function muni_rename_post_to_noticias() {
+    global $menu;
+    global $submenu;
+    
+    // Cambiar menú principal
+    foreach( $menu as $key => $val ) {
+        if ( $val[0] == 'Entradas' || $val[0] == 'Posts' ) {
+            $menu[$key][0] = 'Noticias';
+            $menu[$key][6] = 'dashicons-megaphone'; // Opcional: Cambiar el ícono
+            break;
+        }
+    }
+    
+    // Cambiar submenús
+    if ( isset( $submenu['edit.php'] ) ) {
+        foreach( $submenu['edit.php'] as $key => $val ) {
+            if ( $val[0] == 'Todas las entradas' || $val[0] == 'All Posts' ) {
+                $submenu['edit.php'][$key][0] = 'Todas las Noticias';
+            }
+            if ( $val[0] == 'Añadir nueva' || $val[0] == 'Add New' ) {
+                $submenu['edit.php'][$key][0] = 'Añadir Noticia';
+            }
+        }
+    }
+}
+add_action( 'admin_menu', 'muni_rename_post_to_noticias' );
+
+/**
+ * Renombrar las etiquetas del objeto 'post' globalmente
+ */
+function muni_rename_post_object_to_noticias() {
+    global $wp_post_types;
+    $labels = &$wp_post_types['post']->labels;
+    $labels->name = 'Noticias';
+    $labels->singular_name = 'Noticia';
+    $labels->add_new = 'Añadir Noticia';
+    $labels->add_new_item = 'Añadir nueva Noticia';
+    $labels->edit_item = 'Editar Noticia';
+    $labels->new_item = 'Nueva Noticia';
+    $labels->view_item = 'Ver Noticia';
+    $labels->search_items = 'Buscar Noticias';
+    $labels->not_found = 'No se encontraron Noticias';
+    $labels->not_found_in_trash = 'No se encontraron Noticias en la papelera';
+    $labels->all_items = 'Todas las Noticias';
+    $labels->menu_name = 'Noticias';
+    $labels->name_admin_bar = 'Noticia';
+}
+add_action( 'init', 'muni_rename_post_object_to_noticias' );
