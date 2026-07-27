@@ -25,14 +25,6 @@ $sistema_url = get_theme_mod( 'muni_intranet_sistema_url', 'https://santajuana-i
     </div>
 
     <div class="container intranet-container">
-        <?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
-            <?php if ( get_the_content() ) : ?>
-                <div class="intranet-content">
-                    <?php the_content(); ?>
-                </div>
-            <?php endif; ?>
-        <?php endwhile; endif; ?>
-
         <div class="intranet-services-grid">
             <!-- Tarjeta Webmail -->
             <a href="<?php echo esc_url( $webmail_url ); ?>" class="intranet-card webmail-card" target="_blank" rel="noopener">
