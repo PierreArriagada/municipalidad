@@ -76,40 +76,8 @@ $sesiones_query = new WP_Query( $sesiones_args );
                     <?php endif; ?>
                     <?php wp_reset_postdata(); ?>
                 <?php else : ?>
-                    <!-- Fallback estático -->
-                    <div class="video-principal">
-                        <div class="iframe-container">
-                            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?rel=0" title="Sesión de Concejo Municipal" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        </div>
-                        <div class="video-principal-info">
-                            <span class="badge-live">Última Sesión</span>
-                            <h3>Sesión Ordinaria Concejo Municipal N° 45</h3>
-                            <p class="fecha-video">Transmitido el 20 de Mayo, 2026</p>
-                        </div>
-                    </div>
-
-                    <div class="video-playlist">
-                        <h3 class="playlist-title">Sesiones Anteriores</h3>
-                        <div class="playlist-items">
-                            <a href="#" class="playlist-item active">
-                                <div class="pl-thumb">
-                                    <div class="pl-play-icon">▶</div>
-                                </div>
-                                <div class="pl-info">
-                                    <h4>Sesión Ordinaria N° 45</h4>
-                                    <span>20 May 2026</span>
-                                </div>
-                            </a>
-                            <a href="#" class="playlist-item">
-                                <div class="pl-thumb">
-                                    <div class="pl-play-icon">▶</div>
-                                </div>
-                                <div class="pl-info">
-                                    <h4>Sesión Extraordinaria N° 12</h4>
-                                    <span>15 May 2026</span>
-                                </div>
-                            </a>
-                        </div>
+                    <div style="grid-column: 1 / -1; text-align: center; padding: 3rem; background: var(--color-surface); border-radius: var(--radius-lg); border: 1px dashed var(--color-border); width: 100%;">
+                        <p style="color: var(--color-text-light); margin: 0; font-size: 1.1rem;"><?php esc_html_e( 'No hay sesiones actualmente.', 'muni-santa-juana' ); ?></p>
                     </div>
                 <?php endif; ?>
             </div>

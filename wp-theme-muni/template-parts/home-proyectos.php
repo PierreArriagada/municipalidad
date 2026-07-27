@@ -80,54 +80,9 @@ $proyectos_query = new WP_Query( $args );
                     </article>
                 <?php endwhile; wp_reset_postdata(); ?>
             <?php else : ?>
-                <!-- Fallback estático de muestra -->
-                <article class="proyecto-card">
-                    <div class="proyecto-thumb-wrap">
-                        <a href="#"><img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/img/noticia_fondos_1783211931893.png" alt="Pavimentación Sector Sur" class="proyecto-img"></a>
-                    </div>
-                    <div class="proyecto-content">
-                        <h3 class="proyecto-title"><a href="#">Pavimentación Participativa Sector Sur</a></h3>
-                        <p class="proyecto-excerpt">Mejoramiento de las vías y accesos principales del sector sur de la comuna.</p>
-                        <div class="proyecto-footer">
-                            <a href="#" class="proyecto-link">Ver proyecto</a>
-                            <a href="#" class="proyecto-btn">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                            </a>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="proyecto-card">
-                    <div class="proyecto-thumb-wrap">
-                        <a href="#"><img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/img/noticia_salud_1783211940813.png" alt="Escuela Básica Nueva" class="proyecto-img"></a>
-                    </div>
-                    <div class="proyecto-content">
-                        <h3 class="proyecto-title"><a href="#">Construcción Escuela Básica Nueva</a></h3>
-                        <p class="proyecto-excerpt">Nueva infraestructura educacional para acoger a más de 500 alumnos en espacios modernos.</p>
-                        <div class="proyecto-footer">
-                            <a href="#" class="proyecto-link">Ver proyecto</a>
-                            <a href="#" class="proyecto-btn">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                            </a>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="proyecto-card">
-                    <div class="proyecto-thumb-wrap">
-                        <a href="#"><img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/img/noticia_comunidad_1783211957904.png" alt="Parque Urbano Bicentenario" class="proyecto-img"></a>
-                    </div>
-                    <div class="proyecto-content">
-                        <h3 class="proyecto-title"><a href="#">Parque Urbano Bicentenario Santa Juana</a></h3>
-                        <p class="proyecto-excerpt">Recuperación de 5 hectáreas para esparcimiento, deporte y conservación de flora nativa.</p>
-                        <div class="proyecto-footer">
-                            <a href="#" class="proyecto-link">Ver proyecto</a>
-                            <a href="#" class="proyecto-btn">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                            </a>
-                        </div>
-                    </div>
-                </article>
+                <div style="grid-column: 1 / -1; text-align: center; padding: 3rem; background: var(--color-surface); border-radius: var(--radius-lg); border: 1px dashed var(--color-border); width: 100%;">
+                    <p style="color: var(--color-text-light); margin: 0; font-size: 1.1rem;"><?php esc_html_e( 'No hay proyectos actualmente.', 'muni-santa-juana' ); ?></p>
+                </div>
             <?php endif; ?>
         </div>
         

@@ -26,14 +26,18 @@ get_header(); ?>
 
 <main id="primary" class="site-main">
 
+    <?php /* 1.5. Anuncio Destacado (Hero Gigante) */ ?>
+    <?php get_template_part( 'template-parts/home', 'anuncios' ); ?>
+
     <?php /* 2. Noticias Destacadas Hero (Al inicio, debajo del Navbar) */ ?>
     <?php get_template_part( 'template-parts/home', 'hero' ); ?>
 
     <?php /* 3. Cards de Cuenta Pública, PLADETUR, Ley 20.285, Ley 21.146 */ ?>
     <?php get_template_part( 'template-parts/home', 'info' ); ?>
 
-    <?php /* 4. Banners de Turismo, Tríptico, Reciclaje */ ?>
+    <?php /* 4. Banners de Turismo, Reciclaje */ ?>
     <?php get_template_part( 'template-parts/home', 'banners' ); ?>
+
 
     <?php /* 5. Centro de Beneficios Exclusivos para Vecinos */ ?>
     <?php get_template_part( 'template-parts/home', 'vecinos' ); ?>

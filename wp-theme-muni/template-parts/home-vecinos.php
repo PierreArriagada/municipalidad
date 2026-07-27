@@ -53,38 +53,8 @@ $beneficios_query = new WP_Query( $beneficios_args );
                         </div>
                     <?php endwhile; wp_reset_postdata(); ?>
                 <?php else : ?>
-                    <!-- Tarjeta 1: Fallback -->
-                    <div class="vecino-card">
-                        <div class="vecino-img-wrapper">
-                            <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/img/vecino_aramco_1783210102383.png" alt="Descuento Bencina Aramco" class="vecino-img-circle">
-                        </div>
-                        <div class="vecino-card-content">
-                            <h3>Descuento Aramco</h3>
-                            <p>Accede a rebajas especiales de hasta $15 y $25 por litro de combustible con tu Tarjeta Vecino. Conoce los días de promoción y estaciones adheridas para obtener la tuya.</p>
-                            <a href="#" class="btn-pill-blue">QUIERO SABER MÁS <span class="arrow">▶</span></a>
-                        </div>
-                    </div>
-                    <!-- Tarjeta 2: Fallback -->
-                    <div class="vecino-card">
-                        <div class="vecino-img-wrapper">
-                            <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/img/vecino_kupos_1783210111064.png" alt="Descuento Kupos Adulto Mayor" class="vecino-img-circle">
-                        </div>
-                        <div class="vecino-card-content">
-                            <h3>Tarjeta Vecino Mayor</h3>
-                            <p>Tu bienestar es nuestra prioridad. Conoce la alianza exclusiva para acceder a descuentos en pasajes de buses interurbanos para el Adulto Mayor. Descubre cómo obtenerla.</p>
-                            <a href="#" class="btn-pill-blue">QUIERO SABER MÁS <span class="arrow">▶</span></a>
-                        </div>
-                    </div>
-                    <!-- Tarjeta 3: Fallback -->
-                    <div class="vecino-card">
-                        <div class="vecino-img-wrapper">
-                            <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/img/vecino_copago_1783210119573.png" alt="Copago Cero" class="vecino-img-circle">
-                        </div>
-                        <div class="vecino-card-content">
-                            <h3>Copago Cero Fonasa</h3>
-                            <p>Como política global de Estado, los afiliados a Fonasa tienen gratuidad total en la red pública. Infórmate sobre cómo validar este beneficio en nuestros centros de salud comunales.</p>
-                            <a href="#" class="btn-pill-blue">QUIERO SABER MÁS <span class="arrow">▶</span></a>
-                        </div>
+                    <div style="grid-column: 1 / -1; text-align: center; padding: 3rem; background: var(--color-surface); border-radius: var(--radius-lg); border: 1px dashed var(--color-border);">
+                        <p style="color: var(--color-text-light); margin: 0; font-size: 1.1rem;"><?php esc_html_e( 'No hay beneficios actualmente.', 'muni-santa-juana' ); ?></p>
                     </div>
                 <?php endif; ?>
             </div>

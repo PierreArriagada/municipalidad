@@ -176,7 +176,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                     <p><strong>Última actualización:</strong> 10 de cada mes</p>
                     <p><strong>Ley 20.285</strong> sobre Acceso a la Información Pública</p>
                 </div>
-                <a href="#solicitud" class="btn-solicitud">
+                <a href="<?php echo esc_url( get_theme_mod( 'muni_link_solicitud', 'https://www.portaltransparencia.cl/PortalPdT/ingreso-sai-v2?idOrgTa=MU306' ) ); ?>" class="btn-solicitud" target="_blank" rel="noopener noreferrer">
                     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <rect x="4" y="4" width="16" height="16" rx="2" stroke="currentColor" stroke-width="1.5"/>
                         <line x1="8" y1="9" x2="16" y2="9" stroke="currentColor" stroke-width="1.5"/>
