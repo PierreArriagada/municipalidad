@@ -379,3 +379,9 @@ img {
         padding: 0.65rem 1.2rem !important;
     }
 }
+
+/* Corrección de la línea de renderizado sub-pixel (anti-aliasing) en las olas SVG del Hero */
+.hero-wave, .inst-hero-wave {
+    bottom: -1px !important;
+    transform: translateY(1px);
+}
