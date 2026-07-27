@@ -50,6 +50,37 @@ endif;
 add_action( 'after_setup_theme', 'muni_santa_juana_setup' );
 
 /**
+ * Regenerar reglas de reescritura de URLs al activar el tema.
+ * Esto soluciona el error 404 en /category/noticias/ en servidores nuevos.
+ */
+function muni_flush_rewrite_rules_on_activation() {
+    flush_rewrite_rules();
+}
+add_action( 'after_switch_theme', 'muni_flush_rewrite_rules_on_activation' );
+
+/**
+ * Configurar enlaces permanentes bonitos y regenerar reglas de reescritura.
+ * En instalaciones nuevas, WordPress usa /?p=ID por defecto.
+ * Este tema requiere /%postname%/ para que las URLs funcionen correctamente.
+ */
+function muni_setup_permalinks_and_flush() {
+    if ( ! get_option( 'muni_permalinks_configured' ) ) {
+        global $wp_rewrite;
+        
+        // Si la estructura de permalinks está vacía (modo "Simple"), configurarla
+        $current = get_option( 'permalink_structure' );
+        if ( empty( $current ) ) {
+            $wp_rewrite->set_permalink_structure( '/%postname%/' );
+            update_option( 'permalink_structure', '/%postname%/' );
+        }
+        
+        flush_rewrite_rules();
+        update_option( 'muni_permalinks_configured', true );
+    }
+}
+add_action( 'admin_init', 'muni_setup_permalinks_and_flush', 1 );
+
+/**
  * Encolar scripts y estilos.
  */
 function muni_santa_juana_scripts() {
@@ -425,23 +456,6 @@ function muni_auto_create_institutional_pages() {
     }
 }
 add_action( 'init', 'muni_auto_create_institutional_pages' );
-
-/**
- * Limpieza automática de beneficios de prueba
- */
-function muni_cleanup_dummy_beneficios() {
-    if ( ! get_option( 'muni_dummy_beneficios_cleaned' ) ) {
-        $posts_to_delete = array( 'Copago Cero Fonasa', 'Descuento Aramco' );
-        foreach ( $posts_to_delete as $title ) {
-            $post = get_page_by_title( $title, OBJECT, 'beneficios' );
-            if ( $post ) {
-                wp_delete_post( $post->ID, true );
-            }
-        }
-        update_option( 'muni_dummy_beneficios_cleaned', true );
-    }
-}
-add_action( 'init', 'muni_cleanup_dummy_beneficios' );
 
 /**
  * Register Widget Areas (Sidebars)

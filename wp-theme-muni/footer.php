@@ -51,9 +51,9 @@ if ( ! defined( 'ABSPATH' ) ) {
                     <nav class="footer-links">
                         <a href="<?php echo esc_url( home_url( '/#contacto' ) ); ?>" class="footer-link">Números de Emergencia</a>
                         <a href="https://www.leylobby.gob.cl/instituciones/MU306" class="footer-link" target="_blank" rel="noopener noreferrer">Ley de Lobby</a>
-                        <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'normativa-comunal' ) ) ); ?>" class="footer-link">Normativa Comunal</a>
-                        <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'politicas' ) ) ); ?>" class="footer-link">Políticas de Privacidad</a>
-                        <a href="<?php echo esc_url( get_permalink( get_page_by_title( 'Intranet Municipal' ) ) ); ?>" class="footer-link">Intranet Municipal</a>
+                        <a href="<?php echo esc_url( home_url( '/normativa-comunal/' ) ); ?>" class="footer-link">Normativa Comunal</a>
+                        <a href="<?php echo esc_url( home_url( '/politicas/' ) ); ?>" class="footer-link">Políticas de Privacidad</a>
+                        <a href="<?php echo esc_url( home_url( '/intranet/' ) ); ?>" class="footer-link">Intranet Municipal</a>
                     </nav>
                 </div>
                 

@@ -1,0 +1,67 @@
+# php -- BEGIN cPanel-generated handler, do not edit
+# Configure el paquete "ea-php83" como el lenguaje de programación predeterminado "PHP".
+<IfModule mime_module>
+  AddHandler application/x-httpd-ea-php83 .php .php8 .phtml
+</IfModule>
+# php -- END cPanel-generated handler, do not edit
+
+# ==============================================================================
+# REGLAS DE SEGURIDAD MÁXIMA PARA WORDPRESS
+# ==============================================================================
+
+# 1. Desactivar la exploración de directorios (evita que vean tus archivos internos)
+Options -Indexes
+
+# 2. Proteger el archivo wp-config.php (el corazón y credenciales de tu sitio)
+<files wp-config.php>
+Order allow,deny
+Deny from all
+</files>
+
+# 3. Proteger este mismo archivo .htaccess (para que nadie pueda modificar las reglas)
+<files ~ "^.*\.([Hh][Tt][Aa])">
+Order allow,deny
+Deny from all
+Satisfy all
+</files>
+
+# 4. Bloquear el acceso a xmlrpc.php (previene el 90% de ataques de fuerza bruta y DDoS)
+<Files xmlrpc.php>
+Order Allow,Deny
+Deny from all
+</Files>
+
+# 5. Bloquear ataques de inyección y modificación de variables globales
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+RewriteCond %{QUERY_STRING} (\|%3E) [NC,OR]
+RewriteCond %{QUERY_STRING} GLOBALS(=|\[|\%[0-9A-Z]{0,2}) [OR]
+RewriteCond %{QUERY_STRING} _REQUEST(=|\[|\%[0-9A-Z]{0,2})
+RewriteRule .* - [F,L]
+</IfModule>
+
+# 6. Bloquear acceso a archivos sensibles de WordPress que revelan información
+<files ~ "^(readme\.html|license\.txt)$">
+Order allow,deny
+Deny from all
+</files>
+
+# ==============================================================================
+# REGLAS BÁSICAS DE WORDPRESS (ENRUTAMIENTO)
+# ==============================================================================
+
+# BEGIN WordPress
+# Las directivas (líneas) entre "BEGIN WordPress" y "END WordPress" son
+# generados dinámicamente, y sólo deben ser modificados a través de los filtros de WordPress.
+# Cualquier cambio en las directivas entre estos marcadores se sobrescribirá.
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+RewriteBase /
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.php [L]
+</IfModule>
+# END WordPress

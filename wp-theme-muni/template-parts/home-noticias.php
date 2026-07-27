@@ -32,20 +32,19 @@ $premium_query = new WP_Query( $premium_args );
             <?php if ( $premium_query->have_posts() ) : ?>
                 <?php while ( $premium_query->have_posts() ) : $premium_query->the_post(); ?>
                     <article class="noticia-card-premium">
-                        <?php if ( has_post_thumbnail() ) : 
-                            $thumb_url = get_the_post_thumbnail_url( get_the_ID(), 'medium' );
-                            if ( ! $thumb_url ) {
-                                $thumb_url = get_template_directory_uri() . '/assets/img/noticia_fondos_1783211931893.png';
-                            }
+                        <?php 
+                        $thumb_url = has_post_thumbnail() ? get_the_post_thumbnail_url( get_the_ID(), 'medium_large' ) : false;
                         ?>
-                            <a href="<?php the_permalink(); ?>">
-                                <img src="<?php echo esc_url( $thumb_url ); ?>" alt="<?php echo esc_attr( get_the_title() ); ?>" class="noticia-premium-img" onerror="this.src='<?php echo esc_url( get_template_directory_uri() . '/assets/img/noticia_fondos_1783211931893.png' ); ?>';">
-                            </a>
-                        <?php else : ?>
-                            <a href="<?php the_permalink(); ?>">
-                                <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/img/noticia_fondos_1783211931893.png" alt="<?php echo esc_attr( get_the_title() ); ?>" class="noticia-premium-img">
-                            </a>
-                        <?php endif; ?>
+                        <a href="<?php the_permalink(); ?>" style="display: block; background: #f1f5f9; height: 220px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; border-radius: 16px;">
+                            <!-- Placeholder Background Layers -->
+                            <div style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; background: linear-gradient(135deg, rgba(0,51,153,0.1) 0%, rgba(0,51,153,0.02) 100%); z-index: 1;"></div>
+                            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/fallback-logo.png' ); ?>" alt="" style="position: absolute; width: 70%; height: auto; object-fit: contain; filter: grayscale(100%) opacity(0.2); z-index: 2; margin: auto; left: 0; right: 0; top: 0; bottom: 0;">
+                            
+                            <!-- Actual Image -->
+                            <?php if ( $thumb_url ) : ?>
+                                <img src="<?php echo esc_url( $thumb_url ); ?>" alt="<?php echo esc_attr( get_the_title() ); ?>" class="noticia-premium-img" style="position: relative; z-index: 3; transform: scale(1.05); width: 100%; height: 100%; object-fit: cover; border-radius: 16px;" onerror="this.style.display='none';">
+                            <?php endif; ?>
+                        </a>
                         <div class="noticia-premium-content">
                             <div class="noticia-premium-meta">
                                 <span class="noticia-fecha">
@@ -83,7 +82,12 @@ $premium_query = new WP_Query( $premium_args );
         <div class="noticias-premium-actions" style="text-align: right; margin-top: 3rem;">
             <?php
             $posts_page_id = get_option( 'page_for_posts' );
-            $news_archive_url = $posts_page_id ? get_permalink( $posts_page_id ) : home_url( '/?post_type=post' );
+            if ( $posts_page_id ) {
+                $news_archive_url = get_permalink( $posts_page_id );
+            } else {
+                // Si no hay página configurada, enviamos a la categoría principal de noticias
+                $news_archive_url = home_url( '/category/noticias/' );
+            }
             ?>
             <a href="<?php echo esc_url( $news_archive_url ); ?>" class="ver-todo-white" style="display: inline-block; padding: 0.75rem 2rem; border: 1px solid rgba(255,255,255,0.4); border-radius: 30px; transition: all 0.3s ease; color: white; text-decoration: none;"><?php esc_html_e( 'Ver todas las noticias →', 'muni-santa-juana' ); ?></a>
         </div>

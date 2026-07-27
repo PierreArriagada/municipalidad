@@ -96,11 +96,11 @@ if ( ! defined( 'ABSPATH' ) ) {
                             </svg>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="<?php echo esc_url( get_permalink( get_page_by_title( 'Direcciones Municipales' ) ) ); ?>" class="dropdown-link">Direcciones Municipales</a></li>
+                            <li><a href="<?php echo esc_url( home_url( '/direcciones-municipales/' ) ); ?>" class="dropdown-link">Direcciones Municipales</a></li>
                             <li><a href="<?php echo esc_url( home_url( '/mision/' ) ); ?>" class="dropdown-link">Misión</a></li>
                             <li><a href="<?php echo esc_url( home_url( '/vision/' ) ); ?>" class="dropdown-link">Visión</a></li>
-
-                            <li><a href="<?php echo esc_url( get_permalink( get_page_by_title( 'Intranet Municipal' ) ) ); ?>" class="dropdown-link">Intranet Municipal</a></li>
+                            <li><a href="<?php echo esc_url( home_url( '/historia/' ) ); ?>" class="dropdown-link">Historia</a></li>
+                            <li><a href="<?php echo esc_url( home_url( '/intranet/' ) ); ?>" class="dropdown-link">Intranet Municipal</a></li>
                         </ul>
                     </li>
                     <li class="nav-item"><a href="<?php echo esc_url( get_theme_mod( 'muni_link_transparencia', 'https://www.portaltransparencia.cl/PortalPdT/directorio-de-organismos-regulados/?org=MU306' ) ); ?>" class="nav-link" target="_blank" rel="noopener">Transparencia</a></li>

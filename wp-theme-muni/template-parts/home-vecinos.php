@@ -19,10 +19,10 @@ $beneficios_query = new WP_Query( $beneficios_args );
             <div class="vecinos-grid">
                 <!-- Tarjeta Destacada -->
                 <?php
-                $beneficio_img = get_theme_mod( 'muni_beneficio_img', get_template_directory_uri() . '/assets/img/vecino_featured_1783210094330.png' );
-                $beneficio_titulo = get_theme_mod( 'muni_beneficio_titulo', 'Obtén tu Tarjeta Vecino' );
-                $beneficio_subtitulo = get_theme_mod( 'muni_beneficio_subtitulo', '¡Buenas noticias! La Tarjeta Vecino de Santa Juana ahora es 100% digital.' );
-                $beneficio_texto = get_theme_mod( 'muni_beneficio_texto', 'Solo necesitas descargar la app <em>Tarjeta Santa Juana</em> para acceder a múltiples convenios y beneficios en transporte, salud, combustible, educación y más.' );
+                $beneficio_img = get_theme_mod( 'muni_beneficio_img', get_template_directory_uri() . '/assets/img/beneficios-comunidad.png' );
+                $beneficio_titulo = get_theme_mod( 'muni_beneficio_titulo', 'Beneficios para la comunidad' );
+                $beneficio_subtitulo = get_theme_mod( 'muni_beneficio_subtitulo', 'Descubre todas las alianzas y convenios exclusivos para los vecinos de Santa Juana.' );
+                $beneficio_texto = get_theme_mod( 'muni_beneficio_texto', 'Nuestra municipalidad trabaja día a día para acercar mejores oportunidades a todos los habitantes. Explora los distintos beneficios disponibles y accede a descuentos en servicios esenciales.' );
                 ?>
                 <div class="vecino-featured-card">
                     <img src="<?php echo esc_url( $beneficio_img ); ?>" alt="<?php echo esc_attr( strip_tags( $beneficio_titulo ) ); ?>" class="vecino-featured-img">
@@ -42,7 +42,19 @@ $beneficios_query = new WP_Query( $beneficios_args );
                                 <?php if ( has_post_thumbnail() ) : ?>
                                     <?php the_post_thumbnail( 'thumbnail', array( 'class' => 'vecino-img-circle', 'alt' => esc_attr( get_the_title() ) ) ); ?>
                                 <?php else : ?>
-                                    <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/img/vecino_aramco_1783210102383.png" alt="<?php echo esc_attr( get_the_title() ); ?>" class="vecino-img-circle">
+                                    <?php 
+                                        // Asignar imagen por defecto basada en el título si no hay miniatura
+                                        $fallback_img = 'vecino-mayor.png'; // Por defecto adulto mayor
+                                        $title_lower = mb_strtolower( get_the_title(), 'UTF-8' );
+                                        if ( str_contains( $title_lower, 'aramco' ) || str_contains( $title_lower, 'combustible' ) ) {
+                                            $fallback_img = 'vecino_aramco_1783210102383.png';
+                                        } elseif ( str_contains( $title_lower, 'kupos' ) || str_contains( $title_lower, 'pasaje' ) ) {
+                                            $fallback_img = 'vecino_kupos_1783210111064.png';
+                                        } elseif ( str_contains( $title_lower, 'salud' ) || str_contains( $title_lower, 'copago' ) ) {
+                                            $fallback_img = 'vecino_copago_1783210119573.png';
+                                        }
+                                    ?>
+                                    <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/' . $fallback_img ); ?>" alt="<?php echo esc_attr( get_the_title() ); ?>" class="vecino-img-circle">
                                 <?php endif; ?>
                             </div>
                             <div class="vecino-card-content">

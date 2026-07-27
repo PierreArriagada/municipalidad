@@ -532,8 +532,8 @@ function muni_seed_initial_proyectos() {
         update_option( 'muni_proyectos_seeded_v2', true );
     }
 }
-// OPTIMIZACIÓN: Ejecutar solo una vez al activar el tema, evitando consumo de BD en uso regular.
-add_action( 'after_switch_theme', 'muni_seed_initial_proyectos' );
+// OPTIMIZACIÓN: Desactivado a petición del usuario.
+// add_action( 'after_switch_theme', 'muni_seed_initial_proyectos' );
 
 /**
  * Auto-poblar beneficios de muestra en la Base de Datos si la tabla está vacía
@@ -619,6 +619,127 @@ function muni_seed_initial_banners() {
 }
 // OPTIMIZACIÓN: Ejecutar solo una vez al activar el tema.
 add_action( 'after_switch_theme', 'muni_seed_initial_banners' );
+
+/**
+ * Auto-poblar noticias reales si la tabla de posts está vacía (para instalaciones limpias)
+ */
+function muni_seed_real_noticias() {
+    if ( get_option( 'muni_real_noticias_seeded' ) ) {
+        return;
+    }
+
+    // Eliminar "Hola mundo!" o "Hello world!" por defecto
+    $hola_mundo = get_page_by_title('¡Hola mundo!', OBJECT, 'post');
+    if ($hola_mundo) wp_delete_post($hola_mundo->ID, true);
+    
+    $hello_world = get_page_by_title('Hello world!', OBJECT, 'post');
+    if ($hello_world) wp_delete_post($hello_world->ID, true);
+
+    $json_file = get_template_directory() . '/assets/data/real-news.json';
+    if ( file_exists( $json_file ) ) {
+        $json_data = file_get_contents( $json_file );
+        $news_data = json_decode( $json_data, true );
+        
+        if ( is_array( $news_data ) ) {
+            // Ensure category 'Noticias' exists
+            $term = get_term_by('name', 'Noticias', 'category');
+            if ( ! $term ) {
+                $inserted = wp_insert_term('Noticias', 'category');
+                $cat_id = ( ! is_wp_error($inserted) ) ? $inserted['term_id'] : 1;
+            } else {
+                $cat_id = $term->term_id;
+            }
+
+            foreach ( $news_data as $news ) {
+                wp_insert_post( array(
+                    'post_title'   => $news['post_title'],
+                    'post_content' => $news['post_content'],
+                    'post_excerpt' => $news['post_excerpt'],
+                    'post_date'    => $news['post_date'],
+                    'post_status'  => 'publish',
+                    'post_type'    => 'post',
+                    'post_category'=> array( $cat_id )
+                ) );
+            }
+        }
+    }
+    update_option( 'muni_real_noticias_seeded', true );
+}
+add_action( 'admin_init', 'muni_seed_real_noticias' );
+
+/**
+ * Auto-crear páginas esenciales para la navegación si no existen.
+ * Esto evita que los links de la navbar se rompan en instalaciones limpias.
+ */
+function muni_seed_essential_pages() {
+    if ( get_option( 'muni_essential_pages_seeded' ) ) {
+        return;
+    }
+
+    $pages = array(
+        array(
+            'title'    => 'Misión',
+            'slug'     => 'mision',
+            'content'  => 'Contenido de la misión municipal. Editable desde el panel de WordPress.',
+            'template' => '',
+        ),
+        array(
+            'title'    => 'Visión',
+            'slug'     => 'vision',
+            'content'  => 'Contenido de la visión municipal. Editable desde el panel de WordPress.',
+            'template' => '',
+        ),
+        array(
+            'title'    => 'Historia',
+            'slug'     => 'historia',
+            'content'  => 'Contenido de la historia de Santa Juana. Editable desde el panel de WordPress.',
+            'template' => '',
+        ),
+        array(
+            'title'    => 'Intranet',
+            'slug'     => 'intranet',
+            'content'  => 'Portal de accesos internos para funcionarios municipales.',
+            'template' => 'page-intranet.php',
+        ),
+        array(
+            'title'    => 'Direcciones Municipales',
+            'slug'     => 'direcciones-municipales',
+            'content'  => 'Listado de las direcciones municipales de Santa Juana.',
+            'template' => 'page-direcciones.php',
+        ),
+        array(
+            'title'    => 'Normativa Comunal',
+            'slug'     => 'normativa-comunal',
+            'content'  => 'Normativa y ordenanzas comunales.',
+            'template' => 'page-normativa.php',
+        ),
+        array(
+            'title'    => 'Políticas de Privacidad',
+            'slug'     => 'politicas',
+            'content'  => 'Políticas de privacidad del sitio.',
+            'template' => 'page-politicas.php',
+        ),
+    );
+
+    foreach ( $pages as $page ) {
+        // Solo crear la página si no existe una con ese slug
+        $existing = get_page_by_path( $page['slug'] );
+        if ( ! $existing ) {
+            $post_id = wp_insert_post( array(
+                'post_title'   => $page['title'],
+                'post_name'    => $page['slug'],
+                'post_content' => $page['content'],
+                'post_status'  => 'publish',
+                'post_type'    => 'page',
+            ) );
+            if ( $post_id && ! is_wp_error( $post_id ) && ! empty( $page['template'] ) ) {
+                update_post_meta( $post_id, '_wp_page_template', $page['template'] );
+            }
+        }
+    }
+    update_option( 'muni_essential_pages_seeded', true );
+}
+add_action( 'admin_init', 'muni_seed_essential_pages' );
 
 /**
  * Auto-poblar contactos del footer en la Base de Datos si la tabla está vacía

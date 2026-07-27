@@ -52,14 +52,14 @@ $proyectos_query = new WP_Query( $args );
                             <?php 
                             $thumb_url = has_post_thumbnail() ? get_the_post_thumbnail_url( get_the_ID(), 'medium_large' ) : false;
                             ?>
-                            <a href="<?php the_permalink(); ?>" style="display: block; background: #f1f5f9; height: 100%; min-height: 220px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; border-radius: 16px;">
+                            <a href="<?php the_permalink(); ?>" style="display: block; background: #f1f5f9; height: 220px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; border-radius: 16px;">
                                 <!-- Placeholder Background Layers -->
                                 <div style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; background: linear-gradient(135deg, rgba(0,51,153,0.1) 0%, rgba(0,51,153,0.02) 100%); z-index: 1;"></div>
-                                <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/Marca-Color-Horizontal-3.png' ); ?>" alt="" style="position: absolute; width: 50%; height: auto; object-fit: contain; filter: grayscale(100%) opacity(0.3); z-index: 2; margin: auto; left: 0; right: 0; top: 0; bottom: 0;">
+                                <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/fallback-logo.png' ); ?>" alt="" style="position: absolute; width: 70%; height: auto; object-fit: contain; filter: grayscale(100%) opacity(0.2); z-index: 2; margin: auto; left: 0; right: 0; top: 0; bottom: 0;">
                                 
                                 <!-- Actual Image -->
                                 <?php if ( $thumb_url ) : ?>
-                                    <img src="<?php echo esc_url( $thumb_url ); ?>" alt="<?php echo esc_attr( get_the_title() ); ?>" class="proyecto-img" style="position: relative; z-index: 3; transform: scale(1.05); width: 100%; height: 100%; object-fit: cover; min-height: 220px; border-radius: 16px;" onerror="this.style.display='none';">
+                                    <img src="<?php echo esc_url( $thumb_url ); ?>" alt="<?php echo esc_attr( get_the_title() ); ?>" class="proyecto-img" style="position: relative; z-index: 3; transform: scale(1.05); width: 100%; height: 100%; object-fit: cover; border-radius: 16px;" onerror="this.style.display='none';">
                                 <?php endif; ?>
                             </a>
                         </div>
