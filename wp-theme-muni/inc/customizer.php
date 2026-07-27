@@ -9,54 +9,54 @@ if ( ! defined( 'ABSPATH' ) ) {
 function muni_santa_juana_customizer( $wp_customize ) {
 
     // ==========================================
-    // SECCIÓN CONTACTO Y HORARIOS
+    // SECCIÓN EMERGENCIAS
     // ==========================================
-    $wp_customize->add_section( 'muni_contacto_section', array(
-        'title'    => __( 'Contacto Municipal', 'muni-santa-juana' ),
+    $wp_customize->add_section( 'muni_emergencias_section', array(
+        'title'    => __( 'Contactos de Emergencia', 'muni-santa-juana' ),
         'priority' => 30,
     ) );
 
-    // Teléfono
-    $wp_customize->add_setting( 'muni_telefono', array(
-        'default'           => '+56 41 2779753',
+    // Carabineros
+    $wp_customize->add_setting( 'muni_em_carabineros', array(
+        'default'           => '133',
         'sanitize_callback' => 'sanitize_text_field',
     ) );
-    $wp_customize->add_control( 'muni_telefono', array(
-        'label'    => __( 'Teléfono Principal', 'muni-santa-juana' ),
-        'section'  => 'muni_contacto_section',
+    $wp_customize->add_control( 'muni_em_carabineros', array(
+        'label'    => __( 'Número Carabineros', 'muni-santa-juana' ),
+        'section'  => 'muni_emergencias_section',
         'type'     => 'text',
     ) );
 
-    // Email
-    $wp_customize->add_setting( 'muni_email', array(
-        'default'           => 'oficinadepartes@santajuana.cl',
-        'sanitize_callback' => 'sanitize_email',
-    ) );
-    $wp_customize->add_control( 'muni_email', array(
-        'label'    => __( 'Email Oficina de Partes', 'muni-santa-juana' ),
-        'section'  => 'muni_contacto_section',
-        'type'     => 'email',
-    ) );
-
-    // Dirección
-    $wp_customize->add_setting( 'muni_direccion', array(
-        'default'           => 'Santa Juana, Región del Biobío',
+    // Ambulancia
+    $wp_customize->add_setting( 'muni_em_ambulancia', array(
+        'default'           => '131',
         'sanitize_callback' => 'sanitize_text_field',
     ) );
-    $wp_customize->add_control( 'muni_direccion', array(
-        'label'    => __( 'Dirección Física', 'muni-santa-juana' ),
-        'section'  => 'muni_contacto_section',
-        'type'     => 'textarea',
+    $wp_customize->add_control( 'muni_em_ambulancia', array(
+        'label'    => __( 'Número Ambulancia (SAMU)', 'muni-santa-juana' ),
+        'section'  => 'muni_emergencias_section',
+        'type'     => 'text',
     ) );
 
-    // Horario
-    $wp_customize->add_setting( 'muni_horario', array(
-        'default'           => 'Lunes a viernes: 8:00 - 14:00 hrs',
+    // Bomberos
+    $wp_customize->add_setting( 'muni_em_bomberos', array(
+        'default'           => '132',
         'sanitize_callback' => 'sanitize_text_field',
     ) );
-    $wp_customize->add_control( 'muni_horario', array(
-        'label'    => __( 'Horario de Atención', 'muni-santa-juana' ),
-        'section'  => 'muni_contacto_section',
+    $wp_customize->add_control( 'muni_em_bomberos', array(
+        'label'    => __( 'Número Bomberos', 'muni-santa-juana' ),
+        'section'  => 'muni_emergencias_section',
+        'type'     => 'text',
+    ) );
+
+    // Seguridad Ciudadana
+    $wp_customize->add_setting( 'muni_em_seguridad', array(
+        'default'           => '*4242',
+        'sanitize_callback' => 'sanitize_text_field',
+    ) );
+    $wp_customize->add_control( 'muni_em_seguridad', array(
+        'label'    => __( 'Número Seguridad Ciudadana', 'muni-santa-juana' ),
+        'section'  => 'muni_emergencias_section',
         'type'     => 'text',
     ) );
 
@@ -70,7 +70,7 @@ function muni_santa_juana_customizer( $wp_customize ) {
 
     // Solicitud de Información
     $wp_customize->add_setting( 'muni_link_solicitud', array(
-        'default'           => '#',
+        'default'           => 'https://www.portaltransparencia.cl/PortalPdT/ingreso-sai-v2?idOrgTa=MU306',
         'sanitize_callback' => 'esc_url_raw',
     ) );
     $wp_customize->add_control( 'muni_link_solicitud', array(
@@ -81,7 +81,7 @@ function muni_santa_juana_customizer( $wp_customize ) {
 
     // Transparencia Activa
     $wp_customize->add_setting( 'muni_link_transparencia', array(
-        'default'           => 'https://www.portaltransparencia.cl/PortalPdT/directorio-de-organismos-regulados/?org=MU306#',
+        'default'           => 'https://www.portaltransparencia.cl/PortalPdT/directorio-de-organismos-regulados/?org=MU306',
         'sanitize_callback' => 'esc_url_raw',
     ) );
     $wp_customize->add_control( 'muni_link_transparencia', array(
@@ -92,7 +92,7 @@ function muni_santa_juana_customizer( $wp_customize ) {
 
     // Juntas de Vecinos
     $wp_customize->add_setting( 'muni_link_juntas', array(
-        'default'           => '#',
+        'default'           => 'https://www.portaltransparencia.cl/PortalPdT/directorio-de-organismos-regulados/?org=MU306&pagina=34511023',
         'sanitize_callback' => 'esc_url_raw',
     ) );
     $wp_customize->add_control( 'muni_link_juntas', array(
@@ -114,7 +114,7 @@ function muni_santa_juana_customizer( $wp_customize ) {
 
     // Cuenta Pública
     $wp_customize->add_setting( 'muni_link_cuenta', array(
-        'default'           => '#',
+        'default'           => 'https://transparenciasantajuana.cl/owncloud/index.php/s/1BE1rqMdG8U6dJq',
         'sanitize_callback' => 'esc_url_raw',
     ) );
     $wp_customize->add_control( 'muni_link_cuenta', array(
@@ -302,5 +302,80 @@ function muni_santa_juana_customizer( $wp_customize ) {
         'section'  => 'muni_info_section',
         'type'     => 'text',
     ) );
+
+    // ==========================================
+    // SECCIÓN PORTAL INTRANET
+    // ==========================================
+    $wp_customize->add_section( 'muni_intranet_section', array(
+        'title'    => __( 'Portal Intranet', 'muni-santa-juana' ),
+        'priority' => 35,
+    ) );
+
+    // Webmail Title
+    $wp_customize->add_setting( 'muni_intranet_webmail_title', array(
+        'default'           => 'Correo Institucional (Webmail)',
+        'sanitize_callback' => 'sanitize_text_field',
+    ) );
+    $wp_customize->add_control( 'muni_intranet_webmail_title', array(
+        'label'    => __( 'Título Webmail', 'muni-santa-juana' ),
+        'section'  => 'muni_intranet_section',
+        'type'     => 'text',
+    ) );
+
+    // Webmail Desc
+    $wp_customize->add_setting( 'muni_intranet_webmail_desc', array(
+        'default'           => 'Accede a tu bandeja de entrada y calendario institucional.',
+        'sanitize_callback' => 'sanitize_textarea_field',
+    ) );
+    $wp_customize->add_control( 'muni_intranet_webmail_desc', array(
+        'label'    => __( 'Descripción Webmail', 'muni-santa-juana' ),
+        'section'  => 'muni_intranet_section',
+        'type'     => 'textarea',
+    ) );
+
+    // Webmail URL
+    $wp_customize->add_setting( 'muni_intranet_webmail_url', array(
+        'default'           => 'https://webmail.santajuana.cl/',
+        'sanitize_callback' => 'esc_url_raw',
+    ) );
+    $wp_customize->add_control( 'muni_intranet_webmail_url', array(
+        'label'    => __( 'Enlace Webmail', 'muni-santa-juana' ),
+        'section'  => 'muni_intranet_section',
+        'type'     => 'url',
+    ) );
+
+    // Sistema Intranet Title
+    $wp_customize->add_setting( 'muni_intranet_sistema_title', array(
+        'default'           => 'Plataforma Intranet Municipal',
+        'sanitize_callback' => 'sanitize_text_field',
+    ) );
+    $wp_customize->add_control( 'muni_intranet_sistema_title', array(
+        'label'    => __( 'Título Sistema Intranet', 'muni-santa-juana' ),
+        'section'  => 'muni_intranet_section',
+        'type'     => 'text',
+    ) );
+
+    // Sistema Intranet Desc
+    $wp_customize->add_setting( 'muni_intranet_sistema_desc', array(
+        'default'           => 'Acceso al sistema interno de gestión y servicios para funcionarios.',
+        'sanitize_callback' => 'sanitize_textarea_field',
+    ) );
+    $wp_customize->add_control( 'muni_intranet_sistema_desc', array(
+        'label'    => __( 'Descripción Sistema Intranet', 'muni-santa-juana' ),
+        'section'  => 'muni_intranet_section',
+        'type'     => 'textarea',
+    ) );
+
+    // Sistema Intranet URL
+    $wp_customize->add_setting( 'muni_intranet_sistema_url', array(
+        'default'           => 'https://santajuana-intranet.tumunicipio.cl/auth/login',
+        'sanitize_callback' => 'esc_url_raw',
+    ) );
+    $wp_customize->add_control( 'muni_intranet_sistema_url', array(
+        'label'    => __( 'Enlace Sistema Intranet', 'muni-santa-juana' ),
+        'section'  => 'muni_intranet_section',
+        'type'     => 'url',
+    ) );
+
 }
 add_action( 'customize_register', 'muni_santa_juana_customizer' );
