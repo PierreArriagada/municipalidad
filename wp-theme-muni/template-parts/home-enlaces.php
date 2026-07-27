@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
         <?php else : ?>
             <div class="enlaces-rapidos-grid">
                 <!-- 1. Pagos Online -->
-                <a href="#" class="enlace-rapido-card">
+                <a href="https://portalpagos.smc.cl/SANTA_JUANA/PV/Login" class="enlace-rapido-card" target="_blank" rel="noopener">
                     <div class="enlace-icon-box">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                             <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
@@ -37,7 +37,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                 </a>
 
                 <!-- 2. Turismo Comunal -->
-                <a href="#" class="enlace-rapido-card">
+                <a href="<?php echo esc_url( home_url( '/turismo/' ) ); ?>" class="enlace-rapido-card">
                     <div class="enlace-icon-box">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                             <polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"></polygon>
@@ -72,7 +72,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                 </a>
 
                 <!-- 4. Trípticos Informativos -->
-                <a href="#" class="enlace-rapido-card">
+                <a href="<?php echo esc_url( home_url( '/tripticos/' ) ); ?>" class="enlace-rapido-card">
                     <div class="enlace-icon-box">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
@@ -90,7 +90,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                 </a>
 
                 <!-- 5. Proyectos Municipales -->
-                <a href="#" class="enlace-rapido-card">
+                <a href="<?php echo esc_url( home_url( '/proyectos/' ) ); ?>" class="enlace-rapido-card">
                     <div class="enlace-icon-box">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M2 22h20"></path>
@@ -108,7 +108,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                 </a>
 
                 <!-- 6. Ley de Lobby -->
-                <a href="#" class="enlace-rapido-card">
+                <a href="https://www.leylobby.gob.cl/instituciones/MU306" class="enlace-rapido-card" target="_blank" rel="noopener noreferrer">
                     <div class="enlace-icon-box">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
@@ -123,7 +123,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                 </a>
 
                 <!-- 7. Ley 21.146 -->
-                <a href="#" class="enlace-rapido-card">
+                <a href="https://www.portaltransparencia.cl/PortalPdT/directorio-de-organismos-regulados/?org=MU306&pagina=34511023" class="enlace-rapido-card" target="_blank" rel="noopener noreferrer">
                     <div class="enlace-icon-box">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                             <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
@@ -140,7 +140,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                 </a>
 
                 <!-- 8. Permisos de Circulación -->
-                <a href="#" class="enlace-rapido-card">
+                <a href="https://portalpagos.smc.cl/SANTA_JUANA/PV/Login" class="enlace-rapido-card" target="_blank" rel="noopener">
                     <div class="enlace-icon-box">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A2 2 0 0 0 2 12v4c0 .6.4 1 1 1h2"></path>

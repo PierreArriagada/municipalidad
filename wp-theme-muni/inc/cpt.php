@@ -157,6 +157,29 @@ function muni_santa_juana_register_cpts() {
         'has_archive'           => true,
     );
     register_post_type( 'reciclaje', $args_reciclaje );
+    // CPT Concursos Públicos
+    $args_concursos = array(
+        'label'                 => __( 'Concursos Públicos', 'muni-santa-juana' ),
+        'labels'                => array(
+            'name'          => _x( 'Concursos Públicos', 'Post Type General Name', 'muni-santa-juana' ),
+            'singular_name' => _x( 'Concurso', 'Post Type Singular Name', 'muni-santa-juana' ),
+            'add_new_item'  => __( 'Añadir Nuevo Concurso', 'muni-santa-juana' ),
+            'edit_item'     => __( 'Editar Concurso', 'muni-santa-juana' ),
+            'new_item'      => __( 'Nuevo Concurso', 'muni-santa-juana' ),
+            'view_item'     => __( 'Ver Concurso', 'muni-santa-juana' ),
+        ),
+        'supports'              => array( 'title', 'editor', 'thumbnail', 'excerpt' ),
+        'public'                => true,
+        'show_ui'               => true,
+        'show_in_menu'          => true,
+        'menu_position'         => 8,
+        'menu_icon'             => 'dashicons-portfolio',
+        'show_in_rest'          => true,
+        'has_archive'           => true,
+        'rewrite'               => array( 'slug' => 'concursos' ),
+    );
+    register_post_type( 'concursos', $args_concursos );
+
     // CPT Sesiones Concejo
     $args_sesiones = array(
         'label'                 => __( 'Sesiones Concejo', 'muni-santa-juana' ),
@@ -529,17 +552,9 @@ function muni_seed_initial_beneficios() {
     if ( empty( $existing ) ) {
         $sample_beneficios = array(
             array(
-                'title'   => 'Descuento Aramco',
-                'excerpt' => 'Accede a rebajas especiales de hasta $15 y $25 por litro de combustible con tu Tarjeta Vecino. Conoce los días de promoción y estaciones adheridas para obtener la tuya.',
-            ),
-            array(
                 'title'   => 'Tarjeta Vecino Mayor',
                 'excerpt' => 'Tu bienestar es nuestra prioridad. Conoce la alianza exclusiva para acceder a descuentos en pasajes de buses interurbanos para el Adulto Mayor. Descubre cómo obtenerla.',
-            ),
-            array(
-                'title'   => 'Copago Cero Fonasa',
-                'excerpt' => 'Como política global de Estado, los afiliados a Fonasa tienen gratuidad total en la red pública. Infórmate sobre cómo validar este beneficio en nuestros centros de salud comunales.',
-            ),
+            )
         );
 
         foreach ( $sample_beneficios as $ben ) {
@@ -623,7 +638,7 @@ function muni_seed_initial_contactos() {
         $sample_con = array(
             array( 'title' => 'Oficina de Partes', 'valor' => 'oficinadepartes@santajuana.cl', 'enlace' => 'mailto:oficinadepartes@santajuana.cl', 'icono' => 'mail' ),
             array( 'title' => 'Teléfono', 'valor' => '+56 41 2779753', 'enlace' => 'tel:+56412779753', 'icono' => 'phone' ),
-            array( 'title' => 'Dirección', 'valor' => 'Santa Juana, Región del Biobío', 'enlace' => '', 'icono' => 'map' ),
+            array( 'title' => 'Dirección', 'valor' => 'Yungay 125, Santa Juana', 'enlace' => '', 'icono' => 'map' ),
             array( 'title' => 'Horario', 'valor' => 'Lunes a viernes: 8:00 - 14:00 hrs', 'enlace' => '', 'icono' => 'clock' ),
         );
         foreach ( $sample_con as $con ) {

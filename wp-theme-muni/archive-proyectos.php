@@ -46,11 +46,17 @@ get_header();
                 ?>
                     <article class="proyecto-card" style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.06); transition: transform 0.3s ease; display: flex; flex-direction: column;">
                         <div class="proyecto-thumb-wrap" style="position: relative; padding-top: 60%;">
-                            <a href="<?php the_permalink(); ?>">
-                                <?php if ( has_post_thumbnail() ) : ?>
-                                    <?php the_post_thumbnail( 'medium_large', array( 'style' => 'position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;', 'alt' => esc_attr( get_the_title() ) ) ); ?>
-                                <?php else : ?>
-                                    <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/img/noticia_fondos_1783211931893.png" alt="<?php the_title_attribute(); ?>" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+                            <?php 
+                            $thumb_url = has_post_thumbnail() ? get_the_post_thumbnail_url( get_the_ID(), 'medium_large' ) : false;
+                            ?>
+                            <a href="<?php the_permalink(); ?>" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #f1f5f9; display: flex; align-items: center; justify-content: center; overflow: hidden; border-radius: 12px;">
+                                <!-- Placeholder Background Layers -->
+                                <div style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; background: linear-gradient(135deg, rgba(0,51,153,0.1) 0%, rgba(0,51,153,0.02) 100%); z-index: 1;"></div>
+                                <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/Marca-Color-Horizontal-3.png' ); ?>" alt="" style="position: absolute; width: 50%; height: auto; object-fit: contain; filter: grayscale(100%) opacity(0.3); z-index: 2; margin: auto; left: 0; right: 0; top: 0; bottom: 0;">
+                                
+                                <!-- Actual Image -->
+                                <?php if ( $thumb_url ) : ?>
+                                    <img src="<?php echo esc_url( $thumb_url ); ?>" alt="<?php echo esc_attr( get_the_title() ); ?>" style="position: relative; z-index: 3; transform: scale(1.05); width: 100%; height: 100%; object-fit: cover; border-radius: 12px;" onerror="this.style.display='none';">
                                 <?php endif; ?>
                             </a>
                             <span style="position: absolute; top: 1rem; right: 1rem; background: <?php echo esc_attr( $bg_color ); ?>; color: white; padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.75rem; font-weight: bold; text-transform: uppercase;">

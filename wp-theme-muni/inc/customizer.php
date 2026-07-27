@@ -125,7 +125,7 @@ function muni_santa_juana_customizer( $wp_customize ) {
 
     // PLADETUR
     $wp_customize->add_setting( 'muni_link_pladetur', array(
-        'default'           => '#',
+        'default'           => 'https://www.portaltransparencia.cl/PortalPdT/directorio-de-organismos-regulados/?org=MU306',
         'sanitize_callback' => 'esc_url_raw',
     ) );
     $wp_customize->add_control( 'muni_link_pladetur', array(
@@ -144,7 +144,7 @@ function muni_santa_juana_customizer( $wp_customize ) {
 
     // Facebook URL
     $wp_customize->add_setting( 'muni_facebook_url', array(
-        'default'           => 'https://facebook.com',
+        'default'           => 'https://web.facebook.com/munisantajuana/?locale=es_LA',
         'sanitize_callback' => 'esc_url_raw',
     ) );
     $wp_customize->add_control( 'muni_facebook_url', array(
@@ -155,7 +155,7 @@ function muni_santa_juana_customizer( $wp_customize ) {
 
     // Instagram URL
     $wp_customize->add_setting( 'muni_instagram_url', array(
-        'default'           => 'https://instagram.com',
+        'default'           => 'https://www.instagram.com/munisantajuana',
         'sanitize_callback' => 'esc_url_raw',
     ) );
     $wp_customize->add_control( 'muni_instagram_url', array(
@@ -164,24 +164,26 @@ function muni_santa_juana_customizer( $wp_customize ) {
         'type'     => 'url',
     ) );
 
-    // X (Twitter) URL
-    $wp_customize->add_setting( 'muni_twitter_url', array(
-        'default'           => 'https://x.com',
-        'sanitize_callback' => 'esc_url_raw',
-    ) );
-    $wp_customize->add_control( 'muni_twitter_url', array(
-        'label'    => __( 'Cuenta Oficial de X (Twitter)', 'muni-santa-juana' ),
-        'section'  => 'muni_redes_section',
-        'type'     => 'url',
-    ) );
+
 
     // YouTube URL
     $wp_customize->add_setting( 'muni_youtube_url', array(
-        'default'           => 'https://youtube.com',
+        'default'           => 'https://www.youtube.com/@munisantajuana',
         'sanitize_callback' => 'esc_url_raw',
     ) );
     $wp_customize->add_control( 'muni_youtube_url', array(
         'label'    => __( 'Canal Oficial de YouTube', 'muni-santa-juana' ),
+        'section'  => 'muni_redes_section',
+        'type'     => 'url',
+    ) );
+
+    // TikTok URL
+    $wp_customize->add_setting( 'muni_tiktok_url', array(
+        'default'           => 'https://www.tiktok.com/@munisantajuana',
+        'sanitize_callback' => 'esc_url_raw',
+    ) );
+    $wp_customize->add_control( 'muni_tiktok_url', array(
+        'label'    => __( 'Cuenta Oficial de TikTok', 'muni-santa-juana' ),
         'section'  => 'muni_redes_section',
         'type'     => 'url',
     ) );

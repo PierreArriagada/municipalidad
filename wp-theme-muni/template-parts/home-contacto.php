@@ -42,7 +42,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                     </div>
                     <div class="contacto-info">
                         <h4>Dirección</h4>
-                        <p><?php echo esc_html( get_theme_mod( 'muni_direccion', 'Santa Juana, Región del Biobío' ) ); ?></p>
+                        <p><?php echo esc_html( get_theme_mod( 'muni_direccion', 'Yungay 125, Santa Juana' ) ); ?></p>
                     </div>
                 </div>
                 <div class="contacto-item">

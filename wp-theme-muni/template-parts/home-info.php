@@ -30,7 +30,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                     <span class="info-titulo"><?php echo wp_kses_post( get_theme_mod( 'muni_titulo_juntas', 'Ley 21.146<br>Juntas de Vecinos' ) ); ?></span>
                 </a>
 
-                <a href="<?php echo esc_url( get_theme_mod( 'muni_link_concejo', '#' ) ); ?>" class="info-card">
+                <a href="<?php echo esc_url( get_theme_mod( 'muni_link_concejo', '#concejo' ) ); ?>" class="info-card">
                     <div class="info-icon">
                         <?php echo muni_render_svg( 'info-concejo' ); ?>
                     </div>
@@ -44,7 +44,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                     <span class="info-titulo"><?php echo wp_kses_post( get_theme_mod( 'muni_titulo_cuenta', 'Cuenta<br>Pública' ) ); ?></span>
                 </a>
 
-                <a href="<?php echo esc_url( get_theme_mod( 'muni_link_pladetur', '#' ) ); ?>" class="info-card">
+                <a href="<?php echo esc_url( get_theme_mod( 'muni_link_pladetur', 'https://www.portaltransparencia.cl/PortalPdT/directorio-de-organismos-regulados/?org=MU306' ) ); ?>" class="info-card" target="_blank" rel="noopener noreferrer">
                     <div class="info-icon">
                         <?php echo muni_render_svg( 'info-pladetur' ); ?>
                     </div>

@@ -277,12 +277,12 @@ function muni_auto_seed_enlaces_menu() {
     if ( empty( $items ) || count( $items ) === 0 ) {
         $enlaces = array(
             array( 'title' => 'Pagos Online', 'class' => 'svg-pagos-online', 'url' => 'https://portalpagos.smc.cl/SANTA_JUANA/PV/Login' ),
-            array( 'title' => 'Turismo Comunal', 'class' => 'svg-turismo', 'url' => '#' ),
+            array( 'title' => 'Turismo Comunal', 'class' => 'svg-turismo', 'url' => home_url( '/turismo/' ) ),
             array( 'title' => 'Boletines Mensuales', 'class' => 'svg-boletines', 'url' => '#' ),
-            array( 'title' => 'Trípticos e Informes', 'class' => 'svg-tripticos', 'url' => '#' ),
-            array( 'title' => 'Proyectos y Obras', 'class' => 'svg-proyectos', 'url' => '#' ),
-            array( 'title' => 'Ley de Lobby', 'class' => 'svg-lobby', 'url' => '#' ),
-            array( 'title' => 'Ley 21.146', 'class' => 'svg-ley21146', 'url' => '#' ),
+            array( 'title' => 'Trípticos e Informes', 'class' => 'svg-tripticos', 'url' => home_url( '/tripticos/' ) ),
+            array( 'title' => 'Proyectos y Obras', 'class' => 'svg-proyectos', 'url' => home_url( '/proyectos/' ) ),
+            array( 'title' => 'Ley de Lobby', 'class' => 'svg-lobby', 'url' => 'https://www.portaltransparencia.cl/PortalPdT/directorio-de-organismos-regulados/?org=MU306&pagina=34511023' ),
+            array( 'title' => 'Ley 21.146', 'class' => 'svg-ley21146', 'url' => 'https://www.portaltransparencia.cl/PortalPdT/directorio-de-organismos-regulados/?org=MU306&pagina=34511023' ),
             array( 'title' => 'Permiso Circulación', 'class' => '', 'url' => 'https://portalpagos.smc.cl/SANTA_JUANA/PV/Login' ),
         );
 
@@ -299,6 +299,165 @@ function muni_auto_seed_enlaces_menu() {
 }
 // OPTIMIZACIÓN: Ejecutar solo una vez al activar el tema.
 add_action( 'after_switch_theme', 'muni_auto_seed_enlaces_menu' );
+
+/**
+ * Update existing seeded links just in case they were already seeded with #
+ */
+function muni_update_existing_enlaces_menu() {
+    if ( ! get_option( 'muni_enlaces_seeded_v4' ) ) {
+        $menu = wp_get_nav_menu_object( 'enlaces-rapidos' );
+        if ( $menu ) {
+            $items = wp_get_nav_menu_items( $menu->term_id );
+            foreach ( $items as $item ) {
+                if ( $item->title === 'Turismo Comunal' && $item->url === '#' ) {
+                    update_post_meta( $item->ID, '_menu_item_url', home_url( '/turismo/' ) );
+                }
+                if ( $item->title === 'Trípticos e Informes' && $item->url === '#' ) {
+                    update_post_meta( $item->ID, '_menu_item_url', home_url( '/tripticos/' ) );
+                }
+                if ( $item->title === 'Proyectos y Obras' && $item->url === '#' ) {
+                    update_post_meta( $item->ID, '_menu_item_url', home_url( '/proyectos/' ) );
+                }
+                if ( $item->title === 'Ley 21.146' && $item->url === '#' ) {
+                    update_post_meta( $item->ID, '_menu_item_url', 'https://www.portaltransparencia.cl/PortalPdT/directorio-de-organismos-regulados/?org=MU306&pagina=34511023' );
+                }
+                if ( $item->title === 'Ley de Lobby' && $item->url === '#' ) {
+                    update_post_meta( $item->ID, '_menu_item_url', 'https://www.portaltransparencia.cl/PortalPdT/directorio-de-organismos-regulados/?org=MU306&pagina=34511023' );
+                }
+            }
+        }
+        update_option( 'muni_enlaces_seeded_v4', true );
+    }
+}
+add_action( 'init', 'muni_update_existing_enlaces_menu' );
+
+/**
+ * Auto-create Normativa Comunal page if it doesn't exist
+ */
+function muni_auto_create_institutional_pages() {
+    // 1. Normativa Comunal
+    if ( ! get_option( 'muni_normativa_page_created' ) ) {
+        $page_check = get_page_by_title( 'Normativa Comunal' );
+        if ( ! isset( $page_check->ID ) ) {
+            $new_page_id = wp_insert_post( array(
+                'post_title'     => 'Normativa Comunal',
+                'post_type'      => 'page',
+                'post_name'      => 'normativa-comunal',
+                'post_status'    => 'publish',
+                'post_author'    => 1,
+            ) );
+            if ( $new_page_id && ! is_wp_error( $new_page_id ) ) {
+                update_post_meta( $new_page_id, '_wp_page_template', 'page-normativa.php' );
+            }
+        }
+        update_option( 'muni_normativa_page_created', true );
+    }
+
+    // 2. Historia
+    if ( ! get_option( 'muni_historia_page_created' ) ) {
+        $page_check = get_page_by_title( 'Historia' );
+        if ( ! isset( $page_check->ID ) ) {
+            $new_page_id = wp_insert_post( array(
+                'post_title'     => 'Historia',
+                'post_type'      => 'page',
+                'post_name'      => 'historia',
+                'post_status'    => 'publish',
+                'post_author'    => 1,
+            ) );
+            if ( $new_page_id && ! is_wp_error( $new_page_id ) ) {
+                update_post_meta( $new_page_id, '_wp_page_template', 'page-historia.php' );
+            }
+        }
+        update_option( 'muni_historia_page_created', true );
+    }
+
+    // 3. Misión
+    if ( ! get_option( 'muni_mision_page_created' ) ) {
+        $page_check = get_page_by_title( 'Misión' );
+        if ( ! isset( $page_check->ID ) ) {
+            $new_page_id = wp_insert_post( array(
+                'post_title'     => 'Misión',
+                'post_type'      => 'page',
+                'post_name'      => 'mision',
+                'post_status'    => 'publish',
+                'post_author'    => 1,
+            ) );
+            if ( $new_page_id && ! is_wp_error( $new_page_id ) ) {
+                update_post_meta( $new_page_id, '_wp_page_template', 'page-mision.php' );
+            }
+        }
+        update_option( 'muni_mision_page_created', true );
+    }
+
+    // 4. Visión
+    if ( ! get_option( 'muni_vision_page_created' ) ) {
+        $page_check = get_page_by_title( 'Visión' );
+        if ( ! isset( $page_check->ID ) ) {
+            $new_page_id = wp_insert_post( array(
+                'post_title'     => 'Visión',
+                'post_type'      => 'page',
+                'post_name'      => 'vision',
+                'post_status'    => 'publish',
+                'post_author'    => 1,
+            ) );
+            if ( $new_page_id && ! is_wp_error( $new_page_id ) ) {
+                update_post_meta( $new_page_id, '_wp_page_template', 'page-vision.php' );
+            }
+        }
+        update_option( 'muni_vision_page_created', true );
+    }
+    // 5. Políticas de Privacidad
+    if ( ! get_option( 'muni_politicas_page_created' ) ) {
+        $page_check = get_page_by_title( 'Políticas de Privacidad' );
+        if ( ! isset( $page_check->ID ) ) {
+            $new_page_id = wp_insert_post( array(
+                'post_title'     => 'Políticas de Privacidad',
+                'post_type'      => 'page',
+                'post_name'      => 'politicas',
+                'post_status'    => 'publish',
+                'post_author'    => 1,
+            ) );
+            if ( $new_page_id && ! is_wp_error( $new_page_id ) ) {
+                update_post_meta( $new_page_id, '_wp_page_template', 'page-politicas.php' );
+            }
+        }
+        update_option( 'muni_politicas_page_created', true );
+    }
+}
+add_action( 'init', 'muni_auto_create_institutional_pages' );
+
+/**
+ * Limpieza automática de beneficios de prueba
+ */
+function muni_cleanup_dummy_beneficios() {
+    if ( ! get_option( 'muni_dummy_beneficios_cleaned' ) ) {
+        $posts_to_delete = array( 'Copago Cero Fonasa', 'Descuento Aramco' );
+        foreach ( $posts_to_delete as $title ) {
+            $post = get_page_by_title( $title, OBJECT, 'beneficios' );
+            if ( $post ) {
+                wp_delete_post( $post->ID, true );
+            }
+        }
+        update_option( 'muni_dummy_beneficios_cleaned', true );
+    }
+}
+add_action( 'init', 'muni_cleanup_dummy_beneficios' );
+
+/**
+ * Register Widget Areas (Sidebars)
+ */
+function muni_widgets_init() {
+    register_sidebar( array(
+        'name'          => 'Footer Widgets',
+        'id'            => 'footer-1',
+        'description'   => 'Agrega widgets aquí para que aparezcan en el pie de página.',
+        'before_widget' => '<div id="%1$s" class="footer-section widget %2$s">',
+        'after_widget'  => '</div>',
+        'before_title'  => '<h4 class="widget-title">',
+        'after_title'   => '</h4>',
+    ) );
+}
+add_action( 'widgets_init', 'muni_widgets_init' );
 
 /**
  * Enforce strict chronological order and ignore sticky posts on blog index and archives.

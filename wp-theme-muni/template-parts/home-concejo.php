@@ -13,11 +13,11 @@ $sesiones_query = new WP_Query( $sesiones_args );
 <!-- ============================================
          CONCEJO MUNICIPAL Y MULTIMEDIA
          ============================================ -->
-    <section class="concejo-redes">
+    <section id="concejo" class="concejo-redes">
         <div class="container">
             <div class="noticias-header" style="margin-bottom: 1.5rem;">
                 <h2 class="section-title">Concejo Municipal</h2>
-                <a href="https://www.youtube.com/@munisantajuana" target="_blank" rel="noopener" class="btn-outline-primary">
+                <a href="<?php echo esc_url( get_theme_mod( 'muni_youtube_url', 'https://www.youtube.com/@munisantajuana' ) ); ?>" target="_blank" rel="noopener" class="btn-outline-primary">
                     <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18" style="margin-right: 6px; vertical-align: middle;">
                         <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.5 12 3.5 12 3.5s-7.505 0-9.377.55a3.016 3.016 0 0 0-2.122 2.136C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.55 9.376.55 9.376.55s7.505 0 9.377-.55a3.016 3.016 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
                     </svg>

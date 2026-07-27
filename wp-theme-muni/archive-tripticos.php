@@ -60,8 +60,22 @@ get_header();
             </div>
             
         <?php else : ?>
-            <div class="no-results" style="text-align: center; padding: 4rem 0;">
-                <p style="font-size: 1.2rem; color: var(--color-text-light, #64748b);"><?php esc_html_e( 'Pronto subiremos nuevas ediciones y trípticos informativos.', 'muni-santa-juana' ); ?></p>
+            <!-- Placeholder para que la página no esté vacía -->
+            <div class="tripticos-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2rem;">
+                <article class="triptico-card" style="background: var(--color-surface, #fff); border-radius: var(--radius-lg, 12px); overflow: hidden; box-shadow: var(--shadow-md, 0 4px 6px rgba(0,0,0,0.1)); transition: transform 0.3s ease;">
+                    <a href="#" style="display: block; width: 100%; height: 200px; overflow: hidden;" tabindex="-1" aria-hidden="true">
+                        <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/triptico.jpg' ); ?>" alt="Tríptico Informativo Municipal" class="triptico-img" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease;" loading="lazy" decoding="async">
+                    </a>
+                    
+                    <div class="triptico-info" style="padding: 1.5rem; text-align: center;">
+                        <h3 class="triptico-title" style="margin: 0 0 1rem 0; font-size: 1.25rem;">
+                            <a href="#" style="color: var(--color-text, #1e293b); text-decoration: none;">Edición Informativa Municipal</a>
+                        </h3>
+                        <a href="#" class="triptico-link" style="display: inline-block; padding: 0.5rem 1.2rem; background: var(--color-primary, #003399); color: #fff; border-radius: 50px; text-decoration: none; font-size: 0.9rem; font-weight: 500;">
+                            <?php esc_html_e( 'Leer edición ➡', 'muni-santa-juana' ); ?>
+                        </a>
+                    </div>
+                </article>
             </div>
         <?php endif; ?>
     </div>
