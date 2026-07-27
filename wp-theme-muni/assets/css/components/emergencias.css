@@ -19,12 +19,17 @@
     margin-bottom: 0;
 }
 
-/* Grid minimalista delimitado por líneas de color azul institucional */
+/* Grid minimalista delimitado por marco institucional */
 .emergencias-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 0;
     position: relative;
+    border: 1px solid rgba(0, 51, 153, 0.15);
+    border-radius: 16px;
+    background: #ffffff;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
 }
 
 /* Item individual sin card box */
@@ -35,15 +40,17 @@
     justify-content: space-between !important;
     background: transparent !important;
     border-radius: 0 !important;
-    padding: 1rem 1.5rem !important;
-    gap: 1rem !important;
+    padding: 1rem 0.85rem !important;
+    gap: 0.65rem !important;
     text-decoration: none !important;
     color: inherit !important;
     border: none !important;
     box-shadow: none !important;
     position: relative !important;
     transition: all 0.25s ease !important;
-    border-right: 2px solid rgba(0, 51, 153, 0.15) !important;
+    border-right: 1px solid rgba(0, 51, 153, 0.15) !important;
+    box-sizing: border-box !important;
+    min-width: 0 !important;
 }
 
 .em-item:last-child,
@@ -58,20 +65,20 @@
 
 .em-item:hover,
 .em-card:hover {
-    transform: translateY(-2px) !important;
-    background: rgba(0, 51, 153, 0.03) !important;
+    transform: translateY(-1px) !important;
+    background: rgba(0, 51, 153, 0.04) !important;
     border-right-color: var(--azul-institucional) !important;
 }
 
 /* Icon Wrapper */
 .em-icon-wrapper,
 .em-icon {
-    width: 48px !important;
-    height: 48px !important;
-    min-width: 48px !important;
-    min-height: 48px !important;
-    max-width: 48px !important;
-    max-height: 48px !important;
+    width: 44px !important;
+    height: 44px !important;
+    min-width: 44px !important;
+    min-height: 44px !important;
+    max-width: 44px !important;
+    max-height: 44px !important;
     border-radius: 12px !important;
     display: flex !important;
     align-items: center !important;
@@ -85,7 +92,7 @@
 
 .em-item:hover .em-icon-wrapper,
 .em-card:hover .em-icon {
-    transform: scale(1.08);
+    transform: scale(1.06);
     background-color: rgba(0, 51, 153, 0.12) !important;
 }
 
@@ -93,12 +100,12 @@
 .em-icon svg,
 .emergencias-section .em-icon-wrapper svg,
 .emergencias-section .em-icon svg {
-    width: 28px !important;
-    height: 28px !important;
-    min-width: 28px !important;
-    min-height: 28px !important;
-    max-width: 28px !important;
-    max-height: 28px !important;
+    width: 24px !important;
+    height: 24px !important;
+    min-width: 24px !important;
+    min-height: 24px !important;
+    max-width: 24px !important;
+    max-height: 24px !important;
     display: block !important;
     flex-shrink: 0 !important;
 }
@@ -110,14 +117,15 @@
     flex-direction: column !important;
     flex-grow: 1 !important;
     min-width: 0 !important;
+    overflow: hidden !important;
 }
 
 .em-title,
 .em-content h3 {
-    font-size: 0.85rem !important;
+    font-size: 0.8rem !important;
     font-weight: 600 !important;
     color: var(--texto-secundario) !important;
-    margin: 0 0 0.2rem 0 !important;
+    margin: 0 0 0.15rem 0 !important;
     white-space: nowrap !important;
     overflow: hidden !important;
     text-overflow: ellipsis !important;
@@ -125,22 +133,23 @@
 
 .em-phone-num,
 .em-number {
-    font-size: 1.5rem !important;
+    font-size: 1.3rem !important;
     font-weight: 800 !important;
     color: var(--azul-institucional) !important;
     line-height: 1.1 !important;
     letter-spacing: -0.02em !important;
     display: block !important;
+    white-space: nowrap !important;
 }
 
 /* Action Button */
 .em-call-action {
     display: inline-flex !important;
     align-items: center !important;
-    gap: 0.4rem !important;
-    padding: 0.45rem 0.8rem !important;
+    gap: 0.35rem !important;
+    padding: 0.4rem 0.65rem !important;
     border-radius: 20px !important;
-    font-size: 0.8rem !important;
+    font-size: 0.78rem !important;
     font-weight: 700 !important;
     background-color: rgba(0, 51, 153, 0.08) !important;
     color: var(--azul-institucional) !important;
@@ -155,30 +164,37 @@
 
 .em-phone-icon,
 .em-call-action svg {
-    width: 16px !important;
-    height: 16px !important;
-    min-width: 16px !important;
-    min-height: 16px !important;
-    max-width: 16px !important;
-    max-height: 16px !important;
+    width: 15px !important;
+    height: 15px !important;
+    min-width: 15px !important;
+    min-height: 15px !important;
+    max-width: 15px !important;
+    max-height: 15px !important;
     display: inline-block !important;
     flex-shrink: 0 !important;
 }
 
-/* Responsividad */
-@media (max-width: 1280px) {
+/* Responsividad Laptops & Media Screens (max-width: 1200px) */
+@media (max-width: 1200px) {
     .emergencias-grid {
-        grid-template-columns: repeat(2, 1fr) !important;
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
     }
 
     .em-item,
     .em-card {
         border-right: none !important;
         border-bottom: 1px solid rgba(0, 51, 153, 0.12) !important;
+        padding: 1rem 1.25rem !important;
+        gap: 1rem !important;
     }
 
     .em-item:nth-child(odd) {
-        border-right: 2px solid rgba(0, 51, 153, 0.15) !important;
+        border-right: 1px solid rgba(0, 51, 153, 0.15) !important;
+    }
+
+    .em-item:nth-child(3),
+    .em-item:nth-child(4) {
+        border-bottom: none !important;
     }
 }
 
@@ -191,7 +207,11 @@
     .em-card {
         border-right: none !important;
         border-bottom: 1px solid rgba(0, 51, 153, 0.12) !important;
-        padding: 0.85rem 0.5rem !important;
+        padding: 0.85rem 0.75rem !important;
+    }
+
+    .em-item:nth-child(3) {
+        border-bottom: 1px solid rgba(0, 51, 153, 0.12) !important;
     }
 
     .em-item:last-child,

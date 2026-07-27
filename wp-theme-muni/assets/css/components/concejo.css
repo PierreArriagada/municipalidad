@@ -2,8 +2,21 @@
    CONCEJO MUNICIPAL Y MULTIMEDIA
    ============================================ */
 .concejo-redes {
-    padding: 2rem 1.5rem;
+    padding: 3rem 0;
     background-color: var(--fondo-secundario);
+}
+
+.concejo-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.concejo-header .section-title {
+    margin-bottom: 0;
 }
 
 .btn-outline-primary {

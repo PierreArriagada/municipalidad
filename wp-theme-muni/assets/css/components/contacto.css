@@ -2,7 +2,7 @@
    INFORMACIÓN DE CONTACTO RÁPIDO
    ============================================ */
 .contacto-rapido {
-    padding: 2rem 1.5rem;
+    padding: 3rem 0;
     background-color: var(--fondo-secundario);
 }
 

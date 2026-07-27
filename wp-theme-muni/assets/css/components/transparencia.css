@@ -2,15 +2,23 @@
    TRANSPARENCIA ACTIVA (Ley 20.285)
    ============================================ */
 .transparencia-activa {
-    padding: 2.5rem 1.5rem;
+    padding: 3rem 0;
     background-color: var(--fondo-principal);
+}
+
+.transparencia-header {
+    margin-bottom: 1.5rem;
+}
+
+.transparencia-header .section-title {
+    margin-bottom: 0.25rem;
 }
 
 .transparencia-subtitle {
     font-size: 0.9rem;
     color: var(--texto-secundario);
-    margin-top: -0.75rem;
-    margin-bottom: 1.5rem;
+    margin: 0;
+    padding-left: 1rem;
 }
 
 .transparencia-grid {

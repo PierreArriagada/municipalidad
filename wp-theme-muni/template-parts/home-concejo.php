@@ -15,7 +15,7 @@ $sesiones_query = new WP_Query( $sesiones_args );
          ============================================ -->
     <section id="concejo" class="concejo-redes">
         <div class="container">
-            <div class="noticias-header" style="margin-bottom: 1.5rem;">
+            <div class="concejo-header">
                 <h2 class="section-title">Concejo Municipal</h2>
                 <a href="<?php echo esc_url( get_theme_mod( 'muni_youtube_url', 'https://www.youtube.com/@munisantajuana' ) ); ?>" target="_blank" rel="noopener" class="btn-outline-primary">
                     <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18" style="margin-right: 6px; vertical-align: middle;">

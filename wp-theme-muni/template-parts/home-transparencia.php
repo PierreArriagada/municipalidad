@@ -8,8 +8,10 @@ if ( ! defined( 'ABSPATH' ) ) {
          ============================================ -->
     <section id="transparencia" class="transparencia-activa">
         <div class="container">
-            <h2 class="section-title">Transparencia Activa</h2>
-            <p class="transparencia-subtitle">Según Ley 20.285 sobre Acceso a la Información Pública</p>
+            <div class="transparencia-header">
+                <h2 class="section-title">Transparencia Activa</h2>
+                <p class="transparencia-subtitle">Según Ley 20.285 sobre Acceso a la Información Pública</p>
+            </div>
 
             <div class="transparencia-grid">
                 <!-- 1. Publicaciones Diario Oficial -->

@@ -10,7 +10,7 @@
 .hero-direcciones {
     background-color: var(--azul-institucional);
     color: white;
-    padding: 3rem 1.5rem;
+    padding: 3rem 0;
     text-align: center;
     position: relative;
     overflow: hidden;
