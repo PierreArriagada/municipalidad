@@ -289,3 +289,51 @@
         font-size: 1.05rem;
     }
 }
+
+/* Cajas de Listas y Callouts (Políticas y Normativa) */
+.inst-list-box {
+    background: #f1f5f9;
+    padding: 1.5rem 1.5rem 1.5rem 2.5rem;
+    border-radius: 10px;
+    margin: 1.5rem 0;
+    box-sizing: border-box;
+}
+
+.inst-list-box li {
+    margin-bottom: 0.75rem;
+}
+
+.inst-list-box li:last-child {
+    margin-bottom: 0;
+}
+
+.inst-callout-box {
+    background-color: #eff6ff;
+    border-left: 4px solid #3b82f6;
+    padding: 2rem;
+    border-radius: 0 10px 10px 0;
+    margin: 1.75rem 0;
+    box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+    .inst-list-box {
+        padding: 1.25rem 1.25rem 1.25rem 2rem;
+    }
+
+    .inst-callout-box {
+        padding: 1.25rem 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .inst-list-box {
+        padding: 1rem 1rem 1rem 1.5rem;
+        font-size: 0.95rem;
+    }
+
+    .inst-callout-box {
+        padding: 1rem 0.85rem;
+    }
+}
+
