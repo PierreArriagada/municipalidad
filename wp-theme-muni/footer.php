@@ -49,7 +49,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                 <div class="footer-section">
                     <h4>Información</h4>
                     <nav class="footer-links">
-                        <a href="<?php echo esc_url( home_url( '/#contacto' ) ); ?>" class="footer-link">Números de Emergencia</a>
+                        <a href="<?php echo esc_url( home_url( '/#emergencias' ) ); ?>" class="footer-link">Números de Emergencia</a>
                         <a href="https://www.leylobby.gob.cl/instituciones/MU306" class="footer-link" target="_blank" rel="noopener noreferrer">Ley de Lobby</a>
                         <a href="<?php echo esc_url( home_url( '/normativa-comunal/' ) ); ?>" class="footer-link">Normativa Comunal</a>
                         <a href="<?php echo esc_url( home_url( '/politicas/' ) ); ?>" class="footer-link">Políticas de Privacidad</a>
