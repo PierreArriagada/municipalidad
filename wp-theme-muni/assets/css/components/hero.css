@@ -141,7 +141,7 @@
     fill: var(--azul-institucional) !important;
 }
 
-/* Noticias secundarias (Columna Derecha) */
+/* Noticias secundarias (Columna Derecha / Imagen a la IZQUIERDA borde a borde) */
 .noticias-secundarias {
     display: flex;
     flex-direction: column;
@@ -168,6 +168,8 @@
     min-width: 170px;
     position: relative;
     overflow: hidden;
+    align-self: stretch;
+    flex-shrink: 0;
 }
 
 .noticia-secundaria-img {
@@ -175,18 +177,15 @@
     height: 100%;
     object-fit: cover;
     display: block;
-    transition: transform 0.4s ease;
-}
-
-.noticia-secundaria:hover .noticia-secundaria-img {
-    /* transform removed to keep image static */
 }
 
 .noticia-secundaria-content {
-    padding: 1.35rem 1.5rem;
+    padding: 1.25rem 1.5rem;
     flex: 1;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    min-width: 0;
 }
 
 .noticia-secundaria-titulo {
@@ -229,20 +228,62 @@
     letter-spacing: 0.5px;
 }
 
-/* Responsividad Hero */
+/* Responsividad Hero (Móviles desde 320px en adelante) */
 @media (max-width: 767px) {
     .hero {
         padding: 1.5rem 0 1rem 0;
     }
     
     .noticia-secundaria {
-        flex-direction: column;
+        flex-direction: row;
+        border-radius: 16px;
+        min-height: 150px; /* Alto amplio desde la pantalla mínima (320px) */
     }
 
     .noticia-secundaria-thumb {
-        width: 100%;
-        min-width: 100%;
-        height: 200px;
+        width: 130px;
+        min-width: 130px;
+        align-self: stretch;
+    }
+
+    .noticia-secundaria-content {
+        padding: 1.1rem 1rem;
+        justify-content: space-between;
+    }
+
+    .noticia-secundaria-titulo {
+        font-size: 0.96rem;
+        line-height: 1.35;
+        margin-bottom: 0.35rem;
+        -webkit-line-clamp: 2;
+    }
+
+    .noticia-secundaria-resumen {
+        font-size: 0.83rem;
+        line-height: 1.35;
+        margin-bottom: 0.35rem;
+        -webkit-line-clamp: 2;
+    }
+}
+
+/* Móviles medianos y grandes (375px a 767px) */
+@media (min-width: 375px) and (max-width: 767px) {
+    .noticia-secundaria {
+        min-height: 165px; /* Mayor altura y presencia vertical */
+    }
+
+    .noticia-secundaria-thumb {
+        width: 150px; /* Imagen más amplia hacia la derecha */
+        min-width: 150px;
+    }
+
+    .noticia-secundaria-content {
+        padding: 1.25rem 1.25rem;
+    }
+
+    .noticia-secundaria-titulo {
+        font-size: 1.02rem;
+        line-height: 1.35;
     }
 }
 

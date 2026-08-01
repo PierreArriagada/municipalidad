@@ -46,6 +46,9 @@ if ( $use_wp_fallback ) {
         'ignore_sticky_posts' => true,
     );
     $hero_query = new WP_Query( $hero_args );
+    if ( $hero_query->have_posts() ) {
+        $GLOBALS['muni_hero_post_ids'] = wp_list_pluck( $hero_query->posts, 'ID' );
+    }
 }
 ?>
 <!-- ============================================

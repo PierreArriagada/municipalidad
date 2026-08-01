@@ -11,6 +11,12 @@ $premium_args = array(
     'orderby'             => 'date',
     'order'               => 'DESC',
 );
+
+// Evitar duplicar las noticias que ya fueron mostradas en la sección Hero superior
+if ( ! empty( $GLOBALS['muni_hero_post_ids'] ) && is_array( $GLOBALS['muni_hero_post_ids'] ) ) {
+    $premium_args['post__not_in'] = $GLOBALS['muni_hero_post_ids'];
+}
+
 $premium_query = new WP_Query( $premium_args );
 ?>
 <!-- ============================================
