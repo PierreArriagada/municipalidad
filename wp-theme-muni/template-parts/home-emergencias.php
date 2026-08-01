@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 $em_carabineros = get_theme_mod( 'muni_em_carabineros', '133' );
 $em_ambulancia = get_theme_mod( 'muni_em_ambulancia', '131' );
 $em_bomberos = get_theme_mod( 'muni_em_bomberos', '132' );
-$em_seguridad = get_theme_mod( 'muni_em_seguridad', '*4242' );
+$em_seguridad = get_theme_mod( 'muni_em_seguridad', '956584049' );
 
 ?>
 <!-- ============================================

@@ -215,23 +215,6 @@ function muni_santa_juana_register_cpts() {
         'has_archive'           => false,
     );
     register_post_type( 'anuncios', $args_anuncios );
-    // CPT Contactos (Footer)
-    $args_contactos = array(
-        'label'                 => __( 'Contactos Footer', 'muni-santa-juana' ),
-        'labels'                => array(
-            'name'          => _x( 'Contactos', 'Post Type General Name', 'muni-santa-juana' ),
-            'singular_name' => _x( 'Contacto', 'Post Type Singular Name', 'muni-santa-juana' ),
-            'add_new_item'  => __( 'Añadir Nuevo Contacto', 'muni-santa-juana' ),
-        ),
-        'supports'              => array( 'title' ),
-        'public'                => true,
-        'show_ui'               => true,
-        'show_in_menu'          => true,
-        'menu_position'         => 10,
-        'menu_icon'             => 'dashicons-phone',
-        'has_archive'           => false,
-    );
-    register_post_type( 'contactos', $args_contactos );
 }
 add_action( 'init', 'muni_santa_juana_register_cpts', 0 );
 
@@ -244,7 +227,6 @@ function muni_santa_juana_add_meta_boxes() {
     add_meta_box( 'muni_tripticos_meta', 'Enlace del Tríptico', 'muni_tripticos_meta_callback', 'tripticos', 'normal', 'high' );
     add_meta_box( 'muni_sesiones_meta', 'Detalles de la Sesión', 'muni_sesiones_meta_callback', 'sesiones_concejo', 'normal', 'high' );
     add_meta_box( 'muni_anuncios_meta', 'Configuración del Anuncio', 'muni_anuncios_meta_callback', 'anuncios', 'normal', 'high' );
-    add_meta_box( 'muni_contactos_meta', 'Información de Contacto', 'muni_contactos_meta_callback', 'contactos', 'normal', 'high' );
     add_meta_box( 'muni_direcciones_meta', 'Configuración de Dirección', 'muni_direcciones_meta_callback', 'direcciones', 'normal', 'high' );
 }
 add_action( 'add_meta_boxes', 'muni_santa_juana_add_meta_boxes' );
@@ -339,33 +321,6 @@ function muni_anuncios_meta_callback( $post ) {
     <?php
 }
 
-function muni_contactos_meta_callback( $post ) {
-    wp_nonce_field( 'muni_save_meta_box_data', 'muni_meta_box_nonce' );
-    $valor = get_post_meta( $post->ID, '_contacto_valor', true );
-    $enlace = get_post_meta( $post->ID, '_contacto_enlace', true );
-    $icono = get_post_meta( $post->ID, '_contacto_icono', true );
-    ?>
-    <p>
-        <label for="muni_contacto_valor"><strong>Valor a mostrar (ej: +56 41 2779753, Lunes a viernes...):</strong></label><br>
-        <input type="text" id="muni_contacto_valor" name="muni_contacto_valor" value="<?php echo esc_attr( $valor ); ?>" style="width:100%;" />
-    </p>
-    <p>
-        <label for="muni_contacto_enlace"><strong>Enlace (ej: tel:+56412779753 o mailto:correo@muni.cl). Opcional:</strong></label><br>
-        <input type="text" id="muni_contacto_enlace" name="muni_contacto_enlace" value="<?php echo esc_attr( $enlace ); ?>" style="width:100%;" />
-    </p>
-    <p>
-        <label for="muni_contacto_icono"><strong>Tipo de Ícono:</strong></label><br>
-        <select id="muni_contacto_icono" name="muni_contacto_icono" style="width:100%;">
-            <option value="mail" <?php selected( $icono, 'mail' ); ?>>Correo (Sobre)</option>
-            <option value="phone" <?php selected( $icono, 'phone' ); ?>>Teléfono</option>
-            <option value="map" <?php selected( $icono, 'map' ); ?>>Dirección (Mapa)</option>
-            <option value="clock" <?php selected( $icono, 'clock' ); ?>>Horario (Reloj)</option>
-            <option value="info" <?php selected( $icono, 'info' ); ?>>Información (General)</option>
-        </select>
-    </p>
-    <?php
-}
-
 function muni_santa_juana_save_meta_box_data( $post_id, $post ) {
     // Verificar nonce con wp_unslash() para entornos con magic_quotes legacy.
     if ( ! isset( $_POST['muni_meta_box_nonce'] ) || ! wp_verify_nonce( wp_unslash( $_POST['muni_meta_box_nonce'] ), 'muni_save_meta_box_data' ) ) {
@@ -432,23 +387,6 @@ function muni_santa_juana_save_meta_box_data( $post_id, $post ) {
             // Checkbox: si no está en $_POST fue desmarcado. Usamos get_post_type() en vez de confiar en $_POST['post_type'].
             $anuncio_activo = isset( $_POST['muni_anuncio_activo'] ) ? '1' : '0';
             update_post_meta( $post_id, '_anuncio_activo', $anuncio_activo );
-            break;
-
-        case 'contactos':
-            if ( isset( $_POST['muni_contacto_valor'] ) ) {
-                update_post_meta( $post_id, '_contacto_valor', sanitize_text_field( wp_unslash( $_POST['muni_contacto_valor'] ) ) );
-            }
-            if ( isset( $_POST['muni_contacto_enlace'] ) ) {
-                update_post_meta( $post_id, '_contacto_enlace', sanitize_text_field( wp_unslash( $_POST['muni_contacto_enlace'] ) ) );
-            }
-            if ( isset( $_POST['muni_contacto_icono'] ) ) {
-                // Validar contra lista blanca.
-                $iconos_validos = array( 'mail', 'phone', 'map', 'clock', 'info' );
-                $icono = sanitize_key( wp_unslash( $_POST['muni_contacto_icono'] ) );
-                if ( in_array( $icono, $iconos_validos, true ) ) {
-                    update_post_meta( $post_id, '_contacto_icono', $icono );
-                }
-            }
             break;
 
         case 'direcciones':
@@ -576,96 +514,50 @@ add_action( 'after_switch_theme', 'muni_seed_initial_beneficios' );
  * Auto-poblar banners de muestra en la Base de Datos si la tabla está vacía
  */
 function muni_seed_initial_banners() {
-    if ( get_option( 'muni_banners_seeded_v2' ) ) {
+    if ( get_option( 'muni_banners_seeded_v3' ) ) {
         return;
     }
 
     $existing = get_posts( array(
         'post_type'   => 'banners',
-        'numberposts' => 1,
+        'numberposts' => -1,
         'post_status' => 'any',
     ) );
 
-    // Si está vacío O no se ha sembrado antes, sembramos.
-    if ( empty( $existing ) ) {
-        $sample_banners = array(
-            array(
-                'title' => 'Turismo Local',
-                'link'  => '#',
-            ),
-            array(
-                'title' => 'Tríptico Informativo',
-                'link'  => '#',
-            ),
-            array(
-                'title' => 'Punto Limpio y Reciclaje',
-                'link'  => '#',
-            ),
-        );
+    $sample_banners = array(
+        'Turismo Local'            => home_url( '/turismo/' ),
+        'Tríptico Informativo'     => home_url( '/tripticos/' ),
+        'Punto Limpio y Reciclaje' => home_url( '/reciclaje/' ),
+    );
 
-        foreach ( $sample_banners as $banner ) {
+    // Si está vacío, sembramos.
+    if ( empty( $existing ) ) {
+        foreach ( $sample_banners as $title => $link ) {
             $post_id = wp_insert_post( array(
-                'post_title'   => $banner['title'],
+                'post_title'   => $title,
                 'post_status'  => 'publish',
                 'post_type'    => 'banners',
             ) );
 
             if ( $post_id && ! is_wp_error( $post_id ) ) {
-                update_post_meta( $post_id, '_banner_link', $banner['link'] );
+                update_post_meta( $post_id, '_banner_link', $link );
             }
         }
-        update_option( 'muni_banners_seeded_v2', true );
+    } else {
+        // Actualizamos los banners existentes si tenían el link temporal '#'
+        foreach ( $existing as $post ) {
+            if ( isset( $sample_banners[ $post->post_title ] ) ) {
+                $current_link = get_post_meta( $post->ID, '_banner_link', true );
+                if ( empty( $current_link ) || $current_link === '#' ) {
+                    update_post_meta( $post->ID, '_banner_link', $sample_banners[ $post->post_title ] );
+                }
+            }
+        }
     }
+    update_option( 'muni_banners_seeded_v3', true );
 }
 // OPTIMIZACIÓN: Ejecutar solo una vez al activar el tema.
 add_action( 'after_switch_theme', 'muni_seed_initial_banners' );
-
-/**
- * Auto-poblar noticias reales si la tabla de posts está vacía (para instalaciones limpias)
- */
-function muni_seed_real_noticias() {
-    if ( get_option( 'muni_real_noticias_seeded' ) ) {
-        return;
-    }
-
-    // Eliminar "Hola mundo!" o "Hello world!" por defecto
-    $hola_mundo = get_page_by_title('¡Hola mundo!', OBJECT, 'post');
-    if ($hola_mundo) wp_delete_post($hola_mundo->ID, true);
-    
-    $hello_world = get_page_by_title('Hello world!', OBJECT, 'post');
-    if ($hello_world) wp_delete_post($hello_world->ID, true);
-
-    $json_file = get_template_directory() . '/assets/data/real-news.json';
-    if ( file_exists( $json_file ) ) {
-        $json_data = file_get_contents( $json_file );
-        $news_data = json_decode( $json_data, true );
-        
-        if ( is_array( $news_data ) ) {
-            // Ensure category 'Noticias' exists
-            $term = get_term_by('name', 'Noticias', 'category');
-            if ( ! $term ) {
-                $inserted = wp_insert_term('Noticias', 'category');
-                $cat_id = ( ! is_wp_error($inserted) ) ? $inserted['term_id'] : 1;
-            } else {
-                $cat_id = $term->term_id;
-            }
-
-            foreach ( $news_data as $news ) {
-                wp_insert_post( array(
-                    'post_title'   => $news['post_title'],
-                    'post_content' => $news['post_content'],
-                    'post_excerpt' => $news['post_excerpt'],
-                    'post_date'    => $news['post_date'],
-                    'post_status'  => 'publish',
-                    'post_type'    => 'post',
-                    'post_category'=> array( $cat_id )
-                ) );
-            }
-        }
-    }
-    update_option( 'muni_real_noticias_seeded', true );
-}
-add_action( 'admin_init', 'muni_seed_real_noticias' );
 
 /**
  * Auto-crear páginas esenciales para la navegación si no existen.

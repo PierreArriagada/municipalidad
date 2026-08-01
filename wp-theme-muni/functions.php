@@ -2,6 +2,16 @@
 if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly.
 }
+
+/**
+ * Polyfill para str_contains() para garantizar compatibilidad con PHP 7.x
+ */
+if ( ! function_exists( 'str_contains' ) ) {
+    function str_contains( $haystack, $needle ) {
+        return '' === $needle || false !== strpos( $haystack, $needle );
+    }
+}
+
 /**
  * Funciones del tema Muni Santa Juana
  *
@@ -95,7 +105,7 @@ function muni_santa_juana_scripts() {
     wp_enqueue_style( 'muni-santa-juana-style', $tpl_uri . '/assets/css/main.css', array(), $css_ver );
 
     // Estilos de componentes (versión estática; incrementar manualmente al publicar cambios)
-    $theme_version = '23.0.0';
+    $theme_version = '24.0.1';
     wp_enqueue_style( 'muni-header',       $tpl_uri . '/assets/css/components/header.css',       array(), $theme_version );
     wp_enqueue_style( 'muni-hero',         $tpl_uri . '/assets/css/components/hero.css',         array(), $theme_version );
     wp_enqueue_style( 'muni-emergencias',  $tpl_uri . '/assets/css/components/emergencias.css',  array(), $theme_version );
@@ -139,6 +149,11 @@ add_action( 'wp_enqueue_scripts', 'muni_santa_juana_scripts' );
  * Incluir archivos de funcionalidades extra
  */
 require get_template_directory() . '/inc/cpt.php';
+
+/**
+ * Walker personalizado para el menú principal (Navbar)
+ */
+require get_template_directory() . '/inc/class-muni-nav-walker.php';
 
 /**
  * Personalizador de Temas (Customizer)
@@ -234,6 +249,12 @@ function muni_get_post_image( $post_id, $fallback_img_name ) {
     if ( $thumb_url ) return $thumb_url;
 
     $post = get_post( $post_id );
+    
+    // FIX ESPECÍFICO: Interceptar el post "Tríptico Informativo 2026" para evitar cargar su imagen rota
+    if ( $post && ( str_contains( strtolower( $post->post_title ), 'tríptico informativo 2026' ) || str_contains( strtolower( $post->post_title ), 'triptico informativo 2026' ) ) ) {
+        return get_template_directory_uri() . '/assets/img/triptico-2026.jpg';
+    }
+
     if ( $post && ! empty( $post->post_content ) ) {
         preg_match( '/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', $post->post_content, $matches );
         if ( ! empty( $matches[1] ) ) return $matches[1];
@@ -293,6 +314,8 @@ function muni_add_svg_to_menu( $title, $item, $args, $depth ) {
                 $icon_name = 'ley21146';
             } elseif ( strpos( $clean_title, 'emergencia' ) !== false ) {
                 $icon_name = 'seguridad-ciudadana';
+            } elseif ( strpos( $clean_title, 'permiso' ) !== false || strpos( $clean_title, 'circulacion' ) !== false ) {
+                $icon_name = 'permiso-circulacion';
             }
         }
 
@@ -314,56 +337,116 @@ function muni_add_svg_to_menu( $title, $item, $args, $depth ) {
 add_filter( 'nav_menu_item_title', 'muni_add_svg_to_menu', 10, 4 );
 
 /**
- * Auto-poblar los 8 enlaces rápidos iniciales si el menú está vacío.
+ * Auto-poblar los menús principales del tema (Navbar, Footer, Enlaces Rápidos).
+ * Garantiza que existan y estén asignados a la ubicación correcta automáticamente.
  */
-function muni_auto_seed_enlaces_menu() {
-    if ( get_option( 'muni_enlaces_seeded_v2' ) ) {
+function muni_auto_seed_all_menus() {
+    if ( get_option( 'muni_all_menus_seeded_v5' ) ) {
         return;
     }
 
-    $menu_name = 'Enlaces Rápidos';
-    $menu_exists = wp_get_nav_menu_object( $menu_name );
+    $locations = get_theme_mod( 'nav_menu_locations', array() );
+    $update_locations = false;
 
-    if ( ! $menu_exists ) {
-        $menu_id = wp_create_nav_menu( $menu_name );
+    // Obtener ID de Enlaces Rápidos primero para evitar colisiones
+    $enlaces_name = 'Enlaces Rápidos';
+    $enlaces_menu = wp_get_nav_menu_object( $enlaces_name );
+    $enlaces_id = 0;
+    if ( ! $enlaces_menu ) {
+        $enlaces_id = wp_create_nav_menu( $enlaces_name );
+        if ( ! is_wp_error( $enlaces_id ) ) {
+            $enlaces = array(
+                array( 'title' => 'Pagos Online', 'class' => 'svg-pagos-online', 'url' => 'https://portalpagos.smc.cl/SANTA_JUANA/PV/Login' ),
+                array( 'title' => 'Turismo Comunal', 'class' => 'svg-turismo', 'url' => home_url( '/turismo/' ) ),
+                array( 'title' => 'Boletines Mensuales', 'class' => 'svg-boletines', 'url' => '#' ),
+                array( 'title' => 'Trípticos e Informes', 'class' => 'svg-tripticos', 'url' => home_url( '/tripticos/' ) ),
+                array( 'title' => 'Proyectos y Obras', 'class' => 'svg-proyectos', 'url' => home_url( '/proyectos/' ) ),
+                array( 'title' => 'Ley de Lobby', 'class' => 'svg-lobby', 'url' => 'https://www.portaltransparencia.cl/PortalPdT/directorio-de-organismos-regulados/?org=MU306&pagina=34511023' ),
+                array( 'title' => 'Ley 21.146', 'class' => 'svg-ley21146', 'url' => 'https://www.portaltransparencia.cl/PortalPdT/directorio-de-organismos-regulados/?org=MU306&pagina=34511023' ),
+                array( 'title' => 'Permiso Circulación', 'class' => '', 'url' => 'https://portalpagos.smc.cl/SANTA_JUANA/PV/Login' ),
+            );
+            foreach ( $enlaces as $enlace ) {
+                wp_update_nav_menu_item( $enlaces_id, 0, array(
+                    'menu-item-title'   => $enlace['title'],
+                    'menu-item-url'     => $enlace['url'],
+                    'menu-item-status'  => 'publish',
+                    'menu-item-classes' => $enlace['class'],
+                ) );
+            }
+        }
     } else {
-        $menu_id = $menu_exists->term_id;
+        $enlaces_id = $enlaces_menu->term_id;
     }
 
-    // Asignar el menú a la ubicación si no está asignado
-    $locations = get_theme_mod( 'nav_menu_locations' );
-    if ( empty( $locations['enlaces-rapidos'] ) ) {
-        $locations['enlaces-rapidos'] = $menu_id;
+    if ( empty( $locations['enlaces-rapidos'] ) || $locations['enlaces-rapidos'] != $enlaces_id ) {
+        $locations['enlaces-rapidos'] = $enlaces_id;
+        $update_locations = true;
+    }
+
+    // 1. Navbar Menu (menu-1)
+    // Siempre borrar y recrear el "Menú Principal" generado por versiones anteriores del tema
+    $primary_name = 'Menú Principal';
+    $primary_menu = wp_get_nav_menu_object( $primary_name );
+    if ( $primary_menu ) {
+        wp_delete_nav_menu( $primary_name );
+    }
+
+    $primary_id = wp_create_nav_menu( $primary_name );
+    if ( ! is_wp_error( $primary_id ) ) {
+        // Inicio
+        wp_update_nav_menu_item( $primary_id, 0, array( 'menu-item-title' => 'Inicio', 'menu-item-url' => home_url('/'), 'menu-item-status' => 'publish' ) );
+
+        // Municipalidad (Dropdown)
+        $muni_parent_id = wp_update_nav_menu_item( $primary_id, 0, array( 'menu-item-title' => 'Municipalidad', 'menu-item-url' => '#', 'menu-item-status' => 'publish' ) );
+        if ( ! is_wp_error( $muni_parent_id ) ) {
+            wp_update_nav_menu_item( $primary_id, 0, array( 'menu-item-title' => 'Direcciones Municipales', 'menu-item-url' => home_url('/direcciones-municipales/'), 'menu-item-parent-id' => $muni_parent_id, 'menu-item-status' => 'publish' ) );
+            wp_update_nav_menu_item( $primary_id, 0, array( 'menu-item-title' => 'Misión', 'menu-item-url' => home_url('/mision/'), 'menu-item-parent-id' => $muni_parent_id, 'menu-item-status' => 'publish' ) );
+            wp_update_nav_menu_item( $primary_id, 0, array( 'menu-item-title' => 'Visión', 'menu-item-url' => home_url('/vision/'), 'menu-item-parent-id' => $muni_parent_id, 'menu-item-status' => 'publish' ) );
+            wp_update_nav_menu_item( $primary_id, 0, array( 'menu-item-title' => 'Historia', 'menu-item-url' => home_url('/historia/'), 'menu-item-parent-id' => $muni_parent_id, 'menu-item-status' => 'publish' ) );
+            wp_update_nav_menu_item( $primary_id, 0, array( 'menu-item-title' => 'Intranet Municipal', 'menu-item-url' => home_url('/intranet/'), 'menu-item-parent-id' => $muni_parent_id, 'menu-item-status' => 'publish' ) );
+        }
+
+        // Transparencia
+        wp_update_nav_menu_item( $primary_id, 0, array( 'menu-item-title' => 'Transparencia', 'menu-item-url' => 'https://www.portaltransparencia.cl/PortalPdT/directorio-de-organismos-regulados/?org=MU306', 'menu-item-status' => 'publish' ) );
+
+        // Pagos Online (Dropdown)
+        $pagos_parent_id = wp_update_nav_menu_item( $primary_id, 0, array( 'menu-item-title' => 'Pagos Online', 'menu-item-url' => 'https://portalpagos.smc.cl/SANTA_JUANA/PV/Login', 'menu-item-status' => 'publish' ) );
+        if ( ! is_wp_error( $pagos_parent_id ) ) {
+            wp_update_nav_menu_item( $primary_id, 0, array( 'menu-item-title' => 'Pago de Permiso de Circulación', 'menu-item-url' => 'https://portalpagos.smc.cl/SANTA_JUANA/PV/Login', 'menu-item-parent-id' => $pagos_parent_id, 'menu-item-status' => 'publish' ) );
+        }
+
+        // Contacto
+        wp_update_nav_menu_item( $primary_id, 0, array( 'menu-item-title' => 'Contacto', 'menu-item-url' => home_url('/#contacto'), 'menu-item-status' => 'publish' ) );
+    }
+    $locations['menu-1'] = $primary_id;
+    $update_locations = true;
+
+    // 2. Footer Menu (footer)
+    // SOLO crear y asignar si la ubicación 'footer' está vacía o mal asignada a Enlaces Rápidos
+    if ( empty( $locations['footer'] ) || $locations['footer'] == $enlaces_id ) {
+        $footer_name = 'Menú Pie de Página';
+        $footer_menu = wp_get_nav_menu_object( $footer_name );
+        if ( ! $footer_menu ) {
+            $footer_id = wp_create_nav_menu( $footer_name );
+            if ( ! is_wp_error( $footer_id ) ) {
+                wp_update_nav_menu_item( $footer_id, 0, array( 'menu-item-title' => 'Políticas de Privacidad', 'menu-item-url' => home_url('/politicas-de-privacidad/'), 'menu-item-status' => 'publish' ) );
+                wp_update_nav_menu_item( $footer_id, 0, array( 'menu-item-title' => 'Términos de Uso', 'menu-item-url' => '#', 'menu-item-status' => 'publish' ) );
+            }
+        } else {
+            $footer_id = $footer_menu->term_id;
+        }
+        $locations['footer'] = $footer_id;
+        $update_locations = true;
+    }
+
+    if ( $update_locations ) {
         set_theme_mod( 'nav_menu_locations', $locations );
     }
 
-    // Comprobar si está vacío antes de sembrar
-    $items = wp_get_nav_menu_items( $menu_id );
-    if ( empty( $items ) || count( $items ) === 0 ) {
-        $enlaces = array(
-            array( 'title' => 'Pagos Online', 'class' => 'svg-pagos-online', 'url' => 'https://portalpagos.smc.cl/SANTA_JUANA/PV/Login' ),
-            array( 'title' => 'Turismo Comunal', 'class' => 'svg-turismo', 'url' => home_url( '/turismo/' ) ),
-            array( 'title' => 'Boletines Mensuales', 'class' => 'svg-boletines', 'url' => '#' ),
-            array( 'title' => 'Trípticos e Informes', 'class' => 'svg-tripticos', 'url' => home_url( '/tripticos/' ) ),
-            array( 'title' => 'Proyectos y Obras', 'class' => 'svg-proyectos', 'url' => home_url( '/proyectos/' ) ),
-            array( 'title' => 'Ley de Lobby', 'class' => 'svg-lobby', 'url' => 'https://www.portaltransparencia.cl/PortalPdT/directorio-de-organismos-regulados/?org=MU306&pagina=34511023' ),
-            array( 'title' => 'Ley 21.146', 'class' => 'svg-ley21146', 'url' => 'https://www.portaltransparencia.cl/PortalPdT/directorio-de-organismos-regulados/?org=MU306&pagina=34511023' ),
-            array( 'title' => 'Permiso Circulación', 'class' => '', 'url' => 'https://portalpagos.smc.cl/SANTA_JUANA/PV/Login' ),
-        );
-
-        foreach ( $enlaces as $enlace ) {
-            wp_update_nav_menu_item( $menu_id, 0, array(
-                'menu-item-title'   => $enlace['title'],
-                'menu-item-url'     => $enlace['url'],
-                'menu-item-status'  => 'publish',
-                'menu-item-classes' => $enlace['class'],
-            ) );
-        }
-        update_option( 'muni_enlaces_seeded_v2', true );
-    }
+    update_option( 'muni_all_menus_seeded_v5', true );
 }
-// OPTIMIZACIÓN: Ejecutar solo una vez al activar el tema.
-add_action( 'after_switch_theme', 'muni_auto_seed_enlaces_menu' );
+// Ejecutar en init para forzar la corrección en sitios donde ya está activo
+add_action( 'init', 'muni_auto_seed_all_menus' );
 
 /**
  * Update existing seeded links just in case they were already seeded with #
@@ -515,6 +598,9 @@ function muni_strict_chronological_news( $query ) {
         $query->set( 'orderby', 'date' );
         $query->set( 'order', 'DESC' );
         $query->set( 'ignore_sticky_posts', 1 );
+        
+        // FIX: Mostrar 12 noticias por página (múltiplo de 3) para llenar la grilla perfecta
+        $query->set( 'posts_per_page', 12 );
     }
 }
 add_action( 'pre_get_posts', 'muni_strict_chronological_news' );
@@ -570,3 +656,114 @@ function muni_rename_post_object_to_noticias() {
     $labels->name_admin_bar = 'Noticia';
 }
 add_action( 'init', 'muni_rename_post_object_to_noticias' );
+
+/**
+ * Reemplazar imágenes rotas dentro del contenido del Tríptico 2026
+ */
+add_filter( 'the_content', 'muni_fix_triptico_content_image' );
+function muni_fix_triptico_content_image( $content ) {
+    if ( is_singular( 'tripticos' ) ) {
+        $post = get_post();
+        if ( $post && ( str_contains( strtolower( $post->post_title ), 'tríptico informativo 2026' ) || str_contains( strtolower( $post->post_title ), 'triptico informativo 2026' ) ) ) {
+            // Reemplazar cualquier <img src="..."> por la imagen correcta
+            $content = preg_replace( '/<img[^>]+src=[\'"]([^\'"]+)[\'"][^>]*>/i', '<img src="' . get_template_directory_uri() . '/assets/img/triptico-2026.jpg" alt="Tríptico 2026" style="width:100%; height:auto; border-radius:12px; margin-top:2rem;">', $content );
+        }
+    }
+    return $content;
+}
+
+/**
+ * Auto-create Demo Banners and Beneficios if they don't exist
+ */
+function muni_auto_create_demo_content() {
+    if ( ! get_option( 'muni_demo_content_created_v2' ) ) {
+        // Create Banners
+        $banners = array(
+            'Conoce nuestros Trípticos Informativos',
+            'Descubre el Turismo en Santa Juana',
+            'Puntos de reciclaje y medio ambiente'
+        );
+        foreach ( $banners as $banner_title ) {
+            $check = get_page_by_title( $banner_title, OBJECT, 'banners' );
+            if ( ! isset( $check->ID ) ) {
+                wp_insert_post( array(
+                    'post_title'  => $banner_title,
+                    'post_type'   => 'banners',
+                    'post_status' => 'publish',
+                    'post_author' => 1,
+                ) );
+            }
+        }
+
+        // Create Beneficios
+        $beneficios = array(
+            'Tarjeta Vecino' => 'Accede a múltiples descuentos en salud, educación y comercio local.',
+            'Beneficios Adulto Mayor' => 'Programas especiales, viajes y asistencia para nuestros adultos mayores.'
+        );
+        foreach ( $beneficios as $title => $content ) {
+            $check = get_page_by_title( $title, OBJECT, 'beneficios' );
+            if ( ! isset( $check->ID ) ) {
+                wp_insert_post( array(
+                    'post_title'   => $title,
+                    'post_content' => $content,
+                    'post_type'    => 'beneficios',
+                    'post_status'  => 'publish',
+                    'post_author'  => 1,
+                ) );
+            }
+        }
+
+        // Create Triptico
+        $triptico_title = 'Tríptico Informativo 2026';
+        $check_triptico = get_page_by_title( $triptico_title, OBJECT, 'tripticos' );
+        if ( ! isset( $check_triptico->ID ) ) {
+            wp_insert_post( array(
+                'post_title'   => $triptico_title,
+                'post_content' => '<p>Descubre toda la información sobre el nuevo tríptico municipal.</p><img src="' . get_template_directory_uri() . '/assets/img/triptico-2026.jpg" alt="Tríptico 2026" style="width:100%; height:auto; border-radius:12px; margin-top:2rem;">',
+                'post_type'    => 'tripticos',
+                'post_status'  => 'publish',
+                'post_author'  => 1,
+            ) );
+        }
+        
+        update_option( 'muni_demo_content_created_v2', true );
+    }
+}
+add_action( 'init', 'muni_auto_create_demo_content' );
+
+/**
+ * Fetch YouTube Playlist Videos via RSS and cache them
+ */
+function muni_get_youtube_playlist_videos( $playlist_id, $limit = 5 ) {
+    $transient_key = 'muni_yt_pl_' . md5( $playlist_id );
+    $videos = get_transient( $transient_key );
+    
+    if ( false === $videos || empty( $videos ) ) {
+        $feed_url = 'https://www.youtube.com/feeds/videos.xml?playlist_id=' . sanitize_text_field( $playlist_id );
+        $response = wp_remote_get( $feed_url, array( 'timeout' => 10 ) );
+        $videos = array();
+        
+        if ( ! is_wp_error( $response ) && wp_remote_retrieve_response_code( $response ) === 200 ) {
+            $body = wp_remote_retrieve_body( $response );
+            $xml = @simplexml_load_string( $body );
+            if ( $xml && isset( $xml->entry ) ) {
+                foreach ( $xml->entry as $entry ) {
+                    $yt = $entry->children( 'http://www.youtube.com/xml/schemas/2015' );
+                    if ( isset( $yt->videoId ) ) {
+                        $videos[] = array(
+                            'id'    => (string) $yt->videoId,
+                            'title' => (string) $entry->title,
+                            'date'  => date_i18n( get_option('date_format', 'd M, Y'), strtotime( (string) $entry->published ) ),
+                        );
+                    }
+                    if ( count( $videos ) >= $limit ) break;
+                }
+            }
+        }
+        
+        // Cache for 1 hour
+        set_transient( $transient_key, $videos, HOUR_IN_SECONDS );
+    }
+    
+    return $videos;
+}

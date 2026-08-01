@@ -51,7 +51,7 @@ function muni_santa_juana_customizer( $wp_customize ) {
 
     // Seguridad Ciudadana
     $wp_customize->add_setting( 'muni_em_seguridad', array(
-        'default'           => '*4242',
+        'default'           => '956584049',
         'sanitize_callback' => 'sanitize_text_field',
     ) );
     $wp_customize->add_control( 'muni_em_seguridad', array(
@@ -417,6 +417,58 @@ function muni_santa_juana_customizer( $wp_customize ) {
     $wp_customize->add_control( 'muni_alcalde_cargo', array(
         'label'    => __( 'Cargo / Año', 'muni-santa-juana' ),
         'section'  => 'muni_alcalde_section',
+        'type'     => 'text',
+    ) );
+
+    // ==========================================
+    // SECCIÓN CONTACTO (INFORMACIÓN MUNICIPAL)
+    // ==========================================
+    $wp_customize->add_section( 'muni_contacto_section', array(
+        'title'    => __( 'Contacto Municipal', 'muni-santa-juana' ),
+        'priority' => 37,
+    ) );
+
+    // Email
+    $wp_customize->add_setting( 'muni_email', array(
+        'default'           => 'oficinadepartes@santajuana.cl',
+        'sanitize_callback' => 'sanitize_email',
+    ) );
+    $wp_customize->add_control( 'muni_email', array(
+        'label'    => __( 'Correo Electrónico', 'muni-santa-juana' ),
+        'section'  => 'muni_contacto_section',
+        'type'     => 'email',
+    ) );
+
+    // Teléfono
+    $wp_customize->add_setting( 'muni_telefono', array(
+        'default'           => '+56 41 2779753',
+        'sanitize_callback' => 'sanitize_text_field',
+    ) );
+    $wp_customize->add_control( 'muni_telefono', array(
+        'label'    => __( 'Teléfono', 'muni-santa-juana' ),
+        'section'  => 'muni_contacto_section',
+        'type'     => 'text',
+    ) );
+
+    // Dirección
+    $wp_customize->add_setting( 'muni_direccion', array(
+        'default'           => 'Yungay 125, Santa Juana',
+        'sanitize_callback' => 'sanitize_text_field',
+    ) );
+    $wp_customize->add_control( 'muni_direccion', array(
+        'label'    => __( 'Dirección', 'muni-santa-juana' ),
+        'section'  => 'muni_contacto_section',
+        'type'     => 'text',
+    ) );
+
+    // Horario
+    $wp_customize->add_setting( 'muni_horario', array(
+        'default'           => 'Lunes a viernes: 8:00 - 14:00 hrs',
+        'sanitize_callback' => 'sanitize_text_field',
+    ) );
+    $wp_customize->add_control( 'muni_horario', array(
+        'label'    => __( 'Horario de Atención', 'muni-santa-juana' ),
+        'section'  => 'muni_contacto_section',
         'type'     => 'text',
     ) );
 

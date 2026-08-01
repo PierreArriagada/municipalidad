@@ -33,7 +33,13 @@ $premium_query = new WP_Query( $premium_args );
                 <?php while ( $premium_query->have_posts() ) : $premium_query->the_post(); ?>
                     <article class="noticia-card-premium">
                         <?php 
-                        $thumb_url = has_post_thumbnail() ? get_the_post_thumbnail_url( get_the_ID(), 'medium_large' ) : false;
+                        $thumb_url = false;
+                        if ( has_post_thumbnail() ) {
+                            $thumb_id = get_post_thumbnail_id( get_the_ID() );
+                            if ( $thumb_id ) {
+                                $thumb_url = wp_get_attachment_image_url( $thumb_id, 'medium_large' );
+                            }
+                        }
                         ?>
                         <a href="<?php the_permalink(); ?>" style="display: block; background: #f1f5f9; height: 220px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; border-radius: 16px;">
                             <!-- Placeholder Background Layers -->

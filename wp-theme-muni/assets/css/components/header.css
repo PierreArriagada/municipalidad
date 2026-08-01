@@ -461,8 +461,8 @@
 
     .mobile-socials {
         display: block;
-        margin-top: auto;
-        padding-top: 2rem;
+        margin-top: 1.5rem;
+        padding-top: 1.5rem;
         width: 100%;
         border-top: 1px solid rgba(0, 0, 0, 0.05);
     }

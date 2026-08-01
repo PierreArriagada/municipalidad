@@ -365,13 +365,13 @@ img {
     .wp-block-file {
         flex-direction: column !important;
         align-items: flex-start !important;
-        padding: 1rem !important;
+        padding: 0.85rem !important;
     }
     
     .wp-block-file a:not(.wp-block-file__button) {
         margin-right: 0 !important;
-        margin-bottom: 1rem !important;
-        font-size: 0.95rem !important;
+        margin-bottom: 0.85rem !important;
+        font-size: 0.92rem !important;
     }
     
     .wp-block-file__button {

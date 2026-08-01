@@ -143,9 +143,12 @@ if ( ! defined( 'ABSPATH' ) ) {
                 <a href="https://portalpagos.smc.cl/SANTA_JUANA/PV/Login" class="enlace-rapido-card" target="_blank" rel="noopener">
                     <div class="enlace-icon-box">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A2 2 0 0 0 2 12v4c0 .6.4 1 1 1h2"></path>
-                            <circle cx="7" cy="17" r="2"></circle>
-                            <circle cx="17" cy="17" r="2"></circle>
+                            <path d="m21 8-2 2-1.5-3.7A2 2 0 0 0 15.6 5H8.4a2 2 0 0 0-1.9 1.3L5 10 3 8"></path>
+                            <path d="M7 14h.01"></path>
+                            <path d="M17 14h.01"></path>
+                            <rect width="18" height="8" x="3" y="10" rx="2"></rect>
+                            <path d="M5 18v2a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-2"></path>
+                            <path d="M14 18v2a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-2"></path>
                         </svg>
                     </div>
                     <div class="enlace-info">
