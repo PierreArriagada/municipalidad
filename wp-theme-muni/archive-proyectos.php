@@ -18,7 +18,7 @@ get_header();
             <h1 class="page-title" style="font-size: 3rem; margin: 0 0 1rem 0; font-weight: 800;">Proyectos Municipales</h1>
             <p style="font-size: 1.2rem; opacity: 0.9; max-width: 800px; margin: 0 auto;">Conoce las obras y avances que estamos construyendo juntos para mejorar la calidad de vida en Santa Juana.</p>
         </div>
-        <svg style="position: absolute; bottom: 0; left: 0; width: 100%; height: auto;" viewBox="0 0 1440 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 48H1440V0C1440 0 1140 48 720 48C300 48 0 0 0 0V48Z" fill="#ffffff"/></svg>
+        <svg style="position: absolute; bottom: -1px; left: 0; width: 100%; height: auto; display: block;" viewBox="0 0 1440 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 48H1440V0C1440 0 1140 48 720 48C300 48 0 0 0 0V48Z" fill="#ffffff"/></svg>
     </div>
 
     <div class="container" style="padding: 4rem 1.5rem;">
@@ -74,14 +74,16 @@ get_header();
                                 <?php echo wp_trim_words( wp_strip_all_tags( get_the_content() ), 15, '...' ); ?>
                             </p>
 
-                            <div class="proyecto-footer" style="margin-top: auto; display: flex; justify-content: space-between; align-items: center; padding-top: 1.5rem; border-top: 1px solid #eee;">
-                                <a href="<?php the_permalink(); ?>" class="proyecto-link" style="color: #006633; font-weight: bold; text-decoration: none; font-size: 0.9rem;">Ver proyecto</a>
-                                <a href="<?php the_permalink(); ?>" class="proyecto-btn" aria-label="Ver proyecto" style="display: flex; align-items: center; justify-content: center; width: 35px; height: 35px; background: rgba(0,102,51,0.1); color: #006633; border-radius: 50%;">
-                                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <line x1="5" y1="12" x2="19" y2="12"></line>
-                                        <polyline points="12 5 19 12 12 19"></polyline>
-                                    </svg>
-                                </a>
+                            <div class="proyecto-footer">
+                                <div class="proyecto-actions">
+                                    <a href="<?php the_permalink(); ?>" class="proyecto-link"><?php esc_html_e( 'Ver proyecto', 'muni-santa-juana' ); ?></a>
+                                    <a href="<?php the_permalink(); ?>" class="proyecto-btn">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                                            <polyline points="12 5 19 12 12 19"></polyline>
+                                        </svg>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </article>
@@ -98,7 +100,15 @@ get_header();
             </div>
             
         <?php else : ?>
-            <p style="text-align: center; font-size: 1.2rem; color: #666;">Aún no hay proyectos publicados.</p>
+            <div class="proyecto-empty-state">
+                <div class="proyecto-empty-icon">
+                    <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+                    </svg>
+                </div>
+                <h4 class="proyecto-empty-title"><?php esc_html_e( 'No hay proyectos publicados', 'muni-santa-juana' ); ?></h4>
+                <p class="proyecto-empty-subtitle"><?php esc_html_e( 'Actualmente no existen proyectos registrados en esta sección. Vuelve a revisar periódicamente.', 'muni-santa-juana' ); ?></p>
+            </div>
         <?php endif; ?>
     </div>
 </main>

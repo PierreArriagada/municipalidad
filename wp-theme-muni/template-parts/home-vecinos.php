@@ -65,8 +65,16 @@ $beneficios_query = new WP_Query( $beneficios_args );
                         </div>
                     <?php endwhile; wp_reset_postdata(); ?>
                 <?php else : ?>
-                    <div style="grid-column: 1 / -1; text-align: center; padding: 3rem; background: var(--color-surface); border-radius: var(--radius-lg); border: 1px dashed var(--color-border);">
-                        <p style="color: var(--color-text-light); margin: 0; font-size: 1.1rem;"><?php esc_html_e( 'No hay beneficios actualmente.', 'muni-santa-juana' ); ?></p>
+                    <div class="vecino-empty-state">
+                        <div class="vecino-empty-icon">
+                            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <line x1="12" y1="8" x2="12" y2="12"></line>
+                                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                            </svg>
+                        </div>
+                        <h4 class="vecino-empty-title"><?php esc_html_e( 'No hay beneficios actualmente', 'muni-santa-juana' ); ?></h4>
+                        <p class="vecino-empty-subtitle"><?php esc_html_e( 'Estamos trabajando en nuevas alianzas y convenios para nuestra comunidad. ¡Vuelve a consultar pronto!', 'muni-santa-juana' ); ?></p>
                     </div>
                 <?php endif; ?>
             </div>

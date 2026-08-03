@@ -379,46 +379,7 @@ function muni_santa_juana_customizer( $wp_customize ) {
         'type'     => 'url',
     ) );
 
-    // ==========================================
-    // SECCIÓN ALCALDE (FOOTER)
-    // ==========================================
-    $wp_customize->add_section( 'muni_alcalde_section', array(
-        'title'    => __( 'Alcalde (Footer)', 'muni-santa-juana' ),
-        'priority' => 36,
-    ) );
 
-    // Imagen del Alcalde
-    $wp_customize->add_setting( 'muni_alcalde_img', array(
-        'default'           => '',
-        'sanitize_callback' => 'esc_url_raw',
-    ) );
-    $wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'muni_alcalde_img', array(
-        'label'    => __( 'Imagen del Alcalde', 'muni-santa-juana' ),
-        'section'  => 'muni_alcalde_section',
-        'settings' => 'muni_alcalde_img',
-    ) ) );
-
-    // Nombre del Alcalde
-    $wp_customize->add_setting( 'muni_alcalde_nombre', array(
-        'default'           => 'Ángel Castro Medina',
-        'sanitize_callback' => 'sanitize_text_field',
-    ) );
-    $wp_customize->add_control( 'muni_alcalde_nombre', array(
-        'label'    => __( 'Nombre del Alcalde', 'muni-santa-juana' ),
-        'section'  => 'muni_alcalde_section',
-        'type'     => 'text',
-    ) );
-
-    // Cargo del Alcalde
-    $wp_customize->add_setting( 'muni_alcalde_cargo', array(
-        'default'           => 'Alcalde de Santa Juana 2026',
-        'sanitize_callback' => 'sanitize_text_field',
-    ) );
-    $wp_customize->add_control( 'muni_alcalde_cargo', array(
-        'label'    => __( 'Cargo / Año', 'muni-santa-juana' ),
-        'section'  => 'muni_alcalde_section',
-        'type'     => 'text',
-    ) );
 
     // ==========================================
     // SECCIÓN CONTACTO (INFORMACIÓN MUNICIPAL)

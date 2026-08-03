@@ -18,6 +18,25 @@ if ( false === $banners_posts ) {
     );
     $banners_query = new WP_Query( $banners_args );
     $banners_posts = $banners_query->posts;
+
+    // Forzar el orden específico: Turismo, Reciclaje, Tríptico
+    usort( $banners_posts, function($a, $b) {
+        $order = ['turismo' => 1, 'reciclaje' => 2, 'limpio' => 2, 'triptico' => 3, 'tríptico' => 3];
+        
+        $a_title = mb_strtolower( $a->post_title, 'UTF-8' );
+        $b_title = mb_strtolower( $b->post_title, 'UTF-8' );
+        
+        $a_weight = 99;
+        $b_weight = 99;
+        
+        foreach ($order as $key => $weight) {
+            if (str_contains($a_title, $key)) $a_weight = min($a_weight, $weight);
+            if (str_contains($b_title, $key)) $b_weight = min($b_weight, $weight);
+        }
+        
+        return $a_weight <=> $b_weight;
+    });
+
     wp_cache_set( $cache_key, $banners_posts, 'muni_theme', HOUR_IN_SECONDS );
 }
 ?>
@@ -45,12 +64,12 @@ if ( false === $banners_posts ) {
                     ?>
                         <a href="<?php echo esc_url( $banner_link ); ?>" class="banner-card" aria-label="<?php echo esc_attr( sprintf( __( 'Ir a %s', 'muni-santa-juana' ), get_the_title() ) ); ?>">
                             <?php 
-                                $fallback_img = 'Turismo.png';
+                                $fallback_img = 'Turismo.jpg';
                                 $title_lower  = mb_strtolower( get_the_title(), 'UTF-8' );
                                 if ( str_contains( $title_lower, 'triptico' ) || str_contains( $title_lower, 'tríptico' ) ) {
-                                    $fallback_img = 'triptico.png';
+                                    $fallback_img = 'triptico.jpg';
                                 } elseif ( str_contains( $title_lower, 'reciclaje' ) || str_contains( $title_lower, 'limpio' ) ) {
-                                    $fallback_img = 'reciclaje.png';
+                                    $fallback_img = 'reciclaje.jpg';
                                 }
                                 $final_img_url = muni_get_post_image( get_the_ID(), $fallback_img );
                             ?>
@@ -59,7 +78,7 @@ if ( false === $banners_posts ) {
                                 <h3 class="banner-title"><?php echo esc_html( get_the_title() ); ?></h3>
                             </div>
                             <div class="banner-glass-bottom">
-                                <span class="banner-link"><?php esc_html_e( 'Ir a la información ➔', 'muni-santa-juana' ); ?></span>
+                                <span class="banner-link"><?php esc_html_e( 'Ver más ➔', 'muni-santa-juana' ); ?></span>
                             </div>
                         </a>
                     <?php endforeach; wp_reset_postdata(); ?>

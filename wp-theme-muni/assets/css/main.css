@@ -3,26 +3,8 @@
    Organización Modular CSS para Escalabilidad y Mantenimiento
    ========================================================================== */
 
-/* 1. Capa Base */
-@import url('base/variables.css');
-@import url('base/global.css');
-
-/* 2. Capa de Componentes (Ordenamiento 1:1 con front-page.php) */
-@import url('components/header.css');       /* 1. Navbar & Top Bar */
-@import url('components/hero.css');         /* 2. Noticias Destacadas Hero */
-@import url('components/info.css');         /* 3. Cards Cuenta Pública, PLADETUR, Leyes */
-@import url('components/banners.css');      /* 4. Cards Turismo, Tríptico, Reciclaje */
-@import url('components/vecinos.css');      /* 5. Centro de Beneficios para Vecinos */
-@import url('components/transparencia.css');/* 6. Transparencia Activa */
-@import url('components/noticias.css');     /* 7. Noticias Recientes Grid */
-@import url('components/concejo.css');      /* 8. Concejo Municipal y Transmisiones */
-@import url('components/proyectos.css');    /* 9. Proyectos Municipales */
-@import url('components/enlaces.css');      /* 10. Enlaces Útiles & Servicios */
-@import url('components/emergencias.css');  /* 11. Contactos de Emergencia 24/7 */
-@import url('components/contacto.css');     /* 12. Información de Contacto Rápido */
-@import url('components/footer.css');       /* 13. Pie de Página & Tarjeta Alcalde */
-@import url('components/direcciones.css');  /* Plantilla Direcciones Municipales */
-@import url('components/intranet.css');     /* Plantilla Intranet */
-@import url('components/institucional.css');/* Plantillas Misión, Visión, Historia */
+/* Las capas base y de componentes ahora se cargan desde functions.php
+   usando wp_enqueue_style. No usar @import aquí para evitar cargas duplicadas
+   y mejorar el rendimiento. */
 
 /* Cache buster: v21 */

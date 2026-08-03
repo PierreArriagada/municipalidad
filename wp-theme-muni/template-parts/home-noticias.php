@@ -64,7 +64,7 @@ $premium_query = new WP_Query( $premium_args );
                                     <?php echo get_the_date(); ?>
                                 </span>
                             </div>
-                            <h3 class="noticia-premium-title"><a href="<?php the_permalink(); ?>" style="color:inherit; text-decoration:none;"><?php the_title(); ?></a></h3>
+                            <h3 class="noticia-premium-title"><a href="<?php the_permalink(); ?>" style="color:inherit; text-decoration:none;" class="stretched-link"><?php the_title(); ?></a></h3>
                             
                             <p class="noticia-premium-excerpt">
                                 <?php echo wp_trim_words( get_the_excerpt(), 15, '...' ); ?>

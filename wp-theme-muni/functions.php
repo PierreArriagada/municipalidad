@@ -101,32 +101,68 @@ function muni_santa_juana_scripts() {
     $tpl_dir = get_template_directory();
     $tpl_uri = get_template_directory_uri();
 
-    $css_ver = file_exists( $tpl_dir . '/assets/css/main.css' ) ? (string) filemtime( $tpl_dir . '/assets/css/main.css' ) : '1.0.1';
-    wp_enqueue_style( 'muni-santa-juana-style', $tpl_uri . '/assets/css/main.css', array(), $css_ver );
-
-    // Estilos de componentes (versión estática; incrementar manualmente al publicar cambios)
+    // Estilos Base (Variables y Globales, estrictamente en orden)
     $theme_version = '24.0.1';
-    wp_enqueue_style( 'muni-header',       $tpl_uri . '/assets/css/components/header.css',       array(), $theme_version );
-    wp_enqueue_style( 'muni-hero',         $tpl_uri . '/assets/css/components/hero.css',         array(), $theme_version );
-    wp_enqueue_style( 'muni-emergencias',  $tpl_uri . '/assets/css/components/emergencias.css',  array(), $theme_version );
-    wp_enqueue_style( 'muni-enlaces',      $tpl_uri . '/assets/css/components/enlaces.css',      array(), $theme_version );
-    wp_enqueue_style( 'muni-vecinos',      $tpl_uri . '/assets/css/components/vecinos.css',      array(), $theme_version );
-    wp_enqueue_style( 'muni-proyectos',    $tpl_uri . '/assets/css/components/proyectos.css',    array(), $theme_version );
-    wp_enqueue_style( 'muni-noticias',     $tpl_uri . '/assets/css/components/noticias.css',     array(), $theme_version );
-    wp_enqueue_style( 'muni-banners',      $tpl_uri . '/assets/css/components/banners.css',      array(), $theme_version );
-    wp_enqueue_style( 'muni-concejo',      $tpl_uri . '/assets/css/components/concejo.css',      array(), $theme_version );
-    wp_enqueue_style( 'muni-info',         $tpl_uri . '/assets/css/components/info.css',         array(), $theme_version );
-    wp_enqueue_style( 'muni-transparencia',$tpl_uri . '/assets/css/components/transparencia.css',$theme_version );
-    wp_enqueue_style( 'muni-contacto',     $tpl_uri . '/assets/css/components/contacto.css',     array(), $theme_version );
-    wp_enqueue_style( 'muni-footer',       $tpl_uri . '/assets/css/components/footer.css',       array(), $theme_version );
-    wp_enqueue_style( 'muni-anuncios',     $tpl_uri . '/assets/css/components/anuncios.css',     array(), $theme_version );
-    
-    // Plantillas especiales: solo cargar el CSS si la página actual lo necesita.
-    if ( is_page_template( 'page-intranet.php' ) ) {
-        wp_enqueue_style( 'muni-intranet',   $tpl_uri . '/assets/css/components/intranet.css',   array(), $theme_version );
+    wp_enqueue_style( 'muni-variables',    $tpl_uri . '/assets/css/base/variables.css',          array(), $theme_version );
+    wp_enqueue_style( 'muni-global',       $tpl_uri . '/assets/css/base/global.css',             array('muni-variables'), $theme_version );
+
+    $css_ver = file_exists( $tpl_dir . '/assets/css/main.css' ) ? (string) filemtime( $tpl_dir . '/assets/css/main.css' ) : '1.0.1';
+    wp_enqueue_style( 'muni-santa-juana-style', $tpl_uri . '/assets/css/main.css', array('muni-global'), $css_ver );
+
+    // Estilos de componentes (dependen del estilo principal para garantizar el orden de la cascada)
+    wp_enqueue_style( 'muni-header',       $tpl_uri . '/assets/css/components/header.css',       array('muni-santa-juana-style'), $theme_version );
+    wp_enqueue_style( 'muni-footer',       $tpl_uri . '/assets/css/components/footer.css',       array('muni-santa-juana-style'), $theme_version );
+    wp_enqueue_style( 'muni-banners',      $tpl_uri . '/assets/css/components/banners.css',      array('muni-santa-juana-style'), $theme_version );
+    wp_enqueue_style( 'muni-info',         $tpl_uri . '/assets/css/components/info.css',         array('muni-santa-juana-style'), $theme_version );
+    wp_enqueue_style( 'muni-enlaces',      $tpl_uri . '/assets/css/components/enlaces.css',      array('muni-santa-juana-style'), $theme_version );
+
+    // HOME PAGE
+    if ( is_front_page() || is_home() ) {
+        wp_enqueue_style( 'muni-hero',         $tpl_uri . '/assets/css/components/hero.css',         array('muni-santa-juana-style'), $theme_version );
+        wp_enqueue_style( 'muni-emergencias',  $tpl_uri . '/assets/css/components/emergencias.css',  array('muni-santa-juana-style'), $theme_version );
+        wp_enqueue_style( 'muni-vecinos',      $tpl_uri . '/assets/css/components/vecinos.css',      array('muni-santa-juana-style'), $theme_version );
+        wp_enqueue_style( 'muni-proyectos',    $tpl_uri . '/assets/css/components/proyectos.css',    array('muni-santa-juana-style'), $theme_version );
+        wp_enqueue_style( 'muni-noticias',     $tpl_uri . '/assets/css/components/noticias.css',     array('muni-santa-juana-style'), $theme_version );
+        wp_enqueue_style( 'muni-concejo',      $tpl_uri . '/assets/css/components/concejo.css',      array('muni-santa-juana-style'), $theme_version );
     }
-    if ( is_page_template( 'page-direcciones.php' ) ) {
-        wp_enqueue_style( 'muni-direcciones',$tpl_uri . '/assets/css/components/direcciones.css',array(), $theme_version );
+
+    // ARCHIVOS Y SINGLES DE CUSTOM POST TYPES
+    if ( is_post_type_archive('proyectos') || is_singular('proyectos') ) {
+        wp_enqueue_style( 'muni-proyectos',    $tpl_uri . '/assets/css/components/proyectos.css',    array('muni-santa-juana-style'), $theme_version );
+    }
+    
+    if ( is_category() || is_singular('post') || is_archive() || is_search() ) {
+        wp_enqueue_style( 'muni-noticias',     $tpl_uri . '/assets/css/components/noticias.css',     array('muni-santa-juana-style'), $theme_version );
+    }
+
+    if ( is_post_type_archive('anuncios') || is_singular('anuncios') ) {
+        wp_enqueue_style( 'muni-anuncios',     $tpl_uri . '/assets/css/components/anuncios.css',     array('muni-santa-juana-style'), $theme_version );
+    }
+    
+    if ( is_post_type_archive('direcciones') || is_singular('direcciones') ) {
+        wp_enqueue_style( 'muni-direcciones',  $tpl_uri . '/assets/css/components/direcciones.css',  array('muni-santa-juana-style'), $theme_version );
+    }
+
+    // PLANTILLAS DE PÁGINA ESPECÍFICAS
+    if ( is_page_template( 'page-contacto.php' ) ) {
+        wp_enqueue_style( 'muni-contacto',     $tpl_uri . '/assets/css/components/contacto.css',     array('muni-santa-juana-style'), $theme_version );
+    }
+
+    if ( is_page_template( 'page-transparencia.php' ) ) {
+        wp_enqueue_style( 'muni-transparencia',$tpl_uri . '/assets/css/components/transparencia.css',array('muni-santa-juana-style'), $theme_version );
+    }
+
+    if ( is_page_template( 'page-intranet.php' ) ) {
+        wp_enqueue_style( 'muni-intranet',     $tpl_uri . '/assets/css/components/intranet.css',     array('muni-santa-juana-style'), $theme_version );
+    }
+    
+    if ( is_page_template( 'page-direcciones-municipales.php' ) ) {
+        wp_enqueue_style( 'muni-direcciones',  $tpl_uri . '/assets/css/components/direcciones.css',  array('muni-santa-juana-style'), $theme_version );
+    }
+
+    // Plantillas Institucionales
+    if ( is_page_template( 'page-mision.php' ) || is_page_template( 'page-vision.php' ) || is_page_template( 'page-historia.php' ) || is_page_template( 'page-normativa.php' ) || is_page_template( 'page-politicas.php' ) ) {
+        wp_enqueue_style( 'muni-institucional',$tpl_uri . '/assets/css/components/institucional.css',array('muni-santa-juana-style'), $theme_version );
     }
 
     $js_ver = file_exists( $tpl_dir . '/assets/js/main.js' ) ? (string) filemtime( $tpl_dir . '/assets/js/main.js' ) : '1.0.1';

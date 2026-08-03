@@ -41,11 +41,17 @@
 
 .hero-wave {
     position: absolute;
-    bottom: 0;
+    bottom: -2px;
     left: 0;
     width: 100%;
-    height: 30px;
-    z-index: 1;
+    line-height: 0;
+    z-index: 5;
+}
+.hero-wave svg {
+    display: block;
+    width: 100%;
+    height: 48px;
+    transform: rotate(0);
 }
 
 .container-direcciones {

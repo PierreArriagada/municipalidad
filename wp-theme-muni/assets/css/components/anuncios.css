@@ -69,7 +69,8 @@
     height: auto;
     display: block;
     max-height: 80vh;
-    object-fit: cover;
+    object-fit: contain;
+    background-color: #000;
 }
 
 .muni-popup-no-img {
@@ -108,7 +109,34 @@
     background-position: center;
     background-repeat: no-repeat;
     transition: transform 0.5s ease;
-    position: relative; /* Para posicionar el contenido hijo */
+    position: relative;
+    overflow: hidden;
+}
+
+/* Efecto de fondo desenfocado para llenar los lados vacíos en imágenes verticales */
+.anuncio-hero-bg::before {
+    content: '';
+    position: absolute;
+    top: -5%;
+    left: -5%;
+    width: 110%;
+    height: 110%;
+    background: inherit;
+    filter: blur(25px) brightness(0.6);
+    z-index: 1;
+}
+
+/* Contenedor de la imagen real sin recortes (contain) */
+.anuncio-hero-image-contain {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 2;
 }
 
 @media (min-width: 768px) {
@@ -139,6 +167,7 @@
     flex-direction: column;
     justify-content: flex-end;
     align-items: flex-start;
+    z-index: 3;
 }
 
 .anuncio-hero-title {
@@ -195,6 +224,8 @@
     width: 100%;
     background-color: #0549BD; /* Azul institucional exacto de la sección Hero */
     padding: 2rem 0 1rem 0; /* Espaciado superior e inferior para integrarse perfectamente */
+    margin-bottom: -2px; /* Elimina la línea blanca de gap de subpíxeles */
+    z-index: 5;
 }
 
 .anuncio-hero-section.has-carousel {
@@ -252,11 +283,9 @@
     top: 50%;
     transform: translateY(-50%);
     z-index: 10;
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    color: white;
+    background: #ffffff;
+    border: none;
+    color: var(--azul-institucional, #0549BD);
     width: 48px;
     height: 48px;
     border-radius: 50%;
@@ -265,12 +294,14 @@
     align-items: center;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
 }
 
 .anuncio-hero-control:hover {
-    background: rgba(255, 255, 255, 0.3);
-    transform: translateY(-50%) scale(1.05);
+    background: #ffffff;
+    color: #03348b;
+    transform: translateY(-50%) scale(1.08);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
 }
 
 .anuncio-hero-control:active {

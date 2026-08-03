@@ -18,6 +18,24 @@ $anuncios_args = array(
             'key'     => '_anuncio_activo',
             'value'   => '1',
             'compare' => '='
+        ),
+        array(
+            'relation' => 'OR',
+            array(
+                'key'     => '_anuncio_fecha_fin',
+                'compare' => 'NOT EXISTS'
+            ),
+            array(
+                'key'     => '_anuncio_fecha_fin',
+                'value'   => '',
+                'compare' => '='
+            ),
+            array(
+                'key'     => '_anuncio_fecha_fin',
+                'value'   => current_time( 'Y-m-d' ),
+                'type'    => 'DATE',
+                'compare' => '>='
+            )
         )
     )
 );
@@ -55,6 +73,7 @@ if ( $anuncios_query->have_posts() ) :
                     <a href="<?php echo esc_url( $link ); ?>" class="anuncio-hero-link" title="<?php echo esc_attr( get_the_title() ); ?>" <?php echo $target; ?> <?php echo $rel; ?>>
                         <?php if ( $thumb_url ) : ?>
                             <div class="anuncio-hero-bg" style="background-image: url('<?php echo esc_url( $thumb_url ); ?>');" aria-label="<?php echo esc_attr( get_the_title() ); ?>">
+                                <div class="anuncio-hero-image-contain" style="background-image: url('<?php echo esc_url( $thumb_url ); ?>');"></div>
                                 <div class="anuncio-hero-content">
                                     <h2 class="anuncio-hero-title"><?php the_title(); ?></h2>
                                 </div>

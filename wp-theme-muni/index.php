@@ -87,8 +87,22 @@ get_header(); ?>
             </div>
             
         <?php else : ?>
-            <div class="no-results" style="text-align: center; padding: 4rem 0;">
-                <p style="font-size: 1.2rem; color: #64748b;"><?php esc_html_e( 'No se encontró contenido.', 'muni-santa-juana' ); ?></p>
+            <div class="muni-no-results-card" style="background: #ffffff; border-radius: 20px; box-shadow: 0 12px 35px rgba(0,0,0,0.06); border: 1.5px dashed rgba(5,73,189,0.2); padding: 4rem 2rem; text-align: center; max-width: 650px; margin: 2rem auto;">
+                <div style="width: 60px; height: 60px; background: rgba(5,73,189,0.08); border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 1.25rem; color: #0549BD;">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </div>
+                <h3 style="font-size: 1.4rem; font-weight: 700; color: #1e293b; margin-bottom: 0.5rem;"><?php esc_html_e( 'No se encontraron resultados', 'muni-santa-juana' ); ?></h3>
+                <p style="font-size: 0.98rem; color: #64748b; margin-bottom: 2rem;"><?php esc_html_e( 'Intenta realizar una nueva búsqueda o explora nuestras secciones principales.', 'muni-santa-juana' ); ?></p>
+                
+                <form role="search" method="get" action="<?php echo esc_url( home_url( '/' ) ); ?>" style="display: flex; gap: 0.5rem; max-width: 480px; margin: 0 auto 1.5rem auto;">
+                    <input type="search" placeholder="<?php esc_attr_e( 'Buscar en el sitio...', 'muni-santa-juana' ); ?>" value="<?php echo get_search_query(); ?>" name="s" required style="flex: 1; padding: 0.75rem 1.25rem; border-radius: 30px; border: 1px solid #cbd5e1; outline: none; font-size: 0.9rem;" />
+                    <button type="submit" style="background: #0549BD; color: #ffffff; border: none; padding: 0.75rem 1.5rem; border-radius: 30px; font-weight: 700; font-size: 0.9rem; cursor: pointer;"><?php esc_html_e( 'Buscar', 'muni-santa-juana' ); ?></button>
+                </form>
+                
+                <a href="<?php echo esc_url( home_url( '/' ) ); ?>" style="display: inline-block; color: #0549BD; font-weight: 700; font-size: 0.9rem; text-decoration: none;"><?php esc_html_e( '← Volver a la página principal', 'muni-santa-juana' ); ?></a>
             </div>
         <?php endif; ?>
     </div>

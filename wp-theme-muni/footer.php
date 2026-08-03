@@ -17,19 +17,13 @@ if ( ! defined( 'ABSPATH' ) ) {
         </div>
         <div class="container">
             <div class="footer-grid">
-                <div class="footer-section alcalde-section">
-                    <?php
-                    $alcalde_img = get_theme_mod( 'muni_alcalde_img', get_template_directory_uri() . '/assets/img/alcalde.jpg' );
-                    $alcalde_nombre = get_theme_mod( 'muni_alcalde_nombre', 'Ángel Castro Medina' );
-                    $alcalde_cargo = get_theme_mod( 'muni_alcalde_cargo', 'Alcalde de Santa Juana 2026' );
-                    ?>
-                    <div class="alcalde-foto-container">
-                        <img src="<?php echo esc_url( $alcalde_img ); ?>" alt="<?php echo esc_attr( $alcalde_nombre . ' - ' . $alcalde_cargo ); ?>" class="alcalde-img" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\' fill=\'%23003399\'><rect width=\'100\' height=\'100\' fill=\'%23e0e0e0\'/><circle cx=\'50\' cy=\'40\' r=\'20\'/><path d=\'M20 100 Q 50 60 80 100 Z\'/></svg>'">
-                    </div>
-                    <div class="alcalde-info">
-                        <h4><?php echo esc_html( $alcalde_nombre ); ?></h4>
-                        <p class="alcalde-cargo"><?php echo esc_html( $alcalde_cargo ); ?></p>
-                    </div>
+                <div class="footer-section brand-section">
+                    <a href="<?php echo esc_url( home_url( '/' ) ); ?>" style="display: block; margin-bottom: 1.25rem;">
+                        <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/img/LOGO-MUNICIPALIDAD-SANTA-JUANA-1024x350 (1).png" alt="<?php bloginfo('name'); ?>" style="max-width: 220px; height: auto;" class="footer-logo">
+                    </a>
+                    <p style="color: rgba(255, 255, 255, 0.8); font-size: 0.9rem; line-height: 1.6; margin: 0;">
+                        Sitio web oficial de la Ilustre Municipalidad de Santa Juana. Trabajamos diariamente por el desarrollo integral de nuestra comuna, fomentando el turismo sustentable, la transparencia activa, protegiendo nuestro medio ambiente y mejorando la calidad de vida de todos nuestros vecinos y vecinas.
+                    </p>
                 </div>
                 
                 <div class="footer-section">
@@ -108,6 +102,24 @@ if ( ! defined( 'ABSPATH' ) ) {
                 'key'     => '_anuncio_activo',
                 'value'   => '1',
                 'compare' => '='
+            ),
+            array(
+                'relation' => 'OR',
+                array(
+                    'key'     => '_anuncio_fecha_fin',
+                    'compare' => 'NOT EXISTS'
+                ),
+                array(
+                    'key'     => '_anuncio_fecha_fin',
+                    'value'   => '',
+                    'compare' => '='
+                ),
+                array(
+                    'key'     => '_anuncio_fecha_fin',
+                    'value'   => current_time( 'Y-m-d' ),
+                    'type'    => 'DATE',
+                    'compare' => '>='
+                )
             )
         )
     );
@@ -140,22 +152,24 @@ if ( ! defined( 'ABSPATH' ) ) {
         var popup = document.getElementById("muni-popup-anuncio");
         var closeBtn = document.getElementById("muni-popup-close");
         
+        var popupId = "muni_popup_seen_<?php echo get_the_ID(); ?>";
+        
         // Check session storage
-        if (!sessionStorage.getItem("muni_popup_seen")) {
+        if (!sessionStorage.getItem(popupId)) {
             // Show popup
             popup.style.display = "flex";
             
             // Close event
             closeBtn.addEventListener("click", function() {
                 popup.style.display = "none";
-                sessionStorage.setItem("muni_popup_seen", "true");
+                sessionStorage.setItem(popupId, "true");
             });
 
             // Close when clicking outside content
             popup.addEventListener("click", function(e) {
                 if(e.target === popup) {
                     popup.style.display = "none";
-                    sessionStorage.setItem("muni_popup_seen", "true");
+                    sessionStorage.setItem(popupId, "true");
                 }
             });
         }

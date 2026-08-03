@@ -74,20 +74,28 @@ $proyectos_query = new WP_Query( $args );
                             </p>
 
                             <div class="proyecto-footer">
-                                <a href="<?php the_permalink(); ?>" class="proyecto-link"><?php esc_html_e( 'Ver proyecto', 'muni-santa-juana' ); ?></a>
-                                <a href="<?php the_permalink(); ?>" class="proyecto-btn" aria-label="Ver proyecto">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <line x1="5" y1="12" x2="19" y2="12"></line>
-                                        <polyline points="12 5 19 12 12 19"></polyline>
-                                    </svg>
-                                </a>
+                                <div class="proyecto-actions">
+                                    <a href="<?php the_permalink(); ?>" class="proyecto-link"><?php esc_html_e( 'Ver proyecto', 'muni-santa-juana' ); ?></a>
+                                    <a href="<?php the_permalink(); ?>" class="proyecto-btn">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                                            <polyline points="12 5 19 12 12 19"></polyline>
+                                        </svg>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </article>
                 <?php endwhile; wp_reset_postdata(); ?>
             <?php else : ?>
-                <div style="grid-column: 1 / -1; text-align: center; padding: 3rem; background: var(--color-surface); border-radius: var(--radius-lg); border: 1px dashed var(--color-border); width: 100%;">
-                    <p style="color: var(--color-text-light); margin: 0; font-size: 1.1rem;"><?php esc_html_e( 'No hay proyectos actualmente.', 'muni-santa-juana' ); ?></p>
+                <div class="proyecto-empty-state">
+                    <div class="proyecto-empty-icon">
+                        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+                        </svg>
+                    </div>
+                    <h4 class="proyecto-empty-title"><?php esc_html_e( 'No hay proyectos disponibles actualmente', 'muni-santa-juana' ); ?></h4>
+                    <p class="proyecto-empty-subtitle"><?php esc_html_e( 'Estamos trabajando en nuevas obras e iniciativas para nuestra comuna. ¡Vuelve a consultar pronto!', 'muni-santa-juana' ); ?></p>
                 </div>
             <?php endif; ?>
         </div>

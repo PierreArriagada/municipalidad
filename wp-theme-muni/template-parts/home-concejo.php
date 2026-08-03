@@ -4,8 +4,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 $playlist_id = 'PLQtndAv9EMKA';
-// Fetch videos from YouTube RSS
-$yt_videos = function_exists('muni_get_youtube_playlist_videos') ? muni_get_youtube_playlist_videos( $playlist_id, 6 ) : array();
+// Fetch videos from YouTube RSS (1 principal + 4 en PC / 3 en móvil = 5 total)
+$yt_videos = function_exists('muni_get_youtube_playlist_videos') ? muni_get_youtube_playlist_videos( $playlist_id, 5 ) : array();
 
 ?>
 <!-- ============================================
@@ -26,8 +26,9 @@ $yt_videos = function_exists('muni_get_youtube_playlist_videos') ? muni_get_yout
             <div class="concejo-multimedia">
                 <?php if ( ! empty( $yt_videos ) ) : ?>
                     <?php 
-                    // El primer video es el principal
+                    // El primer video es el principal (4 para PC, 3 para móvil via CSS)
                     $main_video = array_shift( $yt_videos );
+                    $yt_videos  = array_slice( $yt_videos, 0, 4 );
                     ?>
                     <!-- Video Principal -->
                     <div class="video-principal">
@@ -57,6 +58,15 @@ $yt_videos = function_exists('muni_get_youtube_playlist_videos') ? muni_get_yout
                                         </div>
                                     </a>
                                 <?php endforeach; ?>
+                            </div>
+                            <div class="playlist-more">
+                                <a href="https://youtube.com/playlist?list=<?php echo esc_attr( $playlist_id ); ?>" target="_blank" rel="noopener" class="btn-playlist-more">
+                                    <span><?php esc_html_e( 'Ver más sesiones en YouTube', 'muni-santa-juana' ); ?></span>
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                                        <polyline points="12 5 19 12 12 19"></polyline>
+                                    </svg>
+                                </a>
                             </div>
                         </div>
                     <?php endif; ?>

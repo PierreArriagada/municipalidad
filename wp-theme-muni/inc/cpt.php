@@ -300,6 +300,7 @@ function muni_anuncios_meta_callback( $post ) {
     $enlace = get_post_meta( $post->ID, '_anuncio_link', true );
     $tipo = get_post_meta( $post->ID, '_anuncio_tipo', true );
     $activo = get_post_meta( $post->ID, '_anuncio_activo', true );
+    $fecha_fin = get_post_meta( $post->ID, '_anuncio_fecha_fin', true );
     ?>
     <p>
         <label for="muni_anuncio_link"><strong>Enlace de Destino (URL):</strong></label><br>
@@ -311,6 +312,11 @@ function muni_anuncios_meta_callback( $post ) {
             <option value="popup" <?php selected( $tipo, 'popup' ); ?>>Popup al iniciar</option>
             <option value="hero" <?php selected( $tipo, 'hero' ); ?>>Banner destacado tipo Hero</option>
         </select>
+    </p>
+    <p>
+        <label for="muni_anuncio_fecha_fin"><strong>Fecha de Expiración (Opcional):</strong></label><br>
+        <span style="font-size: 13px; color: #666; display: block; margin-bottom: 5px;">Si seleccionas una fecha, el anuncio dejará de mostrarse automáticamente cuando llegue el día siguiente a la fecha indicada. Déjalo en blanco para que no expire.</span>
+        <input type="date" id="muni_anuncio_fecha_fin" name="muni_anuncio_fecha_fin" value="<?php echo esc_attr( $fecha_fin ); ?>" style="width:100%; max-width: 200px;" />
     </p>
     <p>
         <label>
@@ -384,6 +390,9 @@ function muni_santa_juana_save_meta_box_data( $post_id, $post ) {
                     update_post_meta( $post_id, '_anuncio_tipo', $tipo_sanitized );
                 }
             }
+            if ( isset( $_POST['muni_anuncio_fecha_fin'] ) ) {
+                update_post_meta( $post_id, '_anuncio_fecha_fin', sanitize_text_field( wp_unslash( $_POST['muni_anuncio_fecha_fin'] ) ) );
+            }
             // Checkbox: si no está en $_POST fue desmarcado. Usamos get_post_type() en vez de confiar en $_POST['post_type'].
             $anuncio_activo = isset( $_POST['muni_anuncio_activo'] ) ? '1' : '0';
             update_post_meta( $post_id, '_anuncio_activo', $anuncio_activo );
@@ -409,6 +418,43 @@ function muni_santa_juana_save_meta_box_data( $post_id, $post ) {
 }
 // El hook recibe $post como segundo parámetro para poder leer post_type de forma segura.
 add_action( 'save_post', 'muni_santa_juana_save_meta_box_data', 10, 2 );
+
+/**
+ * Columnas Personalizadas para Anuncios en el panel de control
+ */
+add_filter( 'manage_anuncios_posts_columns', 'muni_anuncios_columns' );
+function muni_anuncios_columns( $columns ) {
+    $new_columns = array();
+    foreach ( $columns as $key => $title ) {
+        $new_columns[ $key ] = $title;
+        if ( 'title' === $key ) {
+            $new_columns['anuncio_tipo'] = 'Tipo';
+            $new_columns['anuncio_activo'] = 'Estado';
+            $new_columns['anuncio_fecha_fin'] = 'Expira el';
+        }
+    }
+    return $new_columns;
+}
+
+add_action( 'manage_anuncios_posts_custom_column', 'muni_anuncios_column_content', 10, 2 );
+function muni_anuncios_column_content( $column_name, $post_id ) {
+    if ( 'anuncio_tipo' === $column_name ) {
+        $tipo = get_post_meta( $post_id, '_anuncio_tipo', true );
+        echo $tipo === 'popup' ? 'Popup' : ( $tipo === 'hero' ? 'Hero Banner' : '—' );
+    }
+    if ( 'anuncio_activo' === $column_name ) {
+        $activo = get_post_meta( $post_id, '_anuncio_activo', true );
+        echo $activo ? '<span style="color: green; font-weight: bold;">Activo</span>' : '<span style="color: red;">Inactivo</span>';
+    }
+    if ( 'anuncio_fecha_fin' === $column_name ) {
+        $fecha = get_post_meta( $post_id, '_anuncio_fecha_fin', true );
+        if ( ! empty( $fecha ) ) {
+            echo esc_html( date( 'd/m/Y', strtotime( $fecha ) ) );
+        } else {
+            echo '<span style="color: #999;">No expira</span>';
+        }
+    }
+}
 
 /**
  * Auto-poblar proyectos de muestra en la Base de Datos si la tabla está vacía
