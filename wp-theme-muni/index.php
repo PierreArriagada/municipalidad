@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 get_header(); ?>
 
-<main id="main" class="site-main" style="padding: 4rem 0; background-color: #f8fafc;">
+<main id="main" class="site-main" style="padding: 4rem 0; background-color: #eef2f6;">
     <div class="container">
         <?php if ( is_home() && ! is_front_page() ) : ?>
             <header class="page-header" style="margin-bottom: 3rem; text-align: center;">

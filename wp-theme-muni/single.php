@@ -12,7 +12,7 @@ get_header();
 ?>
 
 <style>
-    .single-main-container { background-color: #f8fafc; padding: 1.5rem 0.5rem; }
+    .single-main-container { background-color: #eef2f6; padding: 1.5rem 0.5rem; }
     .noticia-single-article { background: #ffffff; padding: 1.2rem; border-radius: 16px; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01); max-width: 900px; margin: 0 auto; }
     .single-entry-title { font-size: 1.8rem; color: #1e293b; font-weight: 800; line-height: 1.2; margin-bottom: 1rem; text-align: center; }
     .single-entry-meta { color: #64748b; font-size: 0.9rem; margin-bottom: 1.5rem; display: flex; justify-content: center; gap: 1rem; align-items: center; flex-wrap: wrap; }

@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 get_header();
 ?>
 
-<main id="primary" class="site-main" style="padding: 4rem 0; background-color: #f8fafc;">
+<main id="primary" class="site-main" style="padding: 4rem 0; background-color: #eef2f6;">
     <div class="container">
         <header class="page-header" style="margin-bottom: 3rem; text-align: center;">
             <h1 class="page-title" style="font-size: 2.8rem; color: #1e293b; font-weight: 800; margin-bottom: 1rem;"><?php esc_html_e( 'Concursos Públicos', 'muni-santa-juana' ); ?></h1>

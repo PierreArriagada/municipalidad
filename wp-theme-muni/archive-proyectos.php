@@ -11,14 +11,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 get_header();
 ?>
 
-<main id="primary" class="site-main">
+<main id="primary" class="site-main" style="background-color: #eef2f6;">
     <!-- Header del Archivo -->
     <div class="page-header" style="background-color: #006633; color: white; padding: 4rem 1.5rem; text-align: center; position: relative;">
         <div class="container" style="position: relative; z-index: 2;">
             <h1 class="page-title" style="font-size: 3rem; margin: 0 0 1rem 0; font-weight: 800;">Proyectos Municipales</h1>
             <p style="font-size: 1.2rem; opacity: 0.9; max-width: 800px; margin: 0 auto;">Conoce las obras y avances que estamos construyendo juntos para mejorar la calidad de vida en Santa Juana.</p>
         </div>
-        <svg style="position: absolute; bottom: -1px; left: 0; width: 100%; height: auto; display: block;" viewBox="0 0 1440 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 48H1440V0C1440 0 1140 48 720 48C300 48 0 0 0 0V48Z" fill="#ffffff"/></svg>
+        <svg style="position: absolute; bottom: -1px; left: 0; width: 100%; height: auto; display: block;" viewBox="0 0 1440 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 48H1440V0C1440 0 1140 48 720 48C300 48 0 0 0 0V48Z" fill="#eef2f6"/></svg>
     </div>
 
     <div class="container" style="padding: 4rem 1.5rem;">

@@ -74,11 +74,11 @@ if ( false === $banners_posts ) {
                                 $final_img_url = muni_get_post_image( get_the_ID(), $fallback_img );
                             ?>
                             <img src="<?php echo esc_url( $final_img_url ); ?>" alt="<?php echo esc_attr( get_the_title() ); ?>" class="banner-img" loading="lazy" decoding="async">
-                            <div class="banner-glass-top">
-                                <h3 class="banner-title"><?php echo esc_html( get_the_title() ); ?></h3>
+                            <div class="banner-pill-title">
+                                <?php echo esc_html( get_the_title() ); ?>
                             </div>
-                            <div class="banner-glass-bottom">
-                                <span class="banner-link"><?php esc_html_e( 'Ver más ➔', 'muni-santa-juana' ); ?></span>
+                            <div class="banner-pill-btn">
+                                <?php esc_html_e( 'Ver más', 'muni-santa-juana' ); ?> ➔
                             </div>
                         </a>
                     <?php endforeach; wp_reset_postdata(); ?>

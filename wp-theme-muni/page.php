@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 get_header();
 ?>
 
-<main id="primary" class="site-main" style="background-color: #f8fafc; padding-bottom: 4rem;">
+<main id="primary" class="site-main" style="background-color: #eef2f6; padding-bottom: 4rem;">
     <?php
     while ( have_posts() ) :
         the_post();

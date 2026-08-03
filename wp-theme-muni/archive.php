@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 get_header();
 ?>
 
-<main id="primary" class="site-main" style="padding: 4rem 0; background-color: #f8fafc;">
+<main id="primary" class="site-main" style="padding: 4rem 0; background-color: #eef2f6;">
     <div class="container">
         <?php if ( have_posts() ) : ?>
             <header class="page-header" style="margin-bottom: 3rem; text-align: center;">

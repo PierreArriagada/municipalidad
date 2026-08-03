@@ -15,8 +15,8 @@ $yt_videos = function_exists('muni_get_youtube_playlist_videos') ? muni_get_yout
         <div class="container">
             <div class="concejo-header">
                 <h2 class="section-title">Concejo Municipal</h2>
-                <a href="https://youtube.com/playlist?list=PLQtndAv9EMKA" target="_blank" rel="noopener" class="btn-outline-primary">
-                    <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18" style="margin-right: 6px; vertical-align: middle;">
+                <a href="https://youtube.com/playlist?list=PLQtndAv9EMKA" target="_blank" rel="noopener" class="btn-concejo-yt">
+                    <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18" style="margin-right: 6px; vertical-align: middle; transition: fill 0.25s ease;">
                         <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.5 12 3.5 12 3.5s-7.505 0-9.377.55a3.016 3.016 0 0 0-2.122 2.136C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.55 9.376.55 9.376.55s7.505 0 9.377-.55a3.016 3.016 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
                     </svg>
                     Ver Lista en YouTube

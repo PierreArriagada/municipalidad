@@ -21,8 +21,9 @@
     overflow: hidden;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    position: relative; /* Necesario para posicionar los paneles de cristal */
+    position: relative;
     text-decoration: none;
+    height: 100%;
 }
 
 .banner-card:hover {
@@ -43,57 +44,43 @@
     transform: scale(1.03); /* Efecto sutil de zoom al pasar el mouse */
 }
 
-/* Paneles de Cristal Flotantes (Glassmorphism) */
-.banner-glass-top,
-.banner-glass-bottom {
+/* Diseño Card Blancas (Pills) sobre imagen */
+.banner-pill-title {
     position: absolute;
-    background: rgba(15, 23, 42, 0.72); /* Fondo oscuro semitransparente con mejor contraste */
-    backdrop-filter: blur(12px); /* Efecto borroso de cristal nítido */
-    -webkit-backdrop-filter: blur(12px);
-    color: #ffffff;
-    display: inline-flex;
-    align-items: center;
-    border: 1px solid rgba(255, 255, 255, 0.18); /* Borde sutil de cristal */
-    border-radius: 12px; /* Cuadro plano flotante redondeado */
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3); /* Sombra para resaltar de la foto */
-    transition: all 0.3s ease;
-    z-index: 2;
-    width: auto; /* No ocupa todo el ancho */
-    max-width: calc(100% - 2rem);
-}
-
-.banner-glass-top {
-    top: 1rem;
-    left: 1rem;
-    padding: 0.5rem 1rem;
-}
-
-.banner-glass-bottom {
-    bottom: 1rem;
-    right: 1rem;
-    padding: 0.45rem 0.9rem;
-}
-
-.banner-card:hover .banner-glass-top,
-.banner-card:hover .banner-glass-bottom {
-    background: rgba(0, 0, 0, 0.65);
-}
-
-.banner-title {
+    top: 1.2rem;
+    left: 1.2rem;
+    background-color: #ffffff;
+    color: #1a1a1a;
     font-size: 0.95rem;
     font-weight: 700;
-    margin: 0;
-    line-height: 1.2;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.4);
+    padding: 0.55rem 1.1rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    z-index: 2;
+    transition: transform 0.3s ease;
 }
 
-.banner-link {
-    font-size: 0.82rem;
-    font-weight: 600;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.4);
+.banner-pill-btn {
+    position: absolute;
+    bottom: 1.2rem;
+    right: 1.2rem;
+    background-color: #ffffff;
+    color: var(--azul-institucional, #0549BD);
+    font-size: 0.85rem;
+    font-weight: 700;
+    padding: 0.5rem 1rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    z-index: 2;
     display: inline-flex;
     align-items: center;
     gap: 0.4rem;
+    transition: all 0.3s ease;
+}
+
+.banner-card:hover .banner-pill-btn {
+    color: var(--naranjo-institucional, #FF6600);
+    transform: translateX(-3px);
 }
 
 @media (max-width: 768px) {
@@ -101,3 +88,4 @@
         grid-template-columns: 1fr;
     }
 }
+
