@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
             <div class="footer-grid">
                 <div class="footer-section brand-section">
                     <a href="<?php echo esc_url( home_url( '/' ) ); ?>" style="display: block; margin-bottom: 1.25rem;">
-                        <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/img/LOGO-MUNICIPALIDAD-SANTA-JUANA-1024x350 (1).png" alt="<?php bloginfo('name'); ?>" style="max-width: 220px; height: auto;" class="footer-logo">
+                        <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/img/LOGO-MUNICIPALIDAD-SANTA-JUANA-1024x350 (1).webp" alt="<?php bloginfo('name'); ?>" style="max-width: 220px; height: auto;" class="footer-logo">
                     </a>
                     <p style="color: rgba(255, 255, 255, 0.8); font-size: 0.9rem; line-height: 1.6; margin: 0;">
                         Sitio web oficial de la Ilustre Municipalidad de Santa Juana. Trabajamos diariamente por el desarrollo integral de nuestra comuna, fomentando el turismo sustentable, la transparencia activa, protegiendo nuestro medio ambiente y mejorando la calidad de vida de todos nuestros vecinos y vecinas.

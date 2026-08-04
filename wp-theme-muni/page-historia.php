@@ -22,7 +22,7 @@ get_header();
             <!-- Banner Superior Principal -->
             <div class="page-hero inst-hero">
                 <div class="inst-hero-wrapper">
-                    <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/Marca-Color-Horizontal-3.png' ); ?>" alt="Municipalidad de Santa Juana" class="inst-hero-bg">
+                    <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/Marca-Color-Horizontal-3.webp' ); ?>" alt="Municipalidad de Santa Juana" class="inst-hero-bg">
                     <div class="inst-hero-overlay"></div>
                     <div class="inst-hero-content">
                         <span class="inst-hero-tag">Ilustre Municipalidad de Santa Juana</span>

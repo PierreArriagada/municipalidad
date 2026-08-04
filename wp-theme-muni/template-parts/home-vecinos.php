@@ -19,7 +19,7 @@ $beneficios_query = new WP_Query( $beneficios_args );
             <div class="vecinos-grid">
                 <!-- Tarjeta Destacada -->
                 <?php
-                $beneficio_img = get_theme_mod( 'muni_beneficio_img', get_template_directory_uri() . '/assets/img/beneficios-comunidad.png' );
+                $beneficio_img = get_theme_mod( 'muni_beneficio_img', get_template_directory_uri() . '/assets/img/beneficios-comunidad.webp' );
                 $beneficio_titulo = get_theme_mod( 'muni_beneficio_titulo', 'Beneficios para la comunidad' );
                 $beneficio_subtitulo = get_theme_mod( 'muni_beneficio_subtitulo', 'Descubre todas las alianzas y convenios exclusivos para los vecinos de Santa Juana.' );
                 $beneficio_texto = get_theme_mod( 'muni_beneficio_texto', 'Nuestra municipalidad trabaja día a día para acercar mejores oportunidades a todos los habitantes. Explora los distintos beneficios disponibles y accede a descuentos en servicios esenciales.' );
@@ -44,14 +44,14 @@ $beneficios_query = new WP_Query( $beneficios_args );
                                 <?php else : ?>
                                     <?php 
                                         // Asignar imagen por defecto basada en el título si no hay miniatura
-                                        $fallback_img = 'vecino-mayor.png'; // Por defecto adulto mayor
+                                        $fallback_img = 'vecino-mayor.webp'; // Por defecto adulto mayor
                                         $title_lower = mb_strtolower( get_the_title(), 'UTF-8' );
                                         if ( str_contains( $title_lower, 'aramco' ) || str_contains( $title_lower, 'combustible' ) ) {
-                                            $fallback_img = 'vecino_aramco_1783210102383.png';
+                                            $fallback_img = 'vecino_aramco_1783210102383.webp';
                                         } elseif ( str_contains( $title_lower, 'kupos' ) || str_contains( $title_lower, 'pasaje' ) ) {
-                                            $fallback_img = 'vecino_kupos_1783210111064.png';
+                                            $fallback_img = 'vecino_kupos_1783210111064.webp';
                                         } elseif ( str_contains( $title_lower, 'salud' ) || str_contains( $title_lower, 'copago' ) ) {
-                                            $fallback_img = 'vecino_copago_1783210119573.png';
+                                            $fallback_img = 'vecino_copago_1783210119573.webp';
                                         }
                                     ?>
                                     <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/' . $fallback_img ); ?>" alt="<?php echo esc_attr( get_the_title() ); ?>" class="vecino-img-circle">

@@ -36,11 +36,11 @@ get_header(); ?>
                         <?php 
                         $thumb_url = get_the_post_thumbnail_url( get_the_ID(), 'medium' );
                         if ( ! $thumb_url ) {
-                            $thumb_url = get_template_directory_uri() . '/assets/img/noticia_fondos_1783211931893.png';
+                            $thumb_url = get_template_directory_uri() . '/assets/img/noticia_fondos_1783211931893.webp';
                         }
                         ?>
                         <a href="<?php the_permalink(); ?>">
-                            <img src="<?php echo esc_url( $thumb_url ); ?>" alt="<?php echo esc_attr( get_the_title() ); ?>" class="noticia-premium-img" onerror="this.src='<?php echo esc_url( get_template_directory_uri() . '/assets/img/noticia_fondos_1783211931893.png' ); ?>';">
+                            <img src="<?php echo esc_url( $thumb_url ); ?>" alt="<?php echo esc_attr( get_the_title() ); ?>" class="noticia-premium-img" onerror="this.src='<?php echo esc_url( get_template_directory_uri() . '/assets/img/noticia_fondos_1783211931893.webp' ); ?>';">
                         </a>
                         
                         <div class="noticia-premium-content">

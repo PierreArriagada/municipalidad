@@ -25,7 +25,7 @@ get_header();
                     <div class="post-thumbnail" style="border-radius: 16px; overflow: hidden; margin: 0 auto 2.5rem auto; box-shadow: 0 4px 6px rgba(0,0,0,0.05); max-width: 900px;">
                         <?php 
                         // Obtener la imagen del post (Destacada, o la primera del contenido, o el fallback predeterminado)
-                        $article_img_url = muni_get_post_image( get_the_ID(), 'triptico.png' ); 
+                        $article_img_url = muni_get_post_image( get_the_ID(), 'triptico.webp' );
                         ?>
                         <img src="<?php echo esc_url( $article_img_url ); ?>" alt="<?php echo esc_attr( get_the_title() ); ?>" style="width: 100%; height: auto; display: block; object-fit: cover;">
                     </div>

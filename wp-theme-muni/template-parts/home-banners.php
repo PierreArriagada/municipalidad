@@ -64,12 +64,12 @@ if ( false === $banners_posts ) {
                     ?>
                         <a href="<?php echo esc_url( $banner_link ); ?>" class="banner-card" aria-label="<?php echo esc_attr( sprintf( __( 'Ir a %s', 'muni-santa-juana' ), get_the_title() ) ); ?>">
                             <?php 
-                                $fallback_img = 'Turismo.jpg';
+                                $fallback_img = 'Turismo.webp';
                                 $title_lower  = mb_strtolower( get_the_title(), 'UTF-8' );
                                 if ( str_contains( $title_lower, 'triptico' ) || str_contains( $title_lower, 'tríptico' ) ) {
-                                    $fallback_img = 'triptico.jpg';
+                                    $fallback_img = 'triptico.webp';
                                 } elseif ( str_contains( $title_lower, 'reciclaje' ) || str_contains( $title_lower, 'limpio' ) ) {
-                                    $fallback_img = 'reciclaje.jpg';
+                                    $fallback_img = 'reciclaje.webp';
                                 }
                                 $final_img_url = muni_get_post_image( get_the_ID(), $fallback_img );
                             ?>

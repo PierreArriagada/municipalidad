@@ -68,7 +68,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     <header class="header">
         <div class="header-container">
             <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="logo">
-                <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/img/LOGO-MUNICIPALIDAD-SANTA-JUANA-1024x350 (1).png" alt="<?php bloginfo('name'); ?>" class="main-logo-img">
+                <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/img/LOGO-MUNICIPALIDAD-SANTA-JUANA-1024x350 (1).webp" alt="<?php bloginfo('name'); ?>" class="main-logo-img">
             </a>
 
             <nav class="nav">

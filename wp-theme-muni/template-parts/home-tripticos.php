@@ -30,7 +30,7 @@ $tripticos_query = new WP_Query( $tripticos_args );
                         <?php if ( has_post_thumbnail() ) : ?>
                             <?php the_post_thumbnail( 'large', array( 'class' => 'triptico-img', 'alt' => esc_attr( get_the_title() ), 'style' => 'width: 100%; height: auto; display: block;' ) ); ?>
                         <?php else : ?>
-                            <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/img/triptico-default.jpg" alt="<?php echo esc_attr( get_the_title() ); ?>" class="triptico-img" style="width: 100%; height: auto; display: block;">
+                            <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/img/triptico-default.webp" alt="<?php echo esc_attr( get_the_title() ); ?>" class="triptico-img" style="width: 100%; height: auto; display: block; object-fit: cover;">
                         <?php endif; ?>
                         
                         <div class="triptico-info" style="padding: 1.5rem; text-align: center;">
@@ -45,8 +45,8 @@ $tripticos_query = new WP_Query( $tripticos_args );
             <?php else : ?>
                 <!-- Fallback if no Tripticos exist yet -->
                 <div class="triptico-card" style="background: var(--color-surface); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-md); transition: transform 0.3s ease; max-width: 800px; margin: 0 auto;">
-                    <a href="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/img/triptico-default.jpg" target="_blank" rel="noopener noreferrer" style="text-decoration: none;">
-                        <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/img/triptico-default.jpg" alt="Tríptico" class="triptico-img" style="width: 100%; height: auto; display: block;">
+                    <a href="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/img/triptico-default.webp" target="_blank" rel="noopener noreferrer" style="text-decoration: none;">
+                        <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/img/triptico-default.webp" alt="Tríptico" class="triptico-img" style="width: 100%; height: auto; display: block; object-fit: cover;">
                         <div class="triptico-info" style="padding: 1.5rem; text-align: center;">
                             <h3 class="triptico-title" style="margin: 0; color: var(--color-text); font-size: 1.25rem;">Tríptico Informativo</h3>
                             <p style="margin-top: 0.5rem; color: var(--color-text-light);">Haz clic para ampliar</p>

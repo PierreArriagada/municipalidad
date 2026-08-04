@@ -27,7 +27,7 @@ get_header();
                 <?php while ( have_posts() ) : the_post(); ?>
                     <article id="post-<?php the_ID(); ?>" <?php post_class( 'triptico-card' ); ?> style="background: var(--color-surface, #fff); border-radius: var(--radius-lg, 12px); overflow: hidden; box-shadow: var(--shadow-md, 0 4px 6px rgba(0,0,0,0.1)); transition: transform 0.3s ease;" aria-labelledby="triptico-title-<?php the_ID(); ?>">
                         <?php 
-                        $thumb_url = muni_get_post_image( get_the_ID(), 'triptico.png' );
+                        $thumb_url = muni_get_post_image( get_the_ID(), 'triptico.webp' );
                         ?>
                         <a href="<?php the_permalink(); ?>" style="display: block; width: 100%; height: 200px; overflow: hidden;" tabindex="-1" aria-hidden="true">
                             <img src="<?php echo esc_url( $thumb_url ); ?>" alt="<?php echo esc_attr( get_the_title() ); ?>" class="triptico-img" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease;" loading="lazy" decoding="async">
@@ -61,7 +61,7 @@ get_header();
             <div class="tripticos-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2rem;">
                 <article class="triptico-card" style="background: var(--color-surface, #fff); border-radius: var(--radius-lg, 12px); overflow: hidden; box-shadow: var(--shadow-md, 0 4px 6px rgba(0,0,0,0.1)); transition: transform 0.3s ease;">
                     <a href="#" style="display: block; width: 100%; height: 200px; overflow: hidden;" tabindex="-1" aria-hidden="true">
-                        <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/triptico.jpg' ); ?>" alt="Tríptico Informativo Municipal" class="triptico-img" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease;" loading="lazy" decoding="async">
+                        <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/triptico.webp' ); ?>" alt="Tríptico Informativo Municipal" class="triptico-img" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease;" loading="lazy" decoding="async">
                     </a>
                     
                     <div class="triptico-info" style="padding: 1.5rem; text-align: center;">

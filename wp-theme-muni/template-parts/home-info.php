@@ -55,6 +55,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 
         <!-- Wave & Silhouette divider -->
         <div class="info-municipal-wave">
-            <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/img/wave.png" alt="Paisaje Santa Juana" class="wave-image">
+            <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/img/wave.webp" alt="Paisaje Santa Juana" class="wave-image">
         </div>
     </section>

@@ -838,7 +838,7 @@ function muni_seed_informes_2026() {
     if ( empty( $triptico_exist ) ) {
         $post_id = wp_insert_post( array(
             'post_title'   => 'Tríptico Informativo 2026',
-            'post_content' => '<!-- wp:paragraph {"align":"center"} --><p class="has-text-align-center"><strong>Bienvenido a la edición digital de nuestro Tríptico Informativo.</strong></p><!-- /wp:paragraph --><!-- wp:image {"align":"center","sizeSlug":"large"} --><figure class="wp-block-image aligncenter size-large"><img src="' . esc_url( get_template_directory_uri() . '/assets/img/triptico-ejemplo.jpg' ) . '" alt="Tríptico 2026"/></figure><!-- /wp:image --><!-- wp:paragraph --><p>Aquí podrás encontrar toda la información detallada que hemos preparado para ti. A partir de ahora, la municipalidad puede subir nuevas ediciones y páginas usando el editor de bloques.</p><!-- /wp:paragraph -->',
+            'post_content' => '<!-- wp:paragraph {"align":"center"} --><p class="has-text-align-center"><strong>Bienvenido a la edición digital de nuestro Tríptico Informativo.</strong></p><!-- /wp:paragraph --><!-- wp:image {"align":"center","sizeSlug":"large"} --><figure class="wp-block-image aligncenter size-large"><img src="' . esc_url( get_template_directory_uri() . '/assets/img/triptico-ejemplo.webp' ) . '" alt="Tríptico 2026"/></figure><!-- /wp:image --><!-- wp:paragraph --><p>Aquí podrás encontrar toda la información detallada que hemos preparado para ti. A partir de ahora, la municipalidad puede subir nuevas ediciones y páginas usando el editor de bloques.</p><!-- /wp:paragraph -->',
             'post_status'  => 'publish',
             'post_type'    => 'tripticos',
         ) );

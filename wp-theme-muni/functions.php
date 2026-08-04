@@ -91,6 +91,15 @@ function muni_setup_permalinks_and_flush() {
 add_action( 'admin_init', 'muni_setup_permalinks_and_flush', 1 );
 
 /**
+ * Preconnect to Google Fonts
+ */
+function muni_preconnect_google_fonts() {
+    echo '<link rel="preconnect" href="https://fonts.googleapis.com">' . "\n";
+    echo '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>' . "\n";
+}
+add_action( 'wp_head', 'muni_preconnect_google_fonts', 0 );
+
+/**
  * Encolar scripts y estilos.
  */
 function muni_santa_juana_scripts() {
@@ -291,7 +300,7 @@ function muni_get_post_image( $post_id, $fallback_img_name ) {
     
     // FIX ESPECÍFICO: Interceptar el post "Tríptico Informativo 2026" para evitar cargar su imagen rota
     if ( $post && ( str_contains( strtolower( $post->post_title ), 'tríptico informativo 2026' ) || str_contains( strtolower( $post->post_title ), 'triptico informativo 2026' ) ) ) {
-        return get_template_directory_uri() . '/assets/img/triptico-2026.jpg';
+        return get_template_directory_uri() . '/assets/img/triptico-2026.webp';
     }
 
     if ( $post && ! empty( $post->post_content ) ) {
@@ -705,7 +714,7 @@ function muni_fix_triptico_content_image( $content ) {
         $post = get_post();
         if ( $post && ( str_contains( strtolower( $post->post_title ), 'tríptico informativo 2026' ) || str_contains( strtolower( $post->post_title ), 'triptico informativo 2026' ) ) ) {
             // Reemplazar cualquier <img src="..."> por la imagen correcta
-            $content = preg_replace( '/<img[^>]+src=[\'"]([^\'"]+)[\'"][^>]*>/i', '<img src="' . get_template_directory_uri() . '/assets/img/triptico-2026.jpg" alt="Tríptico 2026" style="width:100%; height:auto; border-radius:12px; margin-top:2rem;">', $content );
+            $content = preg_replace( '/<img[^>]+src=[\'"]([^\'"]+)[\'"][^>]*>/i', '<img src="' . get_template_directory_uri() . '/assets/img/triptico-2026.webp" alt="Tríptico 2026" style="width:100%; height:auto; border-radius:12px; margin-top:2rem;">', $content );
         }
     }
     return $content;
@@ -758,7 +767,7 @@ function muni_auto_create_demo_content() {
         if ( ! isset( $check_triptico->ID ) ) {
             wp_insert_post( array(
                 'post_title'   => $triptico_title,
-                'post_content' => '<p>Descubre toda la información sobre el nuevo tríptico municipal.</p><img src="' . get_template_directory_uri() . '/assets/img/triptico-2026.jpg" alt="Tríptico 2026" style="width:100%; height:auto; border-radius:12px; margin-top:2rem;">',
+                'post_content' => '<p>Descubre toda la información sobre el nuevo tríptico municipal.</p><img src="' . get_template_directory_uri() . '/assets/img/triptico-2026.webp" alt="Tríptico 2026" style="width:100%; height:auto; border-radius:12px; margin-top:2rem;">',
                 'post_type'    => 'tripticos',
                 'post_status'  => 'publish',
                 'post_author'  => 1,
@@ -806,3 +815,14 @@ function muni_get_youtube_playlist_videos( $playlist_id, $limit = 5 ) {
     
     return $videos;
 }
+
+/**
+ * Replace youtube.com with youtube-nocookie.com in oEmbeds to prevent third-party tracking cookies.
+ */
+function muni_youtube_nocookie_oembed( $return, $data, $url ) {
+    if ( strpos( $url, 'youtube.com' ) !== false || strpos( $url, 'youtu.be' ) !== false ) {
+        $return = str_replace( 'youtube.com/embed/', 'youtube-nocookie.com/embed/', $return );
+    }
+    return $return;
+}
+add_filter( 'oembed_dataparse', 'muni_youtube_nocookie_oembed', 10, 3 );

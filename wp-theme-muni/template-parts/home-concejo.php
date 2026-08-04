@@ -33,7 +33,7 @@ $yt_videos = function_exists('muni_get_youtube_playlist_videos') ? muni_get_yout
                     <!-- Video Principal -->
                     <div class="video-principal">
                         <div class="iframe-container">
-                            <iframe src="https://www.youtube.com/embed/<?php echo esc_attr( $main_video['id'] ); ?>" title="<?php echo esc_attr( $main_video['title'] ); ?>" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <iframe src="https://www.youtube-nocookie.com/embed/<?php echo esc_attr( $main_video['id'] ); ?>" title="<?php echo esc_attr( $main_video['title'] ); ?>" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         </div>
                         <div class="video-principal-info">
                             <span class="badge-live">Última Sesión</span>
@@ -49,7 +49,7 @@ $yt_videos = function_exists('muni_get_youtube_playlist_videos') ? muni_get_yout
                             <div class="playlist-items">
                                 <?php foreach ( $yt_videos as $pl_video ) : ?>
                                     <a href="https://www.youtube.com/watch?v=<?php echo esc_attr( $pl_video['id'] ); ?>&list=<?php echo esc_attr( $playlist_id ); ?>" target="_blank" rel="noopener" class="playlist-item">
-                                        <div class="pl-thumb" style="background: url('https://img.youtube.com/vi/<?php echo esc_attr( $pl_video['id'] ); ?>/mqdefault.jpg') center/cover no-repeat; box-shadow: inset 0 0 20px rgba(0,0,0,0.5);">
+                                        <div class="pl-thumb" style="background: url('https://i.ytimg.com/vi/<?php echo esc_attr( $pl_video['id'] ); ?>/mqdefault.jpg') center/cover no-repeat; box-shadow: inset 0 0 20px rgba(0,0,0,0.5);">
                                             <div class="pl-play-icon">▶</div>
                                         </div>
                                         <div class="pl-info">
