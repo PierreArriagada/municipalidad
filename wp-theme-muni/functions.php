@@ -784,11 +784,49 @@ add_action( 'init', 'muni_auto_create_demo_content' );
  */
 function muni_get_youtube_playlist_videos( $playlist_id, $limit = 5 ) {
     $transient_key = 'muni_yt_pl_' . md5( $playlist_id );
+    $option_backup_key = 'muni_yt_backup_' . md5( $playlist_id );
+    
     $videos = get_transient( $transient_key );
     
+    // Lista de respaldo garantizada (fallback inicial de seguridad)
+    $fallback_videos = array(
+        array(
+            'id'    => 'WJGUAUdgM6Q',
+            'title' => 'SESION DE CONCEJO MUNICIPAL 28 DE JULIO 2026',
+            'date'  => '28 Jul, 2026',
+        ),
+        array(
+            'id'    => '6xO1JmMA-yg',
+            'title' => 'SESION DE CONCEJO MUNICIPAL 07 DE JULIO 2026',
+            'date'  => '07 Jul, 2026',
+        ),
+        array(
+            'id'    => '4i62k2m1OGQ',
+            'title' => 'SESION DE CONCEJO MUNICIPAL 23 DE JUNIO 2026',
+            'date'  => '23 Jun, 2026',
+        ),
+        array(
+            'id'    => 'WlkgEpTeVwE',
+            'title' => 'SESION DE CONCEJO MUNICIPAL 09 DE JUNIO 2026',
+            'date'  => '09 Jun, 2026',
+        ),
+        array(
+            'id'    => 'Fpt3aFVDUsM',
+            'title' => 'SESION DE CONCEJO MUNICIPAL 02 DE JUNIO 2026',
+            'date'  => '02 Jun, 2026',
+        ),
+    );
+
     if ( false === $videos || empty( $videos ) ) {
         $feed_url = 'https://www.youtube.com/feeds/videos.xml?playlist_id=' . sanitize_text_field( $playlist_id );
-        $response = wp_remote_get( $feed_url, array( 'timeout' => 10 ) );
+        $response = wp_remote_get( $feed_url, array(
+            'timeout'   => 8,
+            'sslverify' => false,
+            'headers'   => array(
+                'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+            ),
+        ) );
+        
         $videos = array();
         
         if ( ! is_wp_error( $response ) && wp_remote_retrieve_response_code( $response ) === 200 ) {
@@ -809,8 +847,21 @@ function muni_get_youtube_playlist_videos( $playlist_id, $limit = 5 ) {
             }
         }
         
-        // Cache for 1 hour
-        set_transient( $transient_key, $videos, HOUR_IN_SECONDS );
+        if ( ! empty( $videos ) ) {
+            // Éxito: Guardar en caché temporal (1 hora) y también en respaldo permanente
+            set_transient( $transient_key, $videos, HOUR_IN_SECONDS );
+            update_option( $option_backup_key, $videos, false );
+        } else {
+            // Fallo de red/API: Intentar recuperar el último respaldo permanente exitoso
+            $backup_videos = get_option( $option_backup_key );
+            if ( ! empty( $backup_videos ) && is_array( $backup_videos ) ) {
+                $videos = $backup_videos;
+            } else {
+                // Si nunca se ha podido obtener nada, usar el fallback hardcodeado
+                $videos = array_slice( $fallback_videos, 0, $limit );
+            }
+            // Importante: no guardar transient aquí para que intente de nuevo en la siguiente carga
+        }
     }
     
     return $videos;

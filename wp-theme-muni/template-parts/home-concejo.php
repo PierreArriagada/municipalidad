@@ -7,6 +7,36 @@ $playlist_id = 'PLQtndAv9EMKA';
 // Fetch videos from YouTube RSS (1 principal + 4 en PC / 3 en móvil = 5 total)
 $yt_videos = function_exists('muni_get_youtube_playlist_videos') ? muni_get_youtube_playlist_videos( $playlist_id, 5 ) : array();
 
+if ( empty( $yt_videos ) ) {
+    $yt_videos = array(
+        array(
+            'id'    => 'WJGUAUdgM6Q',
+            'title' => 'SESION DE CONCEJO MUNICIPAL 28 DE JULIO 2026',
+            'date'  => '28 Jul, 2026',
+        ),
+        array(
+            'id'    => '6xO1JmMA-yg',
+            'title' => 'SESION DE CONCEJO MUNICIPAL 07 DE JULIO 2026',
+            'date'  => '07 Jul, 2026',
+        ),
+        array(
+            'id'    => '4i62k2m1OGQ',
+            'title' => 'SESION DE CONCEJO MUNICIPAL 23 DE JUNIO 2026',
+            'date'  => '23 Jun, 2026',
+        ),
+        array(
+            'id'    => 'WlkgEpTeVwE',
+            'title' => 'SESION DE CONCEJO MUNICIPAL 09 DE JUNIO 2026',
+            'date'  => '09 Jun, 2026',
+        ),
+        array(
+            'id'    => 'Fpt3aFVDUsM',
+            'title' => 'SESION DE CONCEJO MUNICIPAL 02 DE JUNIO 2026',
+            'date'  => '02 Jun, 2026',
+        ),
+    );
+}
+
 ?>
 <!-- ============================================
          CONCEJO MUNICIPAL Y MULTIMEDIA
