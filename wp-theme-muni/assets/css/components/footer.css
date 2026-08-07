@@ -190,6 +190,7 @@
     .contacto-grid {
         grid-template-columns: repeat(2, 1fr);
     }
+
     .footer-grid {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -199,6 +200,7 @@
     .contacto-grid {
         grid-template-columns: repeat(4, 1fr);
     }
+
     .footer-grid {
         grid-template-columns: 1.5fr 1.5fr 1fr 1fr 1fr;
     }

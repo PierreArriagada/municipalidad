@@ -12,18 +12,18 @@ get_header();
 ?>
 
 <style>
-    .single-main-container { background-color: #eef2f6; padding: 1.5rem 0.5rem; }
-    .noticia-single-article { background: #ffffff; padding: 1.2rem; border-radius: 16px; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01); max-width: 900px; margin: 0 auto; }
+    .single-main-container { background-color: #eef2f6; padding: 1rem 0.25rem; }
+    .noticia-single-article { background: #ffffff; padding: 0.85rem; border-radius: 12px; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01); max-width: 1000px; margin: 0 auto; overflow: hidden; }
     .single-entry-title { font-size: 1.8rem; color: #1e293b; font-weight: 800; line-height: 1.2; margin-bottom: 1rem; text-align: center; }
     .single-entry-meta { color: #64748b; font-size: 0.9rem; margin-bottom: 1.5rem; display: flex; justify-content: center; gap: 1rem; align-items: center; flex-wrap: wrap; }
     .single-post-thumbnail { border-radius: 12px; overflow: hidden; margin: 0 auto 2rem auto; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
     .single-post-thumbnail img { width: 100%; height: auto; display: block; object-fit: cover; }
-    .single-entry-content { line-height: 1.7; font-size: 1.05rem; color: #334155; }
+    .single-entry-content { line-height: 1.7; font-size: 1.05rem; color: #334155; overflow-wrap: break-word; word-wrap: break-word; word-break: break-word; hyphens: auto; }
     .single-entry-content img { max-width: 100%; height: auto; border-radius: 8px; }
     
     @media (min-width: 768px) {
         .single-main-container { padding: 4rem 0; }
-        .noticia-single-article { padding: 3rem; border-radius: 20px; }
+        .noticia-single-article { padding: 2rem; border-radius: 20px; }
         .single-entry-title { font-size: 2.5rem; margin-bottom: 1.5rem; }
         .single-entry-meta { font-size: 1rem; gap: 1.5rem; margin-bottom: 2rem; }
         .single-post-thumbnail { border-radius: 16px; margin-bottom: 2.5rem; }
@@ -72,7 +72,7 @@ get_header();
 </style>
 
 <main id="primary" class="site-main single-main-container">
-    <div class="container" style="max-width: 900px; margin: 0 auto; padding: 0;">
+    <div class="container" style="max-width: 1000px; margin: 0 auto; padding: 0 !important;">
         <?php
         while ( have_posts() ) :
             the_post();

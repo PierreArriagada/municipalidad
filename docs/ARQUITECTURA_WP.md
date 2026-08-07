@@ -66,14 +66,29 @@ Para garantizar que el ingreso de textos largos o cambios de contenido en la BD 
 
 ---
 
-## 4. Enqueueing y Cache-Busting (`functions.php`)
+## 4. Enqueueing Modular y Condicional (`functions.php`)
 
-Para forzar la actualización inmediata de hojas de estilo en el navegador de los usuarios tras cualquier edición:
+Para optimizar el rendimiento y evitar transferir CSS innecesario, el tema utiliza una carga de estilos estrictamente modular y condicional:
 
 ```php
 function muni_santa_juana_scripts() {
-    $css_ver = file_exists( get_template_directory() . '/assets/css/main.css' ) ? filemtime( get_template_directory() . '/assets/css/main.css' ) : '1.0.1';
-    wp_enqueue_style( 'muni-santa-juana-style', get_template_directory_uri() . '/assets/css/main.css', array(), $css_ver );
+    $tpl_uri = get_template_directory_uri();
+    $theme_version = '24.0.1';
+
+    // 1. Estilos Base (Variables y Globales)
+    wp_enqueue_style( 'muni-variables', $tpl_uri . '/assets/css/base/variables.css', array(), $theme_version );
+    wp_enqueue_style( 'muni-global',    $tpl_uri . '/assets/css/base/global.css',    array('muni-variables'), $theme_version );
+
+    // 2. Estilos Transversales (Header, Footer, Info, Enlaces, Banners)
+    wp_enqueue_style( 'muni-header',  $tpl_uri . '/assets/css/components/header.css',  array('muni-global'), $theme_version );
+    wp_enqueue_style( 'muni-footer',  $tpl_uri . '/assets/css/components/footer.css',  array('muni-global'), $theme_version );
+    ...
+
+    // 3. Estilos Condicionales por Página/Template (is_front_page, is_page, is_singular)
+    if ( is_front_page() || is_home() ) {
+        wp_enqueue_style( 'muni-hero', $tpl_uri . '/assets/css/components/hero.css', array('muni-global'), $theme_version );
+        ...
+    }
 }
 add_action( 'wp_enqueue_scripts', 'muni_santa_juana_scripts' );
 ```
@@ -88,4 +103,4 @@ Inyecta directo el SVG inline ubicado en `assets/svg/`:
 
 ---
 
-*Última actualización: 21 de Julio de 2026*
+*Última actualización: 07 de Agosto de 2026*

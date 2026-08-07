@@ -10,6 +10,11 @@ $yt_videos = function_exists('muni_get_youtube_playlist_videos') ? muni_get_yout
 if ( empty( $yt_videos ) ) {
     $yt_videos = array(
         array(
+            'id'    => 'XV-7c-p-baA',
+            'title' => 'SESION DE CONCEJO MUNICIPAL 04 DE AGOSTO 2026',
+            'date'  => '04 Ago, 2026',
+        ),
+        array(
             'id'    => 'WJGUAUdgM6Q',
             'title' => 'SESION DE CONCEJO MUNICIPAL 28 DE JULIO 2026',
             'date'  => '28 Jul, 2026',
@@ -28,11 +33,6 @@ if ( empty( $yt_videos ) ) {
             'id'    => 'WlkgEpTeVwE',
             'title' => 'SESION DE CONCEJO MUNICIPAL 09 DE JUNIO 2026',
             'date'  => '09 Jun, 2026',
-        ),
-        array(
-            'id'    => 'Fpt3aFVDUsM',
-            'title' => 'SESION DE CONCEJO MUNICIPAL 02 DE JUNIO 2026',
-            'date'  => '02 Jun, 2026',
         ),
     );
 }

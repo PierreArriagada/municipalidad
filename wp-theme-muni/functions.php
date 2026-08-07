@@ -115,66 +115,71 @@ function muni_santa_juana_scripts() {
     wp_enqueue_style( 'muni-variables',    $tpl_uri . '/assets/css/base/variables.css',          array(), $theme_version );
     wp_enqueue_style( 'muni-global',       $tpl_uri . '/assets/css/base/global.css',             array('muni-variables'), $theme_version );
 
-    $css_ver = file_exists( $tpl_dir . '/assets/css/main.css' ) ? (string) filemtime( $tpl_dir . '/assets/css/main.css' ) : '1.0.1';
-    wp_enqueue_style( 'muni-santa-juana-style', $tpl_uri . '/assets/css/main.css', array('muni-global'), $css_ver );
-
     // Estilos globales de componentes transversales (header, footer, info, enlaces, banners)
-    wp_enqueue_style( 'muni-header',       $tpl_uri . '/assets/css/components/header.css',       array('muni-santa-juana-style'), $theme_version );
-    wp_enqueue_style( 'muni-footer',       $tpl_uri . '/assets/css/components/footer.css',       array('muni-santa-juana-style'), $theme_version );
-    wp_enqueue_style( 'muni-banners',      $tpl_uri . '/assets/css/components/banners.css',      array('muni-santa-juana-style'), $theme_version );
-    wp_enqueue_style( 'muni-info',         $tpl_uri . '/assets/css/components/info.css',         array('muni-santa-juana-style'), $theme_version );
-    wp_enqueue_style( 'muni-enlaces',      $tpl_uri . '/assets/css/components/enlaces.css',      array('muni-santa-juana-style'), $theme_version );
+    wp_enqueue_style( 'muni-header',       $tpl_uri . '/assets/css/components/header.css',       array('muni-global'), $theme_version );
+    wp_enqueue_style( 'muni-footer',       $tpl_uri . '/assets/css/components/footer.css',       array('muni-global'), $theme_version );
+    wp_enqueue_style( 'muni-banners',      $tpl_uri . '/assets/css/components/banners.css',      array('muni-global'), $theme_version );
+    wp_enqueue_style( 'muni-info',         $tpl_uri . '/assets/css/components/info.css',         array('muni-global'), $theme_version );
+    wp_enqueue_style( 'muni-enlaces',      $tpl_uri . '/assets/css/components/enlaces.css',      array('muni-global'), $theme_version );
 
     // HOME PAGE
     if ( is_front_page() || is_home() ) {
-        wp_enqueue_style( 'muni-hero',         $tpl_uri . '/assets/css/components/hero.css',         array('muni-santa-juana-style'), $theme_version );
-        wp_enqueue_style( 'muni-emergencias',  $tpl_uri . '/assets/css/components/emergencias.css',  array('muni-santa-juana-style'), $theme_version );
-        wp_enqueue_style( 'muni-vecinos',      $tpl_uri . '/assets/css/components/vecinos.css',      array('muni-santa-juana-style'), $theme_version );
-        wp_enqueue_style( 'muni-proyectos',    $tpl_uri . '/assets/css/components/proyectos.css',    array('muni-santa-juana-style'), $theme_version );
-        wp_enqueue_style( 'muni-noticias',     $tpl_uri . '/assets/css/components/noticias.css',     array('muni-santa-juana-style'), $theme_version );
-        wp_enqueue_style( 'muni-concejo',      $tpl_uri . '/assets/css/components/concejo.css',      array('muni-santa-juana-style'), $theme_version );
-        wp_enqueue_style( 'muni-transparencia',$tpl_uri . '/assets/css/components/transparencia.css',array('muni-santa-juana-style'), $theme_version );
-        wp_enqueue_style( 'muni-contacto',     $tpl_uri . '/assets/css/components/contacto.css',     array('muni-santa-juana-style'), $theme_version );
-        wp_enqueue_style( 'muni-anuncios',     $tpl_uri . '/assets/css/components/anuncios.css',     array('muni-santa-juana-style'), $theme_version );
+        wp_enqueue_style( 'muni-hero',         $tpl_uri . '/assets/css/components/hero.css',         array('muni-global'), $theme_version );
+        wp_enqueue_style( 'muni-emergencias',  $tpl_uri . '/assets/css/components/emergencias.css',  array('muni-global'), $theme_version );
+        wp_enqueue_style( 'muni-vecinos',      $tpl_uri . '/assets/css/components/vecinos.css',      array('muni-global'), $theme_version );
+        wp_enqueue_style( 'muni-proyectos',    $tpl_uri . '/assets/css/components/proyectos.css',    array('muni-global'), $theme_version );
+        wp_enqueue_style( 'muni-noticias',     $tpl_uri . '/assets/css/components/noticias.css',     array('muni-global'), $theme_version );
+        wp_enqueue_style( 'muni-concejo',      $tpl_uri . '/assets/css/components/concejo.css',      array('muni-global'), $theme_version );
+        wp_enqueue_style( 'muni-transparencia',$tpl_uri . '/assets/css/components/transparencia.css',array('muni-global'), $theme_version );
+        wp_enqueue_style( 'muni-contacto',     $tpl_uri . '/assets/css/components/contacto.css',     array('muni-global'), $theme_version );
+        wp_enqueue_style( 'muni-anuncios',     $tpl_uri . '/assets/css/components/anuncios.css',     array('muni-global'), $theme_version );
     }
 
     // ARCHIVOS Y SINGLES DE CUSTOM POST TYPES
     if ( is_post_type_archive('proyectos') || is_singular('proyectos') ) {
-        wp_enqueue_style( 'muni-proyectos',    $tpl_uri . '/assets/css/components/proyectos.css',    array('muni-santa-juana-style'), $theme_version );
+        wp_enqueue_style( 'muni-proyectos',    $tpl_uri . '/assets/css/components/proyectos.css',    array('muni-global'), $theme_version );
     }
     
     if ( is_category() || is_singular('post') || is_archive() || is_search() ) {
-        wp_enqueue_style( 'muni-noticias',     $tpl_uri . '/assets/css/components/noticias.css',     array('muni-santa-juana-style'), $theme_version );
+        wp_enqueue_style( 'muni-noticias',     $tpl_uri . '/assets/css/components/noticias.css',     array('muni-global'), $theme_version );
     }
 
     if ( is_post_type_archive('anuncios') || is_singular('anuncios') ) {
-        wp_enqueue_style( 'muni-anuncios',     $tpl_uri . '/assets/css/components/anuncios.css',     array('muni-santa-juana-style'), $theme_version );
+        wp_enqueue_style( 'muni-anuncios',     $tpl_uri . '/assets/css/components/anuncios.css',     array('muni-global'), $theme_version );
     }
     
-    if ( is_post_type_archive('direcciones') || is_singular('direcciones') ) {
-        wp_enqueue_style( 'muni-direcciones',  $tpl_uri . '/assets/css/components/direcciones.css',  array('muni-santa-juana-style'), $theme_version );
+    // Direcciones Municipales: is_page() cubre template hierarchy (page-direcciones-municipales.php),
+    // is_page_template() cubre asignación manual desde el editor, y is_post_type_archive/is_singular
+    // cubre el CPT 'direcciones' si existe.
+    if ( is_page( array( 'direcciones-municipales', 'direcciones' ) )
+        || is_page_template( 'page-direcciones-municipales.php' )
+        || is_page_template( 'page-direcciones.php' )
+        || is_post_type_archive('direcciones') || is_singular('direcciones') ) {
+        wp_enqueue_style( 'muni-direcciones',  $tpl_uri . '/assets/css/components/direcciones.css',  array('muni-global'), $theme_version );
     }
 
     // PLANTILLAS DE PÁGINA ESPECÍFICAS
-    if ( is_page_template( 'page-contacto.php' ) ) {
-        wp_enqueue_style( 'muni-contacto',     $tpl_uri . '/assets/css/components/contacto.css',     array('muni-santa-juana-style'), $theme_version );
+    // Usamos is_page('slug') como fallback robusto: cuando WordPress carga un template
+    // por jerarquía de nombre de archivo (page-{slug}.php), is_page_template() devuelve
+    // false si la página no tiene el meta _wp_page_template configurado en la BD.
+    if ( is_page( 'contacto' ) || is_page_template( 'page-contacto.php' ) ) {
+        wp_enqueue_style( 'muni-contacto',     $tpl_uri . '/assets/css/components/contacto.css',     array('muni-global'), $theme_version );
     }
 
-    if ( is_page_template( 'page-transparencia.php' ) ) {
-        wp_enqueue_style( 'muni-transparencia',$tpl_uri . '/assets/css/components/transparencia.css',array('muni-santa-juana-style'), $theme_version );
+    if ( is_page( 'transparencia' ) || is_page_template( 'page-transparencia.php' ) ) {
+        wp_enqueue_style( 'muni-transparencia',$tpl_uri . '/assets/css/components/transparencia.css',array('muni-global'), $theme_version );
     }
 
-    if ( is_page_template( 'page-intranet.php' ) ) {
-        wp_enqueue_style( 'muni-intranet',     $tpl_uri . '/assets/css/components/intranet.css',     array('muni-santa-juana-style'), $theme_version );
-    }
-    
-    if ( is_page_template( 'page-direcciones-municipales.php' ) ) {
-        wp_enqueue_style( 'muni-direcciones',  $tpl_uri . '/assets/css/components/direcciones.css',  array('muni-santa-juana-style'), $theme_version );
+    if ( is_page( 'intranet' ) || is_page_template( 'page-intranet.php' ) ) {
+        wp_enqueue_style( 'muni-intranet',     $tpl_uri . '/assets/css/components/intranet.css',     array('muni-global'), $theme_version );
     }
 
-    // Plantillas Institucionales
-    if ( is_page_template( 'page-mision.php' ) || is_page_template( 'page-vision.php' ) || is_page_template( 'page-historia.php' ) || is_page_template( 'page-normativa.php' ) || is_page_template( 'page-politicas.php' ) ) {
-        wp_enqueue_style( 'muni-institucional',$tpl_uri . '/assets/css/components/institucional.css',array('muni-santa-juana-style'), $theme_version );
+    // Plantillas Institucionales (misión, visión, historia, normativa, políticas)
+    if ( is_page( array( 'mision', 'vision', 'historia', 'normativa', 'normativa-comunal', 'politicas', 'politicas-de-privacidad' ) )
+        || is_page_template( 'page-mision.php' ) || is_page_template( 'page-vision.php' )
+        || is_page_template( 'page-historia.php' ) || is_page_template( 'page-normativa.php' )
+        || is_page_template( 'page-politicas.php' ) ) {
+        wp_enqueue_style( 'muni-institucional',$tpl_uri . '/assets/css/components/institucional.css',array('muni-global'), $theme_version );
     }
 
     $js_ver = file_exists( $tpl_dir . '/assets/js/main.js' ) ? (string) filemtime( $tpl_dir . '/assets/js/main.js' ) : '1.0.1';
@@ -783,13 +788,19 @@ add_action( 'init', 'muni_auto_create_demo_content' );
  * Fetch YouTube Playlist Videos via RSS and cache them
  */
 function muni_get_youtube_playlist_videos( $playlist_id, $limit = 5 ) {
-    $transient_key = 'muni_yt_pl_' . md5( $playlist_id );
-    $option_backup_key = 'muni_yt_backup_' . md5( $playlist_id );
+    // transient_key con sufijo v4 para invalidar instantáneamente cachés desactualizados guardados en la BD
+    $transient_key = 'muni_yt_pl_v4_' . md5( $playlist_id );
+    $option_backup_key = 'muni_yt_backup_v4_' . md5( $playlist_id );
     
     $videos = get_transient( $transient_key );
     
     // Lista de respaldo garantizada (fallback inicial de seguridad)
     $fallback_videos = array(
+        array(
+            'id'    => 'XV-7c-p-baA',
+            'title' => 'SESION DE CONCEJO MUNICIPAL 04 DE AGOSTO 2026',
+            'date'  => '04 Ago, 2026',
+        ),
         array(
             'id'    => 'WJGUAUdgM6Q',
             'title' => 'SESION DE CONCEJO MUNICIPAL 28 DE JULIO 2026',
@@ -810,11 +821,6 @@ function muni_get_youtube_playlist_videos( $playlist_id, $limit = 5 ) {
             'title' => 'SESION DE CONCEJO MUNICIPAL 09 DE JUNIO 2026',
             'date'  => '09 Jun, 2026',
         ),
-        array(
-            'id'    => 'Fpt3aFVDUsM',
-            'title' => 'SESION DE CONCEJO MUNICIPAL 02 DE JUNIO 2026',
-            'date'  => '02 Jun, 2026',
-        ),
     );
 
     if ( false === $videos || empty( $videos ) ) {
@@ -833,22 +839,78 @@ function muni_get_youtube_playlist_videos( $playlist_id, $limit = 5 ) {
             $body = wp_remote_retrieve_body( $response );
             $xml = @simplexml_load_string( $body );
             if ( $xml && isset( $xml->entry ) ) {
+                $all_videos = array();
+                $month_map = array(
+                    'enero' => '01', 'febrero' => '02', 'marzo' => '03', 'abril' => '04',
+                    'mayo' => '05', 'junio' => '06', 'julio' => '07', 'agosto' => '08',
+                    'septiembre' => '09', 'setiembre' => '09', 'octubre' => '10', 'noviembre' => '11', 'diciembre' => '12',
+                    'ene' => '01', 'feb' => '02', 'mar' => '03', 'abr' => '04', 'may' => '05', 'jun' => '06',
+                    'jul' => '07', 'ago' => '08', 'sep' => '09', 'oct' => '10', 'nov' => '11', 'dic' => '12'
+                );
+
+                // Leer TODOS los videos del feed sin límite inicial
                 foreach ( $xml->entry as $entry ) {
                     $yt = $entry->children( 'http://www.youtube.com/xml/schemas/2015' );
                     if ( isset( $yt->videoId ) ) {
-                        $videos[] = array(
-                            'id'    => (string) $yt->videoId,
-                            'title' => (string) $entry->title,
-                            'date'  => date_i18n( get_option('date_format', 'd M, Y'), strtotime( (string) $entry->published ) ),
+                        $title = (string) $entry->title;
+                        $published_raw = (string) $entry->published;
+                        $session_timestamp = strtotime( $published_raw );
+
+                        // Normalización sin acentos para coincidencia perfecta
+                        $title_clean = str_replace(
+                            array( 'á', 'é', 'í', 'ó', 'ú', 'Á', 'É', 'Í', 'Ó', 'Ú' ),
+                            array( 'a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U' ),
+                            $title
+                        );
+
+                        // Patrón 1: Formato numérico DD/MM/YYYY o DD-MM-YYYY
+                        if ( preg_match( '/(\d{1,2})[\/\.-](\d{1,2})[\/\.-](\d{4})/', $title_clean, $matches ) ) {
+                            $day = str_pad( $matches[1], 2, '0', STR_PAD_LEFT );
+                            $month = str_pad( $matches[2], 2, '0', STR_PAD_LEFT );
+                            $year = $matches[3];
+                            $ts_parsed = strtotime( "{$year}-{$month}-{$day}" );
+                            if ( $ts_parsed !== false ) {
+                                $session_timestamp = $ts_parsed;
+                            }
+                        }
+                        // Patrón 2: Formato texto "DD [DE] [MES] [DE] YYYY" (ej: "04 DE AGOSTO 2026", "15 SETIEMBRE 2026")
+                        elseif ( preg_match( '/(\d{1,2})\s+(?:DE\s+)?([A-Z]+)\s+(?:DE\s+)?(\d{4})/i', $title_clean, $matches ) ) {
+                            $day = str_pad( $matches[1], 2, '0', STR_PAD_LEFT );
+                            $month_key = strtolower( $matches[2] );
+                            $year = $matches[3];
+                            if ( isset( $month_map[ $month_key ] ) ) {
+                                $ts_parsed = strtotime( "{$year}-{$month_map[$month_key]}-{$day}" );
+                                if ( $ts_parsed !== false ) {
+                                    $session_timestamp = $ts_parsed;
+                                }
+                            }
+                        }
+
+                        $all_videos[] = array(
+                            'id'         => (string) $yt->videoId,
+                            'title'      => $title,
+                            'date'       => date_i18n( get_option('date_format', 'd M, Y'), $session_timestamp ),
+                            'session_ts' => $session_timestamp,
                         );
                     }
-                    if ( count( $videos ) >= $limit ) break;
                 }
+                
+                // Ordenamiento cronológico estricto por la fecha real calculada (más reciente primero)
+                usort( $all_videos, function( $a, $b ) {
+                    return $b['session_ts'] - $a['session_ts'];
+                } );
+                
+                // Tomar los primeros $limit y limpiar el campo temporal de ordenamiento
+                $videos = array_slice( $all_videos, 0, $limit );
+                foreach ( $videos as &$v ) {
+                    unset( $v['session_ts'] );
+                }
+                unset( $v );
             }
         }
         
         if ( ! empty( $videos ) ) {
-            // Éxito: Guardar en caché temporal (1 hora) y también en respaldo permanente
+            // Éxito: Guardar en caché temporal (1 hora) y en respaldo permanente
             set_transient( $transient_key, $videos, HOUR_IN_SECONDS );
             update_option( $option_backup_key, $videos, false );
         } else {
@@ -857,10 +919,10 @@ function muni_get_youtube_playlist_videos( $playlist_id, $limit = 5 ) {
             if ( ! empty( $backup_videos ) && is_array( $backup_videos ) ) {
                 $videos = $backup_videos;
             } else {
-                // Si nunca se ha podido obtener nada, usar el fallback hardcodeado
                 $videos = array_slice( $fallback_videos, 0, $limit );
             }
-            // Importante: no guardar transient aquí para que intente de nuevo en la siguiente carga
+            // Cooldown de 15 minutos en caso de fallo para no ralentizar las solicitudes de los usuarios
+            set_transient( $transient_key, $videos, 15 * MINUTE_IN_SECONDS );
         }
     }
     
